@@ -33,7 +33,7 @@ spec:
               name: adguard-udp
               protocol: UDP
             - containerPort: 3000
-              name: adguard-interface
+              name: adguard-intf
               protocol: TCP
           volumeMounts:
             - name: adguard-work-volume
