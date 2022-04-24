@@ -2,13 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: &app adguard-tcp
+  name: &app adguard
   namespace: networking
   labels:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
-  annotations:
-    metallb.universe.tf/allow-shared-ip: "adguard-192.168.202.98"
 spec:
   selector:
     app.kubernetes.io/name: *app
@@ -20,6 +18,10 @@ spec:
   ports:
     - protocol: TCP
       name: adguard-tcp
+      port: 53
+      targetPort: 53
+    - protocol: UDP
+      name: adguard-udp
       port: 53
       targetPort: 53
     - protocol: TCP
@@ -34,27 +36,3 @@ spec:
       name: adguard-intf3
       port: 8080
       targetPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: &app adguard-udp
-  namespace: networking
-  labels:
-    app.kubernetes.io/name: *app
-    app.kubernetes.io/instance: *app
-  annotations:
-    metallb.universe.tf/allow-shared-ip: "adguard-192.168.202.98"
-spec:
-  selector:
-    app.kubernetes.io/name: *app
-    app.kubernetes.io/instance: *app
-  type: LoadBalancer
-  externalIPs:
-    - "${METALLB_ADGUARD_ADDR}"
-  externalTrafficPolicy: Local
-  ports:
-    - protocol: UDP
-      name: adguard-udp
-      port: 53
-      targetPort: 53
