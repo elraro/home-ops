@@ -16,18 +16,15 @@ spec:
     - "${METALLB_ADGUARD_ADDR}"
   externalTrafficPolicy: Local
   ports:
-    - adguard-tcp:
-        enabled: true
-        port: 53
-        targetPort: 53
-        protocol: TCP
-    - adguard-udp:
-        enabled: true
-        port: 53
-        targetPort: 53
-        protocol: UDP
-    - adguard-intf:
-        enabled: true
-        port: 3000
-        targetPort: 3000
-        protocol: HTTP
+    - protocol: TCP
+      name: adguard-tcp
+      port: 53
+      targetPort: 53
+    - protocol: UDP
+      name: adguard-udp
+      port: 53
+      targetPort: 53
+    - protocol: TCP
+      name: adguard-intf
+      port: 3000
+      targetPort: 3000
