@@ -12,8 +12,7 @@ spec:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
   type: LoadBalancer
-  externalIPs:
-    - "${METALLB_ADGUARD_ADDR}"
+  loadBalancerIP: "${METALLB_ADGUARD_ADDR}"
   externalTrafficPolicy: Local
   ports:
     - protocol: TCP
