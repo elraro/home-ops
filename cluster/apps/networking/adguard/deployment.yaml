@@ -38,6 +38,9 @@ spec:
             - containerPort: 3000
               name: adguard-intf2
               protocol: TCP
+            - containerPort: 8080
+              name: adguard-intf3
+              protocol: TCP
           volumeMounts:
             - name: adguard-work-volume
               mountPath: /opt/adguardhome/work

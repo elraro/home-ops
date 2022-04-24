@@ -32,3 +32,7 @@ spec:
       name: adguard-intf2
       port: 3000
       targetPort: 3000
+    - protocol: TCP
+      name: adguard-intf3
+      port: 8080
+      targetPort: 8080
