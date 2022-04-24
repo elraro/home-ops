@@ -16,18 +16,18 @@ spec:
     - "${METALLB_ADGUARD_ADDR}"
   externalTrafficPolicy: Local
   ports:
-    dns-tcp:
-      enabled: true
-      port: 53
-      targetPort: 53
-      protocol: TCP
-    dns-udp:
-      enabled: true
-      port: 53
-      targetPort: 53
-      protocol: UDP
-    dashboard:
-      enabled: true
-      port: 3000
-      targetPort: 3000
-      protocol: HTTP
+    - dns-tcp:
+        enabled: true
+        port: 53
+        targetPort: 53
+        protocol: TCP
+    - dns-udp:
+        enabled: true
+        port: 53
+        targetPort: 53
+        protocol: UDP
+    - dashboard:
+        enabled: true
+        port: 3000
+        targetPort: 3000
+        protocol: HTTP
