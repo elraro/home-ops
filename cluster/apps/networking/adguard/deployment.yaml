@@ -32,7 +32,7 @@ spec:
             - containerPort: 53
               name: adguard-udp
               protocol: UDP
-            - containerPort: 3000
+            - containerPort: 80
               name: adguard-intf
               protocol: TCP
           volumeMounts:
