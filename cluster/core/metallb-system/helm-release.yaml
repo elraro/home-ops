@@ -32,6 +32,7 @@ spec:
           protocol: bgp
           addresses:
             - "${METALLB_LB_RANGE}"
+          auto-assign: false
       # address-pools:
       #  - name: default
       #    protocol: layer2
