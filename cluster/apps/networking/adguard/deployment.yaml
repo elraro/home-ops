@@ -25,22 +25,6 @@ spec:
         - name: *app
           image: adguard/adguardhome:latest
           imagePullPolicy: IfNotPresent
-          #ports:
-          #  - containerPort: 53
-          #    name: adguard-tcp
-          #    protocol: TCP
-          #  - containerPort: 53
-          #    name: adguard-udp
-          #    protocol: UDP
-          #  - containerPort: 80
-          #    name: adguard-intf
-          #    protocol: TCP
-          #  - containerPort: 3000
-          #    name: adguard-intf2
-          #    protocol: TCP
-          #  - containerPort: 8080
-          #    name: adguard-intf3
-          #    protocol: TCP
           volumeMounts:
             - name: adguard-work-volume
               mountPath: /opt/adguardhome/work
