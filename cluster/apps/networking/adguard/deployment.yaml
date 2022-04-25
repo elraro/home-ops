@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: &app adguard-deployment
+  name: &app adguard
   namespace: networking
   labels:
     app.kubernetes.io/name: *app
