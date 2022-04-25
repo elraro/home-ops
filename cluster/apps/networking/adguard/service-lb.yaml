@@ -17,22 +17,8 @@ spec:
   externalTrafficPolicy: Local
   ports:
     - protocol: TCP
-      name: adguard-tcp
-      port: 53
-      targetPort: 53
-    - protocol: UDP
-      name: adguard-udp
-      port: 53
-      targetPort: 53
-    - protocol: TCP
-      name: adguard-intf
-      port: 80
-      targetPort: 80
-    - protocol: TCP
-      name: adguard-intf2
       port: 3000
       targetPort: 3000
     - protocol: TCP
-      name: adguard-intf3
       port: 8080
       targetPort: 8080
