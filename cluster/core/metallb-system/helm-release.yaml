@@ -23,8 +23,18 @@ spec:
       retries: 3
   values:
     configInline:
+      peers:
+        - peer-address: 192.168.202.1
+          peer-asn: 65534
+          my-asn: 65533
       address-pools:
         - name: default
-          protocol: layer2
+          protocol: bgp
           addresses:
             - "${METALLB_LB_RANGE}"
+          auto-assign: false
+      # address-pools:
+      #  - name: default
+      #    protocol: layer2
+      #    addresses:
+      #      - "${METALLB_LB_RANGE}"
