@@ -28,15 +28,15 @@ spec:
           peer-asn: 65534
           my-asn: 65533
       address-pools:
-        - name: red-202
+        - name: home
           protocol: bgp
           addresses:
-            - "${METALLB_LB_RANGE202}"
+            - "${METALLB_RANGE_HOME}"
           auto-assign: false
-        - name: red-0
+        - name: work
           protocol: bgp
           addresses:
-            - "${METALLB_LB_RANGE0}"
+            - "${METALLB_RANGE_WORK}"
           auto-assign: false
       # address-pools:
       #  - name: default
