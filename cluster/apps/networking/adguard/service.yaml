@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
   annotations:
-    metallb.universe.tf/loadBalancerIPs: "${METALLB_ADGUARD_ADDR}"
+    metallb.universe.tf/loadBalancerIPs: "${ADGUARD_ADDR_202}, ${ADGUARD_ADDR_0}"
 spec:
   selector:
     app.kubernetes.io/name: *app
