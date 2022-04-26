@@ -7,3 +7,4 @@ resources:
   - k8s-gateway
   - traefik
   - adguard
+  - adguard-work
