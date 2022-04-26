@@ -27,9 +27,6 @@ spec:
         - peer-address: 192.168.202.1
           peer-asn: 65534
           my-asn: 65533
-        - peer-address: 192.168.0.1
-          peer-asn: 65532
-          my-asn: 65531
       address-pools:
         - name: red-202
           protocol: bgp
