@@ -27,11 +27,19 @@ spec:
         - peer-address: 192.168.202.1
           peer-asn: 65534
           my-asn: 65533
+        - peer-address: 192.168.0.1
+          peer-asn: 65532
+          my-asn: 65531
       address-pools:
-        - name: default
+        - name: red-202
           protocol: bgp
           addresses:
-            - "${METALLB_LB_RANGE}"
+            - "${METALLB_LB_RANGE202}"
+          auto-assign: false
+        - name: red-0
+          protocol: bgp
+          addresses:
+            - "${METALLB_LB_RANGE0}"
           auto-assign: false
       # address-pools:
       #  - name: default
