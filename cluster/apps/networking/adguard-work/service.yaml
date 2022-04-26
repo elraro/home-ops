@@ -2,13 +2,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: &app adguard
+  name: &app adguard-work
   namespace: networking
   labels:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
   annotations:
-    metallb.universe.tf/loadBalancerIPs: "${METALLB_ADGUARD_ADDR}"
+    metallb.universe.tf/loadBalancerIPs: "${METALLB_ADGUARD_WORK_ADDR}"
 spec:
   selector:
     app.kubernetes.io/name: *app
@@ -17,14 +17,14 @@ spec:
   externalTrafficPolicy: Local
   ports:
     - protocol: TCP
-      name: adguard-gui
+      name: adguardw-gui
       port: 80
       targetPort: 80
     - protocol: TCP
-      name: adguard-tcp
+      name: adguardw-tcp
       port: 53
       targetPort: 53
     - protocol: UDP
-      name: adguard-udp
+      name: adguardw-udp
       port: 53
       targetPort: 53
