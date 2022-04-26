@@ -9,7 +9,6 @@ metadata:
     app.kubernetes.io/instance: *app
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
-    external-dns/is-public: "true"
     hajimari.io/enable: "true"
     hajimari.io/icon: "dns-outline"
     kubernetes.io/ingress.class: "traefik"
