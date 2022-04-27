@@ -88,11 +88,6 @@ spec:
               value: "0.0.0.0"
             - name: WEBHOOK_LISTEN_PORT
               value: "8080"
-          volumeMounts:
-            - name: adguard-work-volume
-              mountPath: /opt/adguardhome/work
-            - name: adguard-conf-volume
-              mountPath: /opt/adguardhome/conf
           resources:
             requests:
               cpu: 100m
