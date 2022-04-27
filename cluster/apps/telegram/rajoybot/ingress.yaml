@@ -1,0 +1,30 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &app rajoybot
+  namespace: telegram
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    external-dns/is-public: "true"
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+spec:
+  rules:
+    - host: "botstelegram.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: / + telegrambottoken + /
+            pathType: Prefix
+            backend:
+              service:
+                name: rajoybot
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - "botstelegram.${SECRET_DOMAIN}"
+      secretName: "botstelegram-tls"

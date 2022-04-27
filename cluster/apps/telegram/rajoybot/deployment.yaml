@@ -1,0 +1,108 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &app rajoybot
+  namespace: telegram
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: *app
+      app.kubernetes.io/instance: *app
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: *app
+        app.kubernetes.io/instance: *app
+    spec:
+      containers:
+        - name: mariadb-rajoybot
+          image: mariadb:latest
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: mariadb-rajoybot-volume
+              mountPath: /var/lib/mysql
+          resources:
+            requests:
+              cpu: 100m
+              memory: 50Mi
+            limits:
+              cpu: 250m
+              memory: 500Mi
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: mysqlrootpassword
+                  name: rajoybot
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: mysqldatabase
+                  name: rajoybot
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  key: mysqluser
+                  name: rajoybot
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: mysqlpassword
+                  name: rajoybot
+        - name: *app
+          image: elraro/rajoybot:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MYSQL_HOST
+              value: "mariadb-rajoybot"
+            - name: MYSQL_PORT
+              value: "3306"
+            - name: TELEGRAM_BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: telegrambottoken
+                  name: rajoybot
+            - name: TELEGRAM_USER_ALIAS
+              valueFrom:
+                secretKeyRef:
+                  key: telegramuseralias
+                  name: rajoybot
+            - name: WEBHOOK_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: webhookhost
+                  name: rajoybot
+            - name: WEBHOOK_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: webhookport
+                  name: rajoybot
+            - name: WEBHOOK_LISTEN
+              value: "0.0.0.0"
+            - name: WEBHOOK_LISTEN_PORT
+              value: "8080"
+          volumeMounts:
+            - name: adguard-work-volume
+              mountPath: /opt/adguardhome/work
+            - name: adguard-conf-volume
+              mountPath: /opt/adguardhome/conf
+          resources:
+            requests:
+              cpu: 100m
+              memory: 50Mi
+            limits:
+              cpu: 250m
+              memory: 500Mi
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: mariadb-rajoybot-volume
+          hostPath:
+            path: /home/elraro/home-ops/volumes/rajoybot/mariadb-rajoybot-volume
