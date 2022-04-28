@@ -22,12 +22,46 @@ spec:
         app.kubernetes.io/instance: *app
     spec:
       containers:
+        - name: mariadb-rajoybot
+          image: mariadb:latest
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: mariadb-rajoybot-volume
+              mountPath: /var/lib/mysql
+          resources:
+            requests:
+              cpu: 100m
+              memory: 50Mi
+            limits:
+              cpu: 250m
+              memory: 500Mi
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: mysqlrootpassword
+                  name: rajoybot
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: mysqldatabase
+                  name: rajoybot
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  key: mysqluser
+                  name: rajoybot
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: mysqlpassword
+                  name: rajoybot
         - name: *app
           image: elraro/rajoybot:latest
           imagePullPolicy: IfNotPresent
           env:
             - name: MYSQL_HOST
-              value: "mariadb-rajoybot"
+              value: "localhost"
             - name: MYSQL_PORT
               value: "3306"
             - name: TELEGRAM_BOT_TOKEN
@@ -63,3 +97,7 @@ spec:
               memory: 500Mi
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
+      volumes:
+        - name: mariadb-rajoybot-volume
+          hostPath:
+            path: /home/elraro/home-ops/volumes/rajoybot/mariadb-rajoybot-volume
