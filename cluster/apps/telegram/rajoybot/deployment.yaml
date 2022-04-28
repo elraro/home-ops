@@ -65,10 +65,7 @@ spec:
             - name: MYSQL_PORT
               value: "3306"
             - name: TELEGRAM_BOT_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  key: telegrambottoken
-                  name: rajoybot
+              value: "${SECRET_RAJOYBOT_TOKEN}"
             - name: TELEGRAM_USER_ALIAS
               valueFrom:
                 secretKeyRef:

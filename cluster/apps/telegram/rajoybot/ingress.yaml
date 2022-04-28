@@ -18,7 +18,7 @@ spec:
     - host: "botstelegram.${SECRET_DOMAIN}"
       http:
         paths:
-          - path: / + telegrambottoken + /
+          - path: "/${SECRET_RAJOYBOT_TOKEN}/"
             pathType: Prefix
             backend:
               service:
