@@ -25,7 +25,7 @@ spec:
               service:
                 name: rajoybot
                 port:
-                  number: 80
+                  number: 8080
   tls:
     - hosts:
         - "botstelegram.${SECRET_DOMAIN}"
