@@ -65,9 +65,9 @@ spec:
       runAsGroup: 1000
       fsGroup: 1000
       fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 1000
-        - 100
+      #      supplementalGroups:
+      #        - 1000
+      #        - 100
     persistence:
       config:
         enabled: true
