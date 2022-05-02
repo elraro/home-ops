@@ -36,9 +36,9 @@ spec:
         ports:
           bittorrent:
             enabled: true
-            port: 50413
+            port: 6881
             protocol: TCP
-            targetPort: 50413
+            targetPort: 6881
         externalTrafficPolicy: Local
     ingress:
       main:
@@ -65,9 +65,6 @@ spec:
       runAsGroup: 1000
       fsGroup: 1000
       fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 1000
-      #        - 100
     persistence:
       config:
         enabled: true
