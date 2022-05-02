@@ -8,3 +8,4 @@ resources:
   - system-upgrade.yaml
   - telegram.yaml
   - security.yaml
+  - media.yaml
