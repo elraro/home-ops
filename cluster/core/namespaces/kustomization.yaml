@@ -9,3 +9,4 @@ resources:
   - telegram.yaml
   - security.yaml
   - media.yaml
+  - home.yaml
