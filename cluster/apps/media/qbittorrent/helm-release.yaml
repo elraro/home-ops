@@ -71,7 +71,11 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: qbittorrent-config-v1
+        type: custom
+        volumeSpec:
+          hostPath:
+            path: /home/elraro/home-ops/volumes/qbittorrent/config
+        mountPath: /config
       download:
         enabled: true
         type: custom
