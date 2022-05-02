@@ -50,6 +50,13 @@ spec:
     prometheus:
       serviceMonitor:
         create: false
+    volumes:
+      - name: redis-data
+        hostPath:
+          path: /home/elraro/home-ops/volumes/authentik/redis-data
+      - name: data
+        hostPath:
+          path: /home/elraro/home-ops/volumes/authentik/postgresql-data
   valuesFrom:
     - kind: Secret
       name: authentik-secrets
