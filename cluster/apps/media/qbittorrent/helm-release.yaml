@@ -76,13 +76,13 @@ spec:
           hostPath:
             path: /home/elraro/home-ops/volumes/qbittorrent/config
         mountPath: /config
-      download:
+      downloads:
         enabled: true
         type: custom
         volumeSpec:
           hostPath:
             path: /mnt/sdd1/downloads_qbittorrent
-        mountPath: /download
+        mountPath: /downloads
     resources:
       requests:
         memory: 250Mi
