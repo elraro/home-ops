@@ -28,7 +28,7 @@ spec:
         volumeSpec:
           hostPath:
             path: /mnt/sdc1/mariadb_nextcloud_k3s
-        mountPath: /var/lib/mysql
+        mountPath: /bitnami/mariadb
     metrics:
       enabled: false
     podSecurityContext:
