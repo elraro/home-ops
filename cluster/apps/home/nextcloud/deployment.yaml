@@ -25,9 +25,9 @@ spec:
           image: lscr.io/linuxserver/nextcloud:latest
           imagePullPolicy: Always
           volumeMounts:
-            - name: nexcloud-config-volume
+            - name: nextcloud-config-volume
               mountPath: /config
-            - name: nexcloud-data-volume
+            - name: nextcloud-data-volume
               mountPath: /data
           env:
             - name: PGID
@@ -46,9 +46,9 @@ spec:
               cpu: 300m
               memory: 500Mi
           volumes:
-            - name: nexcloud-config-volume
+            - name: nextcloud-config-volume
               hostPath:
-                path: /home/elraro/home-ops/volumes/nextcloud/nexcloud-config-volume
-            - name: nexcloud-data-volume
+                path: /home/elraro/home-ops/volumes/nextcloud/nextcloud-config-volume
+            - name: nextcloud-data-volume
               hostPath:
                 path: /mnt/sdc1/nextcloud/data
