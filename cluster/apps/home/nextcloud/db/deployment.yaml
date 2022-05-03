@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &app mariadb-nextcloud
+  namespace: home
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: *app
+      app.kubernetes.io/instance: *app
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: *app
+        app.kubernetes.io/instance: *app
+    spec:
+      containers:
+        - name: *app
+          image: mariadb:latest
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: mariadb-nextcloud-volume
+              mountPath: /var/lib/mysql
+          resources:
+            requests:
+              cpu: 200m
+              memory: 200Mi
+            limits:
+              cpu: 300m
+              memory: 300Mi
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "${MARIADBNEXTCLOUD_ROOT_PASS}"
+            - name: MYSQL_DATABASE
+              value: "${MARIADBNEXTCLOUD_DATABASE}"
+            - name: MYSQL_USER
+              value: "${MARIADBNEXTCLOUD_USERNAME}"
+            - name: MYSQL_PASSWORD
+              value: "${MARIADBNEXTCLOUD_PASSWORD}"
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: mariadb-nextcloud-volume
+          hostPath:
+            path: /mnt/sdc1/mariadb_nextcloud

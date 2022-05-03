@@ -24,11 +24,23 @@ spec:
     primary:
       persistence:
         enabled: true
-        type: custom
+        storageClass: custom
         volumeSpec:
           hostPath:
             path: /mnt/sdc1/mariadb_nextcloud_k3s
         mountPath: /bitnami/mariadb
+      podSecurityContext:
+        enabled: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+      containerSecurityContext:
+        enabled: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
     metrics:
       enabled: false
     podSecurityContext:
