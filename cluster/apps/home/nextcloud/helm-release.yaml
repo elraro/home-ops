@@ -1,0 +1,75 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nextcloud
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://nextcloud.github.io/helm/
+      chart: nextcloud
+      version: 2.14.2
+      sourceRef:
+        kind: HelmRepository
+        name: nextcloud-charts
+        namespace: flux-system
+  dependsOn:
+    - name: mariadb-nextcloud
+  values:
+    image:
+      repository: nextcloud
+      tag: production
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "cloud"
+        external-dns/is-public: "true"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+      hosts:
+        - host: &host "nextcloud.${SECRET_DOMAIN}"
+          paths:
+            - path: "/"
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+          secretName: "nextcloud-tls"
+    service:
+      enabled: true
+      type: LoadBalancer
+      spec:
+        loadBalancerIP: "${METALLB_NEXTCLOUD_ADDR}"
+        externalTrafficPolicy: Local
+    persistence:
+      nextcloud:
+        enabled: true
+        type: custom
+        volumeSpec:
+          hostPath:
+            path: /mnt/sdc1/nextcloud
+        mountPath: /var/www/html
+    mariadb:
+      enabled: false
+    postgresql:
+      enabled: false
+    metrics:
+      enabled: false
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: "OnRootMismatch"
+    nextcloud:
+      host: *host
+      username: elraro
+    internalDatabase:
+      enabled: false
+    externalDatabase:
+      enabled: true
+      type: mysql
+      host: mariadb-nextcloud
