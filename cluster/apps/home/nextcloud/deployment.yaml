@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &app nextcloud
+  namespace: home
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: *app
+      app.kubernetes.io/instance: *app
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: *app
+        app.kubernetes.io/instance: *app
+    spec:
+      containers:
+        - name: nextcloud
+          image: lscr.io/linuxserver/nextcloud:latest
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: nexcloud-config-volume
+              mountPath: /config
+            - name: nexcloud-data-volume
+              mountPath: /data
+          env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: "${TZ}"
+          restartPolicy: Always
+          terminationGracePeriodSeconds: 60
+          resources:
+            requests:
+              cpu: 200m
+              memory: 300Mi
+            limits:
+              cpu: 300m
+              memory: 500Mi
+          volumes:
+            - name: nexcloud-config-volume
+              hostPath:
+                path: /home/elraro/home-ops/volumes/nextcloud/nexcloud-config-volume
+            - name: nexcloud-data-volume
+              hostPath:
+                path: /mnt/sdc1/nextcloud/data

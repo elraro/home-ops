@@ -1,0 +1,31 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &app nextcloud
+  namespace: home
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+    external-dns/is-public: "true"
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+spec:
+  rules:
+    - host: "nextcloud.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 443
+  tls:
+    - hosts:
+        - "nextcloud.${SECRET_DOMAIN}"
+      secretName: "nextcloud-tls"
