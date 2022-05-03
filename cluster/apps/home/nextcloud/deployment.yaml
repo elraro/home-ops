@@ -36,8 +36,6 @@ spec:
               value: "1000"
             - name: TZ
               value: "${TZ}"
-          restartPolicy: Always
-          terminationGracePeriodSeconds: 60
           resources:
             requests:
               cpu: 200m
@@ -45,10 +43,12 @@ spec:
             limits:
               cpu: 300m
               memory: 500Mi
-          volumes:
-            - name: nextcloud-config-volume
-              hostPath:
-                path: /home/elraro/home-ops/volumes/nextcloud/nextcloud-config-volume
-            - name: nextcloud-data-volume
-              hostPath:
-                path: /mnt/sdc1/nextcloud/data
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: nextcloud-config-volume
+          hostPath:
+            path: /home/elraro/home-ops/volumes/nextcloud/nextcloud-config-volume
+        - name: nextcloud-data-volume
+          hostPath:
+            path: /mnt/sdc1/nextcloud/data
