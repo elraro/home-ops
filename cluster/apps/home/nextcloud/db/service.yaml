@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: &app mariadb-nextcloud
+  namespace: home
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+spec:
+  selector:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+  ports:
+    - protocol: TCP
+      name: mariadb-nextcloud
+      port: 3306
+      targetPort: 3306

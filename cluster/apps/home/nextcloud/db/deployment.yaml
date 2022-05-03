@@ -44,8 +44,6 @@ spec:
               value: "${MARIADBNEXTCLOUD_USERNAME}"
             - name: MYSQL_PASSWORD
               value: "${MARIADBNEXTCLOUD_PASSWORD}"
-          ports:
-            - containerPort: 3306
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
       volumes:
