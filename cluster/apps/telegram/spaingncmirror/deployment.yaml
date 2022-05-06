@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: &app spaingnc_mirror
+  name: &app spaingncmirror
   namespace: telegram
   labels:
     app.kubernetes.io/name: *app
