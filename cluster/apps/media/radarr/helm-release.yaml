@@ -64,9 +64,17 @@ spec:
         mountPath: /media
       backup:
         enabled: false
+      downloads:
+        enabled: true
+        type: custom
+        volumeSpec:
+          hostPath:
+            type: DirectoryOrCreate
+            path: /mnt/sdd1/downloads_qbittorrent
+        mountPath: /downloads
     resources:
       requests:
-        memory: 250Mi
-        cpu: 500m
+        memory: 100Mi
+        cpu: 100m
       limits:
         memory: 1000Mi
