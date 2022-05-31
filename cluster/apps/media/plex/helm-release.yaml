@@ -39,7 +39,8 @@ spec:
         - 109 # render
 #    hostNetwork: true
     service:
-      main:
+      plex:
+        enabled: true
         type: LoadBalancer
         externalIPs:
           - "${METALLB_PLEX_ADDR}"
