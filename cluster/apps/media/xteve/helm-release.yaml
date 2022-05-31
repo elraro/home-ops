@@ -32,6 +32,9 @@ spec:
     service:
       xteve:
         enabled: true
+        type: LoadBalancer
+        externalIPs:
+          - "${METALLB_XTEVE_ADDR}"
         externalTrafficPolicy: Local
         ports:
           http:
