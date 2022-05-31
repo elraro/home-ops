@@ -6,4 +6,4 @@ resources:
   - radarr
   - sonarr
   - prowlarr
-#  - plex
+  - plex
