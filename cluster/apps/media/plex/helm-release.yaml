@@ -42,8 +42,7 @@ spec:
       plex:
         enabled: true
         type: LoadBalancer
-        externalIPs:
-          - "${METALLB_PLEX_ADDR}"
+        loadBalancerIP: "${METALLB_PLEX_ADDR}"
         externalTrafficPolicy: Local
         ports:
           http:
