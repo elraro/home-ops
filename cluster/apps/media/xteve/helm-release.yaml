@@ -57,11 +57,11 @@ spec:
               - *host
             secretName: "xteve-tls"
     persistence:
-      config:
+      data:
         enabled: true
         type: custom
         volumeSpec:
           hostPath:
             type: DirectoryOrCreate
-            path: /home/elraro/home-ops/volumes/xteve/config
-        mountPath: /config
+            path: /home/elraro/home-ops/volumes/xteve/data
+        mountPath: /data
