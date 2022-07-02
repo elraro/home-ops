@@ -24,6 +24,11 @@ spec:
     env:
       TZ: "${TZ}"
     hostNetwork: true
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: "OnRootMismatch"
     # Bluethooth
     securityContext:
       capabilities:
