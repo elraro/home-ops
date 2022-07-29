@@ -13,7 +13,10 @@ spec:
       app.kubernetes.io/name: *app
       app.kubernetes.io/instance: *app
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 2
   template:
     metadata:
       labels:
