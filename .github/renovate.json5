@@ -8,9 +8,9 @@
     ":separatePatchReleases",
     "docker:enableMajor",
     ":enablePreCommit",
-    "github>MrMarble/home-ops//.github/renovate/autoMerge",
-    "github>MrMarble/home-ops//.github/renovate/labels",
-    "github>MrMarble/home-ops//.github/renovate/semanticCommits",
+    "github>elraro/home-ops//.github/renovate/autoMerge",
+    "github>elraro/home-ops//.github/renovate/labels",
+    "github>elraro/home-ops//.github/renovate/semanticCommits",
   ],
   platform: "github",
   username: "roy-batty-bot[bot]",
@@ -22,15 +22,6 @@
   suppressNotifications: ["prIgnoreNotification"],
   rebaseWhen: "conflicted",
   commitBodyTable: true,
-  // set up ignored deps
-  ignoreDeps: [
-    "ghcr.io/fluxcd/helm-controller",
-    "ghcr.io/fluxcd/image-automation-controller",
-    "ghcr.io/fluxcd/image-reflector-controller",
-    "ghcr.io/fluxcd/kustomize-controller",
-    "ghcr.io/fluxcd/notification-controller",
-    "ghcr.io/fluxcd/source-controller",
-  ],
   // set up renovate managers
   "docker-compose": {
     fileMatch: ["ansible/.+/docker-compose.*\\.ya?ml(\\.j2)?$"],
