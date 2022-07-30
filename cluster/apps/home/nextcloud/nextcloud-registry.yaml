@@ -1,0 +1,8 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: nextcloud
+  namespace: flux-system
+spec:
+  image: linuxserver/nextcloud:latest
+  interval: 1d
