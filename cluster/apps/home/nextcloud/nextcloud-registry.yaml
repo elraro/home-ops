@@ -4,5 +4,5 @@ metadata:
   name: nextcloud
   namespace: flux-system
 spec:
-  image: linuxserver/nextcloud:latest
+  image: linuxserver/nextcloud
   interval: 30m

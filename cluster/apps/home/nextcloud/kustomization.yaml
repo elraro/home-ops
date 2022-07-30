@@ -7,3 +7,4 @@ resources:
   - ingress.yaml
   - db
   - nextcloud-registry.yaml
+  - nextcloud-policy.yaml
