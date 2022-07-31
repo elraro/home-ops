@@ -7,7 +7,7 @@ spec:
   interval: 30m0s
   sourceRef:
     kind: GitRepository
-    name: flux-core
+    name: flux-cluster
   git:
     checkout:
       ref:
