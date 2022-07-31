@@ -27,7 +27,7 @@ spec:
       containers:
         - name: *app
           image: mariadb:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           volumeMounts:
             - name: mariadb-nextcloud-volume
               mountPath: /var/lib/mysql
