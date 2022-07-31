@@ -41,11 +41,11 @@ spec:
               value: "${TZ}"
           resources:
             requests:
-              cpu: 200m
-              memory: 300Mi
+              cpu: 400m
+              memory: 600Mi
             limits:
-              cpu: 300m
-              memory: 500Mi
+              cpu: 800m
+              memory: 1000Mi
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
       volumes:
