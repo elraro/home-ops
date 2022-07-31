@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: nextcloud
-          image: linuxserver/nextcloud:24.0.0 # {"$imagepolicy": "flux-system:nextcloud"}
+          image: linuxserver/nextcloud:24.0.3 # {"$imagepolicy": "flux-system:nextcloud"}
           imagePullPolicy: Always
           volumeMounts:
             - name: nextcloud-config-volume
