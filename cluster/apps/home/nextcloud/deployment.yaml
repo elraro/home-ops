@@ -51,7 +51,7 @@ spec:
       volumes:
         - name: nextcloud-config-volume
           hostPath:
-            path: /home/elraro/home-ops/volumes/nextcloud/nextcloud-config-volume2
+            path: /home/elraro/home-ops/volumes/nextcloud/nextcloud-config-volume
         - name: nextcloud-data-volume
           hostPath:
-            path: /mnt/sdc1/nextcloud/data2
+            path: /mnt/sdc1/nextcloud/data
