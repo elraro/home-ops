@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: nextcloud
-          image: linuxserver/nextcloud:24.0.3 # {"$imagepolicy": "flux-system:nextcloud"}
+          image: linuxserver/nextcloud:24.0.3
           imagePullPolicy: Always
           volumeMounts:
             - name: nextcloud-config-volume
@@ -51,7 +51,7 @@ spec:
       volumes:
         - name: nextcloud-config-volume
           hostPath:
-            path: /home/elraro/home-ops/volumes/nextcloud/nextcloud-config-volume
+            path: /home/elraro/home-ops/volumes/nextcloud/nextcloud-config-volume2
         - name: nextcloud-data-volume
           hostPath:
-            path: /mnt/sdc1/nextcloud/data
+            path: /mnt/sdc1/nextcloud/data2
