@@ -29,9 +29,7 @@ spec:
           imagePullPolicy: Always
           volumeMounts:
             - name: nextcloud-config-volume
-              mountPath: /config/www/nextcloud
-            - name: nextcloud-config-volume2
-              mountPath: /config2
+              mountPath: /config
             - name: nextcloud-data-volume
               mountPath: /data
           env:
@@ -54,9 +52,6 @@ spec:
         - name: nextcloud-config-volume
           hostPath:
             path: /home/elraro/home-ops/volumes/nextcloud/nextcloud-config-volume
-        - name: nextcloud-config-volume2
-          hostPath:
-            path: /home/elraro/home-ops/volumes/nextcloud/config2
         - name: nextcloud-data-volume
           hostPath:
             path: /mnt/sdc1/nextcloud/data
