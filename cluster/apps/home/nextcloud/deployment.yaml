@@ -30,6 +30,8 @@ spec:
           volumeMounts:
             - name: nextcloud-config-volume
               mountPath: /config/www/nextcloud
+            - name: nextcloud-config-volume2
+              mountPath: /config2
             - name: nextcloud-data-volume
               mountPath: /data
           env:
@@ -42,16 +44,19 @@ spec:
           resources:
             requests:
               cpu: 400m
-              memory: 600Mi
+              memory: 1000Mi
             limits:
               cpu: 800m
-              memory: 1000Mi
+              memory: 2000Mi
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
       volumes:
         - name: nextcloud-config-volume
           hostPath:
             path: /home/elraro/home-ops/volumes/nextcloud/nextcloud-config-volume
+        - name: nextcloud-config-volume2
+          hostPath:
+            path: /home/elraro/home-ops/volumes/nextcloud/config2
         - name: nextcloud-data-volume
           hostPath:
             path: /mnt/sdc1/nextcloud/data
