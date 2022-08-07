@@ -6,5 +6,6 @@ metadata:
 spec:
   ipAddressPools:
     - home-pool
+    - work-pool
   peers:
     - bgp-peer
