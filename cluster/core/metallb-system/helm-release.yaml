@@ -22,24 +22,5 @@ spec:
     remediation:
       retries: 3
   values:
-    configInline:
-      peers:
-        - peer-address: 192.168.202.1
-          peer-asn: 65534
-          my-asn: 65533
-      address-pools:
-        - name: home
-          protocol: bgp
-          addresses:
-            - "${METALLB_RANGE_HOME}"
-          auto-assign: false
-        - name: work
-          protocol: bgp
-          addresses:
-            - "${METALLB_RANGE_WORK}"
-          auto-assign: false
-      # address-pools:
-      #  - name: default
-      #    protocol: layer2
-      #    addresses:
-      #      - "${METALLB_LB_RANGE}"
+    crds:
+      enabled: true
