@@ -24,7 +24,7 @@ spec:
       containers:
         - name: *app
           image: adguard/adguardhome:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: adguard-work-volume
               mountPath: /opt/adguardhome/work
