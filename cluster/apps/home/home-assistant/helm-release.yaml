@@ -35,8 +35,7 @@ spec:
     service:
       main:
         type: LoadBalancer
-        externalIPs:
-          - "${METALLB_HOME_ASSISTANT_ADDR}"
+        loadBalancerIP: "${METALLB_HOME_ASSISTANT_ADDR}"
         externalTrafficPolicy: Local
     ingress:
       main:
