@@ -19,7 +19,7 @@ spec:
     createNamespace: true
   values:
     image:
-      repository: dmcallejo/xteve
+      repository: elraro/xteve
       tag: latest
       pullPolicy: Always
     env:
