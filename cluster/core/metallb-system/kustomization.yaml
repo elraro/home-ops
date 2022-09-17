@@ -3,7 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - helm-release.yaml
-#  - work-pool.yaml
-#  - home-pool.yaml
-#  - bgp-peer.yaml
-#  - bgp-advertisement.yaml
+  - work-pool.yaml
+  - home-pool.yaml
+  - bgp-peer.yaml
+  - bgp-advertisement.yaml
