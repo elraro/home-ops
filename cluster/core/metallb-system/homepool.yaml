@@ -1,0 +1,9 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: homepool
+  namespace: metallb-system
+spec:
+  autoAssign: false
+  addresses:
+    - "${METALLB_RANGE_HOME}"
