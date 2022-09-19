@@ -12,6 +12,7 @@
     "github>elraro/home-ops//.github/renovate/labels",
     "github>elraro/home-ops//.github/renovate/semanticCommits",
   ],
+  configMigration: true,
   platform: "github",
   username: "roy-batty-bot[bot]",
   repositories: ["elraro/home-ops"],
