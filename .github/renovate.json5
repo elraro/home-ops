@@ -11,6 +11,7 @@
     'github>elraro/home-ops//.github/renovate/autoMerge',
     'github>elraro/home-ops//.github/renovate/labels',
     'github>elraro/home-ops//.github/renovate/semanticCommits',
+    'github>elraro/home-ops//.github/renovate/disabledDatasources.json5'
   ],
   configMigration: true,
   platform: 'github',
