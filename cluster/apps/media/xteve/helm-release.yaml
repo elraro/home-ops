@@ -20,7 +20,7 @@ spec:
   values:
     image:
       repository: ghcr.io/elraro/xteve
-      tag: latest
+      tag: master
       pullPolicy: Always
     env:
       TZ: "${TZ}"
