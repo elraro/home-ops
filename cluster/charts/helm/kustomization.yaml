@@ -8,6 +8,7 @@ resources:
   - ealenn-charts.yaml
   - emberstack-charts.yaml
   - external-dns-charts.yaml
+  - firefly-iii-charts.yaml
   - grafana-charts.yaml
   - hajimari-charts.yaml
   - infracloudio-charts.yaml
