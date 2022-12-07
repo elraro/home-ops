@@ -26,11 +26,6 @@ spec:
     remediation:
       retries: 3
   values:
-    providers:
-      kubernetesCRD:
-        enabled: true
-        allowCrossNamespace: true
-        allowExternalNameServices: true
     image:
       name: traefik
     deployment:
