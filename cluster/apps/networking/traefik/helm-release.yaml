@@ -34,6 +34,7 @@ spec:
     service:
       enabled: true
       type: LoadBalancer
+      single: false
       spec:
         loadBalancerIP: "${METALLB_TRAEFIK_ADDR}"
         externalTrafficPolicy: Local
