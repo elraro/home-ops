@@ -28,4 +28,4 @@ resources:
   - stakater-charts.yaml
   - traefik-charts.yaml
   - kured-charts.yaml
-  - bjw-s-charts.yaml
+  - bjw-s.yaml
