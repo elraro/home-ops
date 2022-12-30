@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: *app
-          image: adguard/adguardhome:latest
+          image: adguard/adguardhome:v0.107.21
           imagePullPolicy: Always
           volumeMounts:
             - name: adguard-work-volume
