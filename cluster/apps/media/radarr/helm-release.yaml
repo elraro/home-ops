@@ -21,6 +21,11 @@ spec:
       tag: 4.3.1.6822@sha256:8b3167caff215443e1fd0cdcb417f85dc307faa97a216479df2c4257487c369e
     env:
       TZ: "${TZ}"
+    service:
+      main:
+        ports:
+          http:
+            port: 7878
     ingress:
       main:
         enabled: true
