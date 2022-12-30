@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &app postgresql-firefly-iii
+  namespace: home
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: *app
+      app.kubernetes.io/instance: *app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 2
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: *app
+        app.kubernetes.io/instance: *app
+    spec:
+      containers:
+        - name: *app
+          image: postgresql:15.1-alpine
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: postgresql-firefly-iii-volume
+              mountPath: /var/lib/postgresql/data/pgdata
+          resources:
+            requests:
+              cpu: 200m
+              memory: 200Mi
+            limits:
+              cpu: 300m
+              memory: 300Mi
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "${MARIADBNEXTCLOUD_ROOT_PASS}"
+            - name: POSTGRES_DB
+              value: "${MARIADBNEXTCLOUD_DATABASE}"
+            - name: POSTGRES_USER
+              value: "${MARIADBNEXTCLOUD_USERNAME}"
+            - name: POSTGRES_PASSWORD
+              value: "${MARIADBNEXTCLOUD_PASSWORD}"
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: postgresql-firefly-iii-volume
+          hostPath:
+            path: /mnt/sdc1/postgresql_firefly-iii
