@@ -5,20 +5,20 @@ metadata:
   name: radarr
   namespace: media
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
-      chart: radarr
-      version: 16.3.2
+      chart: app-template
+      version: 1.2.0
+      interval: 30m
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s
         namespace: flux-system
-      interval: 5m
   values:
     image:
-      repository: ghcr.io/k8s-at-home/radarr-develop
-      tag: v4.3.0.6671
+      repository: ghcr.io/onedr0p/radarr-develop
+      tag: 4.3.1.6822@sha256:8b3167caff215443e1fd0cdcb417f85dc307faa97a216479df2c4257487c369e
     env:
       TZ: "${TZ}"
     ingress:

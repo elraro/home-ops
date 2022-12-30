@@ -5,20 +5,20 @@ metadata:
   name: prowlarr
   namespace: media
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
-      chart: prowlarr
-      version: 4.5.2
+      chart: app-template
+      version: 1.2.0
+      interval: 30m
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s
         namespace: flux-system
-      interval: 5m
   values:
     image:
-      repository: ghcr.io/k8s-at-home/prowlarr-nightly
-      tag: v0.4.10.2089
+      repository: ghcr.io/onedr0p/prowlarr-develop
+      tag: 1.0.0.2171@sha256:2453e489b2354c028bd3d17030697b18a0ec18632618220288118b7312185c2e
     env:
       TZ: "${TZ}"
     ingress:

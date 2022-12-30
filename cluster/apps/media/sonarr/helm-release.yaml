@@ -5,20 +5,20 @@ metadata:
   name: sonarr
   namespace: media
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
-      chart: sonarr
-      version: 16.3.2
+      chart: app-template
+      version: 1.2.0
+      interval: 30m
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s
         namespace: flux-system
-      interval: 5m
   values:
     image:
-      repository: ghcr.io/k8s-at-home/sonarr-develop
-      tag: v3.0.9.1555
+      repository: ghcr.io/onedr0p/sonarr-develop
+      tag: 4.0.0.322@sha256:0c869b81c5d9e1129eac00988892f1333d3fb0ba36964024e50b852ee13dcc9d
     env:
       TZ: "${TZ}"
     ingress:
