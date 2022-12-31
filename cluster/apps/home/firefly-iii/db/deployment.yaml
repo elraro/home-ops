@@ -30,7 +30,7 @@ spec:
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: postgresql-firefly-iii-volume
-              mountPath: /var/lib/postgresql/data/pgdata
+              mountPath: /var/lib/postgresql/data
           resources:
             requests:
               cpu: 200m
