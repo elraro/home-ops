@@ -39,14 +39,12 @@ spec:
               cpu: 300m
               memory: 300Mi
           env:
-            - name: POSTGRES_PASSWORD
-              value: "${MARIADBNEXTCLOUD_ROOT_PASS}"
             - name: POSTGRES_DB
-              value: "${MARIADBNEXTCLOUD_DATABASE}"
+              value: "${POSTGRESQLFIREFLY_DATABASE}"
             - name: POSTGRES_USER
-              value: "${MARIADBNEXTCLOUD_USERNAME}"
+              value: "${POSTGRESQLFIREFLY_USER}"
             - name: POSTGRES_PASSWORD
-              value: "${MARIADBNEXTCLOUD_PASSWORD}"
+              value: "${POSTGRESQLFIREFLY_PASSWORD}"
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
       volumes:
