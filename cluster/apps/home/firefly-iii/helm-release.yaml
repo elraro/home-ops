@@ -65,7 +65,7 @@ spec:
           - name: POSTGRES_HOST
             valueFrom:
               secretKeyRef:
-                name: firefly-iii-secret
+                name: firefly-iii-secrets
                 key: DB_HOST
 
     persistence:
@@ -85,4 +85,4 @@ spec:
         memory: 175Mi
     envFrom:
       - secretRef:
-          name: firefly-iii-secret
+          name: firefly-iii-secrets
