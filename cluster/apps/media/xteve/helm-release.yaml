@@ -36,11 +36,8 @@ spec:
         loadBalancerIP: "${METALLB_XTEVE_ADDR}"
         externalTrafficPolicy: Local
         ports:
-          http-xteve:
-            enabled: true
+          http:
             port: 34400
-            targetPort: 34400
-            protocol: HTTP
     ingress:
       main:
         enabled: true
