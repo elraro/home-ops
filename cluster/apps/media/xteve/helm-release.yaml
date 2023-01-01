@@ -5,16 +5,16 @@ metadata:
   name: xteve
   namespace: media
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
-      chart: xteve
-      version: 8.4.2
+      chart: app-template
+      version: 1.2.0
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s
         namespace: flux-system
-      interval: 5m
+      interval: 30m
   install:
     createNamespace: true
   values:
@@ -30,7 +30,7 @@ spec:
       fsGroup: 1000
       fsGroupChangePolicy: "OnRootMismatch"
     service:
-      xteve:
+      main:
         enabled: true
         type: LoadBalancer
         loadBalancerIP: "${METALLB_XTEVE_ADDR}"
