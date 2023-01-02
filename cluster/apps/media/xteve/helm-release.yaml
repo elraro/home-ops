@@ -34,7 +34,6 @@ spec:
         enabled: true
         type: LoadBalancer
         loadBalancerIP: "${METALLB_XTEVE_ADDR}"
-        externalTrafficPolicy: Local
         ports:
           http:
             port: 34400
