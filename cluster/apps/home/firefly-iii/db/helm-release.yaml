@@ -1,0 +1,54 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app postgresql-firefly-iii
+  namespace: home
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 30m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    image:
+      repository: postgres
+      tag: 15.1-alpine
+    service:
+      main:
+        ports:
+          tcp:
+            port: 5432
+    persistence:
+      data:
+        enabled: true
+        type: custom
+        volumeSpec:
+          hostPath:
+            type: DirectoryOrCreate
+            path: /mnt/sdc1/postgresql_firefly-iii
+        mountPath: /var/lib/postgresql/data
+    resources:
+      requests:
+        cpu: 200m
+        memory: 200Mi
+      limits:
+        cpu: 300m
+        memory: 300Mi
+    env:
+      POSTGRES_DB: "${POSTGRESQLFIREFLY_DATABASE}"
+      POSTGRES_USER: "${POSTGRESQLFIREFLY_USER}"
+      POSTGRES_PASSWORD: "${POSTGRESQLFIREFLY_PASSWORD}"
+      PGDATA: /var/lib/postgresql/data/pgdata
