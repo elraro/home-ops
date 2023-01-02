@@ -29,7 +29,7 @@ spec:
     service:
       main:
         ports:
-          tcp:
+          db:
             port: 5432
     persistence:
       data:
