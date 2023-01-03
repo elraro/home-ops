@@ -1,0 +1,76 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app firefly-iii-data-importer
+  namespace: home
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+      interval: 30m
+
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+
+  values:
+    global:
+      nameOverride: *app
+    image:
+      repository: fireflyiii/data-importer
+      tag: version-0.9.17
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "foundation:page-export-csv"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: &host "firefly-iii-data-importer.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: "firefly-iii-data-importer-tls"
+    dependsOn:
+      - name: firefly-iii
+        namespace: home
+    envFrom:
+      - secretRef:
+          name: firefly-iii-secrets
+    env:
+      TRUSTED_PROXIES: "**"
+      FIREFLY_III_URL: "https://firefly-iii.${SECRET_DOMAIN}"
+      VANITY_URL: "https://firefly.${SECRET_DOMAIN}"
+      FIREFLY_III_ACCESS_TOKEN:
+        valueFrom:
+          secretKeyRef:
+            name: firefly-iii-secrets
+            key: APP_KEY
+    resources:
+      requests:
+        cpu: 15m
+        memory: 164Mi
+      limits:
+        memory: 175Mi
