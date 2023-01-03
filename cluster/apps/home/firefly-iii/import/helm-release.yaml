@@ -67,7 +67,7 @@ spec:
         valueFrom:
           secretKeyRef:
             name: firefly-iii-secrets
-            key: APP_KEY
+            key: IMPORTER
     resources:
       requests:
         cpu: 15m
