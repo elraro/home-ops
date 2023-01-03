@@ -29,8 +29,9 @@ spec:
     service:
       main:
         ports:
-          db:
+          http:
             port: 5432
+            protocol: TCP
     persistence:
       data:
         enabled: true
