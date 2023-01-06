@@ -77,12 +77,6 @@ spec:
             type: DirectoryOrCreate
             path: /home/elraro/home-ops/volumes/firefly-iii/upload
         mountPath: /var/www/html/firefly-iii/storage/upload
-    resources:
-      requests:
-        cpu: 15m
-        memory: 164Mi
-      limits:
-        memory: 175Mi
     envFrom:
       - secretRef:
           name: firefly-iii-secrets

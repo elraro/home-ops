@@ -68,9 +68,3 @@ spec:
           secretKeyRef:
             name: firefly-iii-secrets
             key: IMPORTER
-    resources:
-      requests:
-        cpu: 15m
-        memory: 164Mi
-      limits:
-        memory: 175Mi

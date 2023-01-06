@@ -30,13 +30,6 @@ spec:
               mountPath: /opt/adguardhome/work
             - name: adguard-work-conf-volume
               mountPath: /opt/adguardhome/conf
-          resources:
-            requests:
-              cpu: 100m
-              memory: 50Mi
-            limits:
-              cpu: 250m
-              memory: 500Mi
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
       volumes:
