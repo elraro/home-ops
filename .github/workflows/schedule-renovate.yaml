@@ -18,12 +18,13 @@ on: # yamllint disable-line rule:truthy
     branches:
       - main
     paths:
-      - ".github/renovate.json5"
+      - ".github/renovate.json"
       - ".github/renovate/**.json"
 
 env:
-  LOG_LEVEL: debug
-  DRY_RUN: false
+  LOG_LEVEL: info
+  RENOVATE_DRY_RUN: false
+  RENOVATE_CONFIG_FILE: .github/renovate.json
 
 jobs:
   renovate:
