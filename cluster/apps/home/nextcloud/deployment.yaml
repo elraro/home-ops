@@ -39,13 +39,6 @@ spec:
               value: "1000"
             - name: TZ
               value: "${TZ}"
-          resources:
-            requests:
-              cpu: 400m
-              memory: 1000Mi
-            limits:
-              cpu: 800m
-              memory: 2000Mi
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
       volumes:
