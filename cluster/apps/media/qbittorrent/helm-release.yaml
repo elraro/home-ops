@@ -37,6 +37,11 @@ spec:
             port: 6881
             protocol: TCP
             targetPort: 6881
+          microtp:
+            enabled: true
+            port: 6881
+            protocol: UDP
+            targetPort: 6881
         externalTrafficPolicy: Local
     ingress:
       main:
