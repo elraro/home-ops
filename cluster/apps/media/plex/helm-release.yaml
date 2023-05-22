@@ -24,7 +24,7 @@ spec:
     runtimeClassName: nvidia
     image:
       repository: ghcr.io/onedr0p/plex
-      tag: 1.32.0.6973-a787c5a8e
+      tag: 1.32.1.6999-91e1e2e2c@sha256:fa9bbdbd8a73d110c703839619b9e1cc13524187b00662955235c02e07cef50c
     env:
       TZ: "${TZ}"
       ADVERTISE_IP: "http://${METALLB_PLEX_ADDR}:32400/"
