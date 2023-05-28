@@ -1,184 +1,58 @@
 {
-  extends: [
-    ':enableRenovate',
-    'config:base',
-    ':disableRateLimiting',
-    ':dependencyDashboard',
-    ':semanticCommits',
-    ':separatePatchReleases',
-    'docker:enableMajor',
-    ':enablePreCommit',
-    'github>elraro/home-ops//.github/renovate/autoMerge',
-    'github>elraro/home-ops//.github/renovate/labels',
-    'github>elraro/home-ops//.github/renovate/semanticCommits',
-    'github>elraro/home-ops//.github/renovate/disabledDatasources.json5'
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    "docker:enableMajor",
+    ":disableRateLimiting",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":enablePreCommit",
+    ":automergeDigest",
+    ":automergeBranch",
+    "github>elraro/home-ops//.github/renovate/autoMerge.json5",
+    "github>elraro/home-ops//.github/renovate/commitMessage.json5",
+    "github>elraro/home-ops/.github/renovate/groups.json5",
+    "github>elraro/home-ops//.github/renovate/labels.json5",
+    "github>elraro/home-ops//.github/renovate/semanticCommits.json5",
+    "helpers:pinGitHubActionDigests"
   ],
-  configMigration: true,
-  platform: 'github',
   username: 'roy-batty-bot[bot]',
   repositories: [
     'elraro/home-ops',
   ],
-  onboarding: false,
-  requireConfig: 'optional',
   gitAuthor: 'roy-batty-bot <194077+roy-batty-bot[bot]@users.noreply.github.com>',
-  dependencyDashboardTitle: 'Renovate Dashboard 🤖',
-  suppressNotifications: [
-    'prIgnoreNotification',
-  ],
-  rebaseWhen: 'conflicted',
-  commitBodyTable: true,
-  'docker-compose': {
-    fileMatch: [
-      'ansible/.+/docker-compose.*\\.ya?ml(\\.j2)?$',
-    ],
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "suppressNotifications": ["prIgnoreNotification"],
+  "rebaseWhen": "conflicted",
+  "schedule": ["every saturday"],
+  "pre-commit": {
+    "enabled": true
   },
-  flux: {
-    fileMatch: [
-      'cluster/.+\\.ya?ml$',
-    ],
+  "flux": {
+    "fileMatch": ["kubernetes/.+\\.ya?ml$"]
   },
-  'helm-values': {
-    fileMatch: [
-      'cluster/.+\\.ya?ml$',
-    ],
+  "helm-values": {
+    "fileMatch": ["kubernetes/.+\\.ya?ml$"]
   },
-  helmv3: {
-    fileMatch: [
-      'charts/.+/Chart\\.ya?ml$',
-    ],
+  "kubernetes": {
+    "fileMatch": [
+      "ansible/.+\\.ya?ml.j2$",
+      "kubernetes/.+\\.ya?ml$"
+    ]
   },
-  kubernetes: {
-    fileMatch: [
-      'cluster/.+\\.ya?ml$',
-    ],
-  },
-  regexManagers: [
+  "regexManagers": [
     {
-      fileMatch: [
-        'cluster/.+\\.ya?ml$',
-        'ansible/.+\\.ya?ml$',
-        'hack/.+\\.sh$',
+      "description": "Process various other dependencies",
+      "fileMatch": [
+        "ansible/.+\\.ya?ml$",
+        "kubernetes/.+\\.ya?ml$"
       ],
-      matchStrings: [
-        'datasource=(?<datasource>.*?)\n *url: https://github\\.com/(?<depName>.*?)\\.git\n *ref:\n *tag: (?<currentValue>.*)\n',
-        'datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n.*?_version: "(?<currentValue>.*)"\n',
-        'datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n.*?_VERSION="(?<currentValue>.*)"\n',
+      "matchStrings": [
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
       ],
-      datasourceTemplate: 'github-releases',
-    },
-    {
-      fileMatch: [
-        'cluster/.+\\.ya?ml$',
-      ],
-      matchStrings: [
-        'registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>[a-zA-Z-]+)-(?<currentValue>.*)\n',
-        'registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n.*\\/(?<currentValue>.*?)\\/',
-      ],
-      datasourceTemplate: 'helm',
-    },
-    {
-      fileMatch: [
-        'cluster/.+\\.ya?ml$',
-      ],
-      matchStrings: [
-        'datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n .*: (?<currentValue>.*=?)',
-      ],
-      datasourceTemplate: 'docker',
-    },
-  ],
-  packageRules: [
-    {
-      matchDatasources: [
-        'helm',
-      ],
-      ignoreDeprecated: true,
-    },
-    {
-      matchDatasources: [
-        'docker',
-      ],
-      commitMessageExtra: 'to {{newVersion}}',
-    },
-    {
-      matchDatasources: [
-        'docker',
-      ],
-      versioning: 'regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<compatibility>.*)$',
-      matchPackageNames: [
-        'docker.io/blakeblackshear/frigate',
-      ],
-    },
-    {
-      matchDatasources: [
-        'docker',
-      ],
-      versioning: 'regex:^RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z(-(?<compatibility>.*))?$',
-      matchPackageNames: [
-        'quay.io/minio/minio',
-      ],
-    },
-    {
-      matchDatasources: [
-        'docker',
-        'github-releases',
-      ],
-      versioning: 'loose',
-      matchPackageNames: [
-        'ghcr.io/k8s-at-home/plex',
-        'ghcr.io/k8s-at-home/qbittorrent',
-        'Hypfer/Valetudo',
-      ],
-    },
-    {
-      groupName: 'rook-ceph-suite',
-      matchDatasources: [
-        'docker',
-        'helm',
-      ],
-      matchPackagePatterns: [
-        '^rook.ceph',
-      ],
-      additionalBranchPrefix: '',
-      separateMinorPatch: true,
-    },
-    {
-      groupName: 'external-snapshotter-suite',
-      matchDatasources: [
-        'docker',
-        'github-releases',
-      ],
-      matchPackagePatterns: [
-        'external-snapshotter',
-        'snapshot-controller',
-      ],
-      additionalBranchPrefix: '',
-      separateMinorPatch: true,
-    },
-    {
-      groupName: 'system-upgrade-controller-suite',
-      matchDatasources: [
-        'docker',
-        'github-tags',
-      ],
-      matchPackagePatterns: [
-        'rancher/system-upgrade-controller',
-      ],
-      additionalBranchPrefix: '',
-      separateMinorPatch: true,
-    },
-    {
-      groupName: 'vector-suite',
-      matchDatasources: [
-        'docker',
-        'github-releases',
-        'helm',
-      ],
-      matchPackagePatterns: [
-        'vector',
-      ],
-      additionalBranchPrefix: '',
-      separateMinorPatch: true,
-    },
-  ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ]
 }
