@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "username": "roy-batty-bot[bot]",
-  "gitAuthor": "roy-batty-bot <194077+roy-batty-bot[bot]@users.noreply.github.com>",
+  "username": "roybatty-bot[bot]",
+  "gitAuthor": "roybatty-bot <341140+roybatty-bot[bot]@users.noreply.github.com>",
   "repositories": ["elraro/home-ops"]
 }
