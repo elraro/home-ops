@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: *app
-          image: mariadb:10.11
+          image: mariadb:11.0
           imagePullPolicy: Always
           volumeMounts:
             - name: mariadb-nextcloud-volume
