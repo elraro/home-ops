@@ -8,4 +8,4 @@ collections:
     version: 1.5.4
 roles:
   - src: xanmanning.k3s
-    version: v3.4.1
+    version: v3.4.2
