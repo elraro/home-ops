@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &app waf
+  namespace: networking
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: *app
+      app.kubernetes.io/instance: *app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 2
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: *app
+        app.kubernetes.io/instance: *app
+    spec:
+      containers:
+        - name: waf
+          image: owasp/modsecurity-crs:apache-alpine
+          imagePullPolicy: Always
+          env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: "${TZ}"
+            - name: PARANOIA
+              value: 1
+            - name: ANOMALY_INBOUND
+              value: 10
+            - name: ANOMALY_OUTBOUND
+              value: 5
+            - name: BACKEND
+              value: "http://dummy"
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
