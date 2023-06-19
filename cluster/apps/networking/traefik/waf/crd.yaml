@@ -4,9 +4,9 @@ kind: Middleware
 metadata:
   name: my-traefik-modsecurity-plugin
   namespace: networking
-  spec:
-    plugin:
-      traefik-modsecurity-plugin:
-        MaxBodySize: "10485760"
-        ModsecurityUrl: http://waf:80
-        TimeoutMillis: "2000"
+spec:
+  plugin:
+    traefik-modsecurity-plugin:
+      MaxBodySize: "10485760"
+      ModsecurityUrl: http://waf:80
+      TimeoutMillis: "2000"
