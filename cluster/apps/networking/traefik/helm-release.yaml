@@ -85,7 +85,9 @@ spec:
       enabled: false
     experimental:
       plugins:
-        enabled: false
+        traefik-modsecurity-plugin:
+          moduleName: "github.com/acouvreur/traefik-modsecurity-plugin"
+          version: "v1.3.0"
     resources:
       requests:
         memory: 100Mi
