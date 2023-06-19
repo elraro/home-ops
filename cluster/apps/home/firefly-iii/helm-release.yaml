@@ -51,7 +51,7 @@ spec:
             secretName: "firefly-iii-tls"
     initContainers:
       wait-database:
-        image: alpine:3.18.0
+        image: alpine:3.18.2
         imagePullPolicy: IfNotPresent
         command:
           - sh
