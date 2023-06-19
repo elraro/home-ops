@@ -35,11 +35,11 @@ spec:
             - name: TZ
               value: "${TZ}"
             - name: PARANOIA
-              value: 1
+              value: "1"
             - name: ANOMALY_INBOUND
-              value: 10
+              value: "10"
             - name: ANOMALY_OUTBOUND
-              value: 5
+              value: "5"
             - name: BACKEND
               value: "http://dummy"
       restartPolicy: Always
