@@ -42,9 +42,11 @@ spec:
             - name: PARANOIA
               value: "1"
             - name: ANOMALY_INBOUND
-              value: "10"
-            - name: ANOMALY_OUTBOUND
               value: "5"
+            - name: ANOMALY_OUTBOUND
+              value: "4"
+            - name: ALLOWED_METHODS
+              value: "GET HEAD POST OPTIONS PROPFIND"
             - name: BACKEND
               value: http://localhost:8080
         - name: dummy
