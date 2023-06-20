@@ -13,7 +13,6 @@ metadata:
     external-dns/is-public: "true"
     kubernetes.io/ingress.class: "traefik"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: networking-modsecurity@kubernetescrd
 spec:
   rules:
     - host: "nextcloud.${SECRET_DOMAIN}"
