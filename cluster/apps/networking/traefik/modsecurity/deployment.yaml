@@ -40,7 +40,5 @@ spec:
               value: "10"
             - name: ANOMALY_OUTBOUND
               value: "5"
-            - name: BACKEND
-              value: "http://dummy"
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
