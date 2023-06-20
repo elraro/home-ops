@@ -63,6 +63,8 @@ spec:
       - "--providers.kubernetesingress.ingressendpoint.ip=${METALLB_TRAEFIK_ADDR}"
       - "--providers.kubernetesingress.allowexternalnameservices=true"
       - "--providers.kubernetescrd.allowexternalnameservices=true"
+      - "--experimental.plugins.modsecurity.modulename=github.com/acouvreur/traefik-modsecurity-plugin"
+      - "--experimental.plugins.modsecurity.version=v1.3.0"
     ports:
       traefik:
         expose: true
@@ -85,9 +87,7 @@ spec:
       enabled: false
     experimental:
       plugins:
-        traefik-modsecurity-plugin:
-          moduleName: "github.com/acouvreur/traefik-modsecurity-plugin"
-          version: "v1.3.0"
+        enabled: true
     resources:
       requests:
         memory: 100Mi

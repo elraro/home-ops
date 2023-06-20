@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: &app waf
+  name: &app mod-security
   namespace: networking
   labels:
     app.kubernetes.io/name: *app

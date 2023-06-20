@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: &app waf
+  name: &app mod-security
   namespace: networking
   labels:
     app.kubernetes.io/name: *app
@@ -24,7 +24,7 @@ spec:
         app.kubernetes.io/instance: *app
     spec:
       containers:
-        - name: waf
+        - name: mod-security
           image: owasp/modsecurity-crs:apache-alpine
           imagePullPolicy: Always
           env:
