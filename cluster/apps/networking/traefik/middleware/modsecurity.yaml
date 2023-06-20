@@ -6,7 +6,7 @@ metadata:
   namespace: networking
 spec:
   plugin:
-    traefik-modsecurity-plugin:
+    modsecurity:
       MaxBodySize: "10485760"
       ModsecurityUrl: http://modsecurity.networking.svc.cluster.local
       TimeoutMillis: "2000"
