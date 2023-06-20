@@ -42,9 +42,9 @@ spec:
             - name: PARANOIA
               value: "1"
             - name: ANOMALY_INBOUND
-              value: "5"
+              value: "100"
             - name: ANOMALY_OUTBOUND
-              value: "4"
+              value: "100"
             - name: ALLOWED_METHODS
               value: "GET HEAD POST OPTIONS PROPFIND"
             - name: BACKEND
