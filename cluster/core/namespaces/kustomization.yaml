@@ -10,3 +10,4 @@ resources:
   - security.yaml
   - media.yaml
   - home.yaml
+  - monitoring.yaml
