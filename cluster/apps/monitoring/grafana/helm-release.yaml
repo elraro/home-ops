@@ -98,7 +98,7 @@ spec:
         enabled: true
         searchNamespace: ALL
     serviceMonitor:
-      enabled: true
+      enabled: false
     plugins:
       - natel-discrete-panel
       - pr0ps-trackmap-panel
