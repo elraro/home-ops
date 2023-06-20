@@ -47,11 +47,6 @@ spec:
               value: "5"
             - name: BACKEND
               value: http://localhost:8080
-
-          resources:
-            limits:
-              memory: 200Mi
-              cpu: 50m
         - name: dummy
           image: traefik/whoami
           env:
