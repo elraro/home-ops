@@ -112,7 +112,7 @@ spec:
       networkPolicy:
         limitIngress: false
       serviceMonitor:
-        enabled: true
+        enabled: false
     ingress:
       enabled: true
       ingressClassName: "traefik"
