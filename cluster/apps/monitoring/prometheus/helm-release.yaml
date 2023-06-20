@@ -1,0 +1,197 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: 47.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community-charts
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    fullnameOverride: prometheus
+    alertmanager:
+      config:
+        receivers:
+          - name: "null"
+        route:
+          group_by: ["alertname", "job"]
+          group_wait: 30s
+          group_interval: 5m
+          repeat_interval: 6h
+          routes:
+            - receiver: "null"
+              match:
+                alertname: InfoInhibitor
+            - receiver: "null"
+              match:
+                alertname: Watchdog
+        inhibit_rules:
+          - source_match:
+              severity: "critical"
+            target_match:
+              severity: "warning"
+            equal: ["alertname", "namespace"]
+      ingress:
+        enabled: false
+      alertmanagerSpec:
+        replicas: 1
+        storage:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              storageClassName: local-path
+              resources:
+                requests:
+                  storage: 5Gi
+    kube-state-metrics:
+      metricLabelsAllowlist:
+        - "persistentvolumeclaims=[*]"
+        - "pods=[*]"
+        - "deployments=[*]"
+      verticalPodAutoscaler:
+        enabled: true
+    prometheus-node-exporter:
+      fullnameOverride: node-exporter
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
+    grafana:
+      enabled: false
+      forceDeployDashboards: true
+      serviceMonitor:
+        enabled: false
+      sidecar:
+        dashboards:
+          multicluster:
+            etcd:
+              enabled: true
+    kubelet:
+      enabled: true
+      serviceMonitor:
+        https: true
+        metricRelabelings:
+          - action: replace
+            sourceLabels:
+              - node
+            targetLabel: instance
+    kubeApiServer:
+      enabled: true
+    kubeControllerManager:
+      enabled: true # can't connect without port
+      endpoints:
+        - 192.168.202.4
+    kubeScheduler:
+      enabled: true # can't connect without port
+      endpoints:
+        - 192.168.202.4
+    kubeProxy:
+      enabled: true
+      endpoints:
+        - 192.168.202.4
+    kubeEtcd:
+      enabled: true
+      endpoints:
+        - 192.168.202.4
+      service:
+        enabled: true
+        port: 2381
+        targetPort: 2381
+    prometheusOperator:
+      verticalPodAutoscaler:
+        enabled: true
+      prometheusConfigReloader:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 50Mi
+          limits:
+            cpu: 200m
+            memory: 100Mi
+    prometheus:
+      ingress:
+        enabled: true
+        pathType: Prefix
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: Prometheus
+          hajimari.io/icon: "torch"
+        hosts:
+          - &host "prometheus.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
+            secretName: "prometheus-tls"
+      thanosService:
+        enabled: true
+      thanosServiceMonitor:
+        enabled: true
+      prometheusSpec:
+        replicas: 1
+        replicaExternalLabelName: "replica"
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        retention: 3d
+        retentionSize: 5GB
+        enableAdminAPI: true
+        walCompression: true
+        additionalScrapeConfigs:
+          - job_name: Mikrotik
+            scrape_interval: 30s
+            static_configs:
+              - targets:
+                  - 192.168.202.1 # mikrotik_ip
+            metrics_path: /snmp
+            params:
+              module: [mikrotik]
+            relabel_configs:
+              - source_labels: [__address__]
+                target_label: __param_target
+              - source_labels: [__param_target]
+                target_label: instance
+              - target_label: __address__
+                replacement: mikrotik-exporter:9116
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              storageClassName: local-path
+              resources:
+                requests:
+                  storage: 10Gi
+        thanos:
+          image: quay.io/thanos/thanos:v0.29.0
+          version: v0.25.1
+        resources:
+          requests:
+            cpu: 10m
+            memory: 2000Mi
+          limits:
+            memory: 3500Mi
