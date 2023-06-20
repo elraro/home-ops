@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: &app mod-security
+  name: &app modsecurity
   namespace: networking
   labels:
     app.kubernetes.io/name: *app
@@ -13,6 +13,6 @@ spec:
     app.kubernetes.io/instance: *app
   ports:
     - protocol: TCP
-      name: waf
+      name: modsecurity
       port: 80
       targetPort: 80
