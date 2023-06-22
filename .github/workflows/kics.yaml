@@ -21,7 +21,7 @@ jobs:
         # make sure results dir is created
         run: mkdir -p results-dir
       - name: run kics Scan
-        uses: Checkmarx/kics-github-action@v1.6
+        uses: Checkmarx/kics-github-action@v1.7
         with:
           path: cluster,provision
           output_path: results-dir
