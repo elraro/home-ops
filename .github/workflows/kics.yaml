@@ -1,0 +1,31 @@
+---
+name: KICS
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: KICS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3
+      - name: Mkdir results-dir
+        # make sure results dir is created
+        run: mkdir -p results-dir
+      - name: run kics Scan
+        uses: Checkmarx/kics-github-action@v1.6
+        with:
+          path: cluster,provision
+          output_path: results-dir
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results-dir/results.sarif
