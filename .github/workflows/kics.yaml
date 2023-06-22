@@ -26,7 +26,7 @@ jobs:
           output_path: myResults/
           output_formats: 'json,sarif'
           ignore_on_exit: results
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           enable_comments: true
       - name: Show results
         run: |
