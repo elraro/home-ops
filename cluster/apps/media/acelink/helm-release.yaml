@@ -40,6 +40,6 @@ spec:
         type: custom
         volumeSpec:
           hostPath:
-            type: DirectoryOrCreate
+            type: File
             path: /home/elraro/home-ops/volumes/acelink/acestream.conf
             mountPath: /opt/acestream/acestream.conf
