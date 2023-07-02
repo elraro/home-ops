@@ -34,12 +34,3 @@ spec:
         ports:
           http:
             port: 6878
-    persistence:
-      data:
-        enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: File
-            path: /home/elraro/home-ops/volumes/acelink/acestream.conf
-            mountPath: /opt/acestream/acestream.conf
