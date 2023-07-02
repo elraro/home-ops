@@ -34,3 +34,7 @@ spec:
         ports:
           http:
             port: 6878
+          http2:
+            port: 6821
+          api:
+            port: 62062
