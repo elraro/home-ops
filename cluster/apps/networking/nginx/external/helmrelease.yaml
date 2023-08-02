@@ -85,15 +85,6 @@ spec:
       extraArgs:
         default-ssl-certificate: "networking/home-dev-tls"
 
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app.kubernetes.io/name: nginx-external
-              app.kubernetes.io/component: controller
-
       resources:
         requests:
           cpu: 100m
