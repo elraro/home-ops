@@ -134,18 +134,12 @@ spec:
       ingress:
         enabled: true
         pathType: Prefix
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          hajimari.io/enable: "true"
-          hajimari.io/appName: Prometheus
-          hajimari.io/icon: "torch"
+        ingressClassName: "internal"
         hosts:
           - &host "prometheus.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - *host
-            secretName: "prometheus-tls"
       thanosService:
         enabled: true
       thanosServiceMonitor:

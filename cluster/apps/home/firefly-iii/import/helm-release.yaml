@@ -38,12 +38,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "foundation:page-export-csv"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        ingressClassName: "internal"
         hosts:
           - host: &host "firefly-iii-data-importer.${SECRET_DOMAIN}"
             paths:
@@ -52,7 +47,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: "firefly-iii-data-importer-tls"
     dependsOn:
       - name: firefly-iii
         namespace: home
