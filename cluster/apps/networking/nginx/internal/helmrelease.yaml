@@ -32,9 +32,7 @@ spec:
         type: RollingUpdate
 
       service:
-        enabled: true
-        type: LoadBalancer
-        externalIPs: "${NGINX_INT_ADDR}"
+        externalIPs: ["${NGINX_INT_ADDR}"]
         externalTrafficPolicy: Local
 
       publishService:
