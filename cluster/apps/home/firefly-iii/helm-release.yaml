@@ -34,12 +34,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "simple-icons:money"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        ingressClassName: "internal"
         hosts:
           - host: &host "firefly-iii.${SECRET_DOMAIN}"
             paths:
@@ -48,7 +43,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: "firefly-iii-tls"
     initContainers:
       wait-database:
         image: alpine:3.18.2

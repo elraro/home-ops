@@ -8,11 +8,8 @@ metadata:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
     external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
     external-dns/is-public: "true"
-    kubernetes.io/ingress.class: "traefik"
-    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
 spec:
   rules:
     - host: "nextcloud.${SECRET_DOMAIN}"
@@ -28,4 +25,3 @@ spec:
   tls:
     - hosts:
         - "nextcloud.${SECRET_DOMAIN}"
-      secretName: "nextcloud-tls"
