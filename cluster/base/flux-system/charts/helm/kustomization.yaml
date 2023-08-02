@@ -30,4 +30,3 @@ resources:
   - traefik-charts.yaml
   - kured-charts.yaml
   - bjw-s.yaml
-  - prometheus-community-charts.yaml
