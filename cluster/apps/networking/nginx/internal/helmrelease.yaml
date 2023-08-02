@@ -24,8 +24,6 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  values:
-    fullnameOverride: nginx-internal
 
     controller:
       replicaCount: 1
