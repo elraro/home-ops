@@ -34,10 +34,8 @@ spec:
       service:
         enabled: true
         type: LoadBalancer
-        single: false
-        spec:
-          loadBalancerIP: "${NGINX_INT_ADDR}"
-          externalTrafficPolicy: Local
+        externalIPs: "${NGINX_INT_ADDR}"
+        externalTrafficPolicy: Local
 
       publishService:
         enabled: true
