@@ -8,12 +8,10 @@ metadata:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
     external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
     external-dns/is-public: "true"
-    kubernetes.io/ingress.class: "traefik"
-    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
 spec:
+  ingressClassName: external
   rules:
     - host: "botstelegram.${SECRET_DOMAIN}"
       http:
@@ -28,4 +26,3 @@ spec:
   tls:
     - hosts:
         - "botstelegram.${SECRET_DOMAIN}"
-      secretName: "botstelegram-tls"
