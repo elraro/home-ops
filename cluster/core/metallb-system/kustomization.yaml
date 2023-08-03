@@ -4,5 +4,4 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - homepool.yaml
-  - peer.yaml
-  - advertisement.yaml
+  - l2.yaml
