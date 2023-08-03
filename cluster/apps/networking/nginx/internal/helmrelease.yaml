@@ -31,9 +31,12 @@ spec:
       updateStrategy:
         type: RollingUpdate
 
+
       service:
-        externalIPs: ["${NGINX_INT_ADDR}"]
-        externalTrafficPolicy: Local
+        type: LoadBalancer
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${NGINX_INT_ADDR}"
+          externalTrafficPolicy: Local
 
       publishService:
         enabled: true
