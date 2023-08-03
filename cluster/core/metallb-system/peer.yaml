@@ -6,4 +6,4 @@ metadata:
 spec:
   myASN: 65533
   peerASN: 65534
-  peerAddress: 192.168.203.1
+  peerAddress: 192.168.202.1
