@@ -33,9 +33,9 @@ spec:
       main:
         enabled: true
         type: LoadBalancer
-        externalIPs:
-          - "${METALLB_XTEVE_ADDR}"
-        externalTrafficPolicy: Local
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${METALLB_XTEVE_ADDR}"
+          externalTrafficPolicy: Local
         ports:
           http:
             port: 34400
