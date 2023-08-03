@@ -6,4 +6,3 @@ resources:
   - external-dns
   - k8s-gateway
   - nginx
-  - traefik
