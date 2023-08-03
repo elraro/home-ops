@@ -1,5 +1,5 @@
 apiVersion: metallb.io/v1beta2
-kind: BGPPeer
+kind: BGPPeer.metallb.io
 metadata:
   name: peer
   namespace: metallb-system
