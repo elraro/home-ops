@@ -33,12 +33,8 @@ spec:
         type: RollingUpdate
 
       service:
-        enabled: true
-        type: LoadBalancer
-        single: false
-        spec:
-          loadBalancerIP: "${NGINX_EXT_ADDR}"
-          externalTrafficPolicy: Local
+        externalIPs: ["${NGINX_EXT_ADDR}"]
+        externalTrafficPolicy: Local
 
       publishService:
         enabled: true
