@@ -5,4 +5,3 @@ resources:
   - cloudflare-ddns
   - external-dns
   - k8s-gateway
-  - nginx
