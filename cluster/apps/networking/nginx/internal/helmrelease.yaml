@@ -31,7 +31,6 @@ spec:
       updateStrategy:
         type: RollingUpdate
 
-
       service:
         type: LoadBalancer
         annotations:

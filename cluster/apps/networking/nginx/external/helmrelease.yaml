@@ -33,8 +33,10 @@ spec:
         type: RollingUpdate
 
       service:
-        externalIPs: ["${NGINX_EXT_ADDR}"]
-        externalTrafficPolicy: Local
+        type: LoadBalancer
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${NGINX_EXT_ADDR}"
+          externalTrafficPolicy: Local
 
       publishService:
         enabled: true
