@@ -2,10 +2,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - qbittorrent
-  - radarr
-  - sonarr
-  - prowlarr
-  - plex
-  - xteve
-  - acelink
+  - ./qbittorrent/ks.yaml
+  - ./radarr/ks.yaml
+  - ./sonarr/ks.yaml
+  - ./prowlarr/ks.yaml
+  - ./plex/ks.yaml
+  - ./xteve/ks.yaml
+  - ./acelink/ks.yaml
