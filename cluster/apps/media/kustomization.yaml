@@ -8,6 +8,6 @@ resources:
   - ./prowlarr/ks.yaml
   - ./qbittorrent/ks.yaml
   - ./radarr/ks.yaml
-  - ./readarr/ks.yaml
+  - ./calibre/ks.yaml
   - ./sonarr/ks.yaml
   - ./xteve/ks.yaml
