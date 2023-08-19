@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: ghcr.io/linuxserver/calibre
-      tag: 6.25.0@sha256:eca66c63f092bc3380dc55ea9ec5556e91b174aaf7f85adb20f96cc27e53dd6d
+      tag: version-v6.24.0
     env:
       TZ: "${TZ}"
     service:
