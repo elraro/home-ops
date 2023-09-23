@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: postgres
-      tag: 15.4-alpine
+      tag: 16.0-alpine
     service:
       main:
         ports:
