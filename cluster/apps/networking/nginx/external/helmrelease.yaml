@@ -53,6 +53,7 @@ spec:
               operator: In
               values: ["external"]
 
+      allowSnippetAnnotations: true
       config:
         client-body-buffer-size: 100M
         client-body-timeout: 120
