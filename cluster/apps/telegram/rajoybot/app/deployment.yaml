@@ -57,7 +57,7 @@ spec:
                   key: mysqlpassword
                   name: rajoybot
         - name: *app
-          image: elraro/rajoybot:latest
+          image: ghcr.io/elraro/rajoybot:latest@sha256:731a726ffb611dbcbc6158ded125cfc515c966ba899cf7c4c318a99a7aac7f1e
           imagePullPolicy: Always
           env:
             - name: MYSQL_HOST
