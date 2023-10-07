@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/prowlarr-develop
-      tag: 1.9.1.3981@sha256:73fc659eb724f175d30a09de96054849fa4c8e895d0ca30ee3f3a71c3578b173
+      tag: 1.9.1.3981@sha256:09ddc88c3ab257e6e27ed2abe461d9bb83db5159389637b39fd79bf7c967b8f7
     env:
       TZ: "${TZ}"
     service:
