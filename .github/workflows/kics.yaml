@@ -22,7 +22,7 @@ jobs:
       - name: run kics Scan
         uses: Checkmarx/kics-github-action@v1.7.0
         with:
-          path: cluster,provision
+          path: cluster
           output_path: myResults/
           output_formats: 'json,sarif'
           ignore_on_exit: results
