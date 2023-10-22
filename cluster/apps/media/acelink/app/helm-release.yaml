@@ -28,13 +28,10 @@ spec:
       main:
         enabled: true
         type: LoadBalancer
-        externalIPs:
-          - "${METALLB_ACELINK_ADDR}"
-        externalTrafficPolicy: Local
+        loadBalancerIP: "${METALLB_ACELINK_ADDR}"
         ports:
           http:
+            enabled: true
             port: 6878
-          http2:
-            port: 6821
-          api:
-            port: 62062
+            protocol: TCP
+            targetPort: 6878
