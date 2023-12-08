@@ -45,7 +45,7 @@ spec:
               - *host
     initContainers:
       wait-database:
-        image: alpine:3.18.4
+        image: alpine:3.19.0
         imagePullPolicy: IfNotPresent
         command:
           - sh
