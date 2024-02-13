@@ -1,9 +1,5 @@
 ---
-area/ansible:
-  - "provision/ansible/**/*"
 area/github:
   - ".github/**/*"
 area/cluster:
   - "cluster/**/*"
-area/terraform:
-  - "provision/terraform/**/*"
