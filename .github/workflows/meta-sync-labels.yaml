@@ -1,5 +1,5 @@
 ---
-name: Meta - Sync labels
+name: "Meta: Sync labels"
 
 on: # yamllint disable-line rule:truthy
   workflow_dispatch:
