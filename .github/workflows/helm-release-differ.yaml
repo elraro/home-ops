@@ -1,5 +1,5 @@
 ---
-name: Helm Release Differ
+name: "Helm Release Differ"
 
 on: # yamllint disable-line rule:truthy
   pull_request:
@@ -11,15 +11,18 @@ on: # yamllint disable-line rule:truthy
 env:
   # Currently no way to detect automatically
   DEFAULT_BRANCH: main
-  BOT_USERNAME: "roy-batty-bot[bot]"
+  BOT_USERNAME: "pepinillo-bot[bot]"
 
 jobs:
   detect-file-changes:
     name: Detect File Changes
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-      - uses: dorny/paths-filter@v2
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Filter Helm Releases
+        uses: dorny/paths-filter@v2
         id: filter
         with:
           list-files: json
@@ -28,6 +31,7 @@ jobs:
               - added|modified: "**/helm-release.yaml"
     outputs:
       yaml_files: ${{ steps.filter.outputs.yaml_files }}
+
   helm-release-differ:
     name: Helm Release Differ
     runs-on: ubuntu-latest
@@ -38,21 +42,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
       - name: Generate Token
         uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
         id: generate-token
         with:
           app_id: ${{ secrets.BOT_APP_ID }}
           private_key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+
       - name: Checkout default branch
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
         with:
           ref: "${{ env.DEFAULT_BRANCH }}"
           path: default
+
       - name: Install Helm
         uses: azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # v3
         with:
-          version: v3.6.3
+          version: latest
+
       - name: Helm Release Differ
         id: diff
         run: |
@@ -63,14 +71,15 @@ jobs:
           diff="${diff//$'\r'/'%0D'}"
           echo "::set-output name=diff::$(echo ${diff})"
       - name: Find Comment
-        uses: peter-evans/find-comment@a54c31d7fa095754bfef525c0c8e5e5674c4b4b1 # v2
+        uses: peter-evans/find-comment@d5fe37641ad8451bdd80312415672ba26c86575e # v3
         id: find-comment
         with:
           issue-number: "${{ github.event.pull_request.number }}"
           comment-author: "${{ env.BOT_USERNAME }}"
           body-includes: "${{ matrix.file }}"
+
       - name: Create or update comment
-        uses: peter-evans/create-or-update-comment@23ff15729ef2fc348714a3bb66d2f655ca9066f2 # v3
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
         with:
           token: "${{ steps.generate-token.outputs.token }}"
           comment-id: "${{ steps.find-comment.outputs.comment-id }}"
