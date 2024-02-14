@@ -18,7 +18,6 @@
     "github>elraro/home-ops//.github/renovate/commitMessage",
     "github>elraro/home-ops//.github/renovate/groups",
     "github>elraro/home-ops//.github/renovate/customManagers",
-    "github>elraro/home-ops//.github/renovate/grafanaDashboards",
     "github>elraro/home-ops//.github/renovate/packageRules"
   ],
   "onboarding": false,
@@ -38,7 +37,7 @@
   },
   "kubernetes": {
     "fileMatch": [
-      "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"
+      "(^|/)cluster/.+\\.ya?ml(\\.j2)?$"
     ]
   }
 }
