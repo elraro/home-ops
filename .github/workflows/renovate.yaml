@@ -18,8 +18,8 @@ on: # yamllint disable-line rule:truthy
     branches:
       - main
     paths:
-      - ".github/renovate.json5"
-      - ".github/renovate/**.json5"
+      - ".github/renovate.json"
+      - ".github/renovate/**.json"
 
 env:
   WORKFLOW_DRY_RUN: false
@@ -27,7 +27,7 @@ env:
   WORKFLOW_VERSION: latest # 37.59.8
   RENOVATE_PLATFORM: github
   RENOVATE_PLATFORM_COMMIT: true
-  RENOVATE_ONBOARDING_CONFIG_FILE_NAME: .github/renovate.json5
+  RENOVATE_ONBOARDING_CONFIG_FILE_NAME: .github/renovate.json
   RENOVATE_AUTODISCOVER: true
   RENOVATE_AUTODISCOVER_FILTER: "${{ github.repository }}"
   RENOVATE_USERNAME: "${{ secrets.BOT_USERNAME }}[bot]"
