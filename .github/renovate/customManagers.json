@@ -1,0 +1,38 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Process generic dependencies",
+      "fileMatch": [
+        "(^|/)provision/talos/.+\\.ya?ml(\\.j2)?$",
+        "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.*?)(?:\\s+extractVersion=(?<extractVersion>.+?))?(?:\\s+versioning=(?<versioning>.+?))?\\s+depName=(?<depName>.+?)?\\s(?:.*(?:[v|V]ersion):\\s+(?<currentValue>.*))?(?:.*(?:[r|R]ef):\\s+(?<currentDigest>.*))?"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
+    },
+    {
+      "customType": "regex",
+      "description": "Process custom dependencies",
+      "fileMatch": [
+        "(^|/)provision/talos/.+\\.ya?ml(\\.j2)?$",
+        "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?-\\s(.*?)/(?<currentValue>(v|\\d)[^/]+)/\\S+\n"
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
+      "customType": "regex",
+      "description": "Process CloudnativePG Postgresql version",
+      "fileMatch": ["(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"],
+      "matchStrings": ["imageName: (?<depName>\\S+):(?<currentValue>.*\\-.*)"],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "redhat"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "docker:enableMajor",
+    "helpers:pinGitHubActionDigests",
+    "replacements:k8s-registry-move",
+    ":automergeBranch",
+    ":disableRateLimiting",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":skipStatusChecks",
+    ":timezone(Europe/Madrid)",
+    "github>elraro/home-ops//.github/renovate/allowedVersions",
+    "github>elraro/home-ops//.github/renovate/autoMerge",
+    "github>elraro/home-ops//.github/renovate/labels",
+    "github>elraro/home-ops//.github/renovate/semanticCommits",
+    "github>elraro/home-ops//.github/renovate/commitMessage",
+    "github>elraro/home-ops//.github/renovate/groups",
+    "github>elraro/home-ops//.github/renovate/customManagers",
+    "github>elraro/home-ops//.github/renovate/grafanaDashboards",
+    "github>elraro/home-ops//.github/renovate/packageRules"
+  ],
+  "onboarding": false,
+  "requireConfig": "optional",
+  "configMigration": true,
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
+  "rebaseWhen": "conflicted",
+  "assigneesFromCodeOwners": true,
+  "reviewersFromCodeOwners": true,
+  "ignorePaths": ["**/*.sops.*", "**/.archive/**", "**/resources/**"],
+  "flux": {
+    "fileMatch": ["(^|/)cluster/.+\\.ya?ml(\\.j2)?$"]
+  },
+  "helm-values": {
+    "fileMatch": ["(^|/)cluster/.+\\.ya?ml(\\.j2)?$"]
+  },
+  "kubernetes": {
+    "fileMatch": [
+      "(^|/)kubernetes/.+\\.ya?ml(\\.j2)?$"
+    ]
+  }
+}
