@@ -26,8 +26,8 @@ spec:
               repository: blaiseio/acelink
               tag: 2.0.6
               pullPolicy: Always
-    env:
-      TZ: "${TZ}"
+            env:
+              TZ: "${TZ}"
     service:
       main:
         enabled: true
