@@ -9,27 +9,38 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.6.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      repository: ghcr.io/onedr0p/sonarr-develop
-      tag: 4.0.1.1131@sha256:dab8a943fb50f161a09a8c2e2e7c17a2e230545c5797fc6893f9363b590028af
-    env:
-      TZ: "${TZ}"
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/sonarr-develop
+              tag: 4.0.1.1131@sha256:dab8a943fb50f161a09a8c2e2e7c17a2e230545c5797fc6893f9363b590028af
+            env:
+              TZ: "${TZ}"
+            resources:
+              requests:
+                memory: 100Mi
+                cpu: 100m
+              limits:
+                memory: 1000Mi
     service:
       main:
+        enabled: true
         ports:
           http:
             port: 8989
     ingress:
       main:
         enabled: true
-        ingressClassName: "internal"
+        className: "internal"
         hosts:
           - host: &host "sonarr.${SECRET_DOMAIN}"
             paths:
@@ -38,13 +49,12 @@ spec:
         tls:
           - hosts:
               - *host
-    metrics:
-      enabled: false
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: "OnRootMismatch"
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
     persistence:
       config:
         enabled: true
@@ -71,9 +81,3 @@ spec:
         mountPath: /downloads
       backup:
         enabled: false
-    resources:
-      requests:
-        memory: 100Mi
-        cpu: 100m
-      limits:
-        memory: 1000Mi
