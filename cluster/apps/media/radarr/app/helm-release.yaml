@@ -9,42 +9,54 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.6.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      repository: ghcr.io/onedr0p/radarr-develop
-      tag: 5.3.5.8592@sha256:60d0a8a04a062654e27be6f1d8d780be2e821bd0e7815201f4bb32df8090b00b
-    env:
-      TZ: "${TZ}"
-    service:
+    controllers:
       main:
-        ports:
-          http:
-            port: 7878
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: "internal"
-        hosts:
-          - host: &host "radarr.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
-    metrics:
-      enabled: false
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: "OnRootMismatch"
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/radarr-develop
+              tag: 5.3.5.8592@sha256:60d0a8a04a062654e27be6f1d8d780be2e821bd0e7815201f4bb32df8090b00b
+            env:
+              TZ: "${TZ}"
+            resources:
+              requests:
+                memory: 100Mi
+                cpu: 100m
+              limits:
+                memory: 1000Mi
+        defaultPodOptions:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: "OnRootMismatch"
+        service:
+          main:
+            ports:
+              http:
+                port: 7878
+        ingress:
+          main:
+            enabled: true
+            className: "internal"
+            hosts:
+              - host: &host "radarr.${SECRET_DOMAIN}"
+                paths:
+                  - path: /
+                    pathType: Prefix
+                    service:
+                      name: main
+                      port: http
+            tls:
+              - hosts:
+                  - *host
     persistence:
       config:
         enabled: true
@@ -71,9 +83,3 @@ spec:
             type: DirectoryOrCreate
             path: /mnt/sdd1/downloads_qbittorrent
         mountPath: /downloads
-    resources:
-      requests:
-        memory: 100Mi
-        cpu: 100m
-      limits:
-        memory: 1000Mi
