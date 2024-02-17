@@ -23,9 +23,34 @@ spec:
     remediation:
       retries: 5
   values:
-    image:
-      repository: fireflyiii/core
-      tag: version-6.0.11
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: fireflyiii/core
+              tag: version-6.0.11
+            envFrom:
+              - secretRef:
+                  name: firefly-iii-secrets
+        initContainers:
+          wait-database:
+            image: alpine:3.19.1
+            imagePullPolicy: IfNotPresent
+            command:
+              - sh
+            args:
+              - -c
+              - >-
+                until nc -w 1 -v $POSTGRES_HOST:5432;
+                do echo "Waiting for database";
+                done
+            env:
+              - name: POSTGRES_HOST
+                valueFrom:
+                  secretKeyRef:
+                    name: firefly-iii-secrets
+                    key: DB_HOST
     service:
       main:
         ports:
@@ -40,28 +65,12 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
-    initContainers:
-      wait-database:
-        image: alpine:3.19.1
-        imagePullPolicy: IfNotPresent
-        command:
-          - sh
-        args:
-          - -c
-          - >-
-            until nc -w 1 -v $POSTGRES_HOST:5432;
-            do echo "Waiting for database";
-            done
-        env:
-          - name: POSTGRES_HOST
-            valueFrom:
-              secretKeyRef:
-                name: firefly-iii-secrets
-                key: DB_HOST
-
     persistence:
       data:
         enabled: true
@@ -71,6 +80,3 @@ spec:
             type: DirectoryOrCreate
             path: /home/elraro/home-ops/volumes/firefly-iii/upload
         mountPath: /var/www/html/firefly-iii/storage/upload
-    envFrom:
-      - secretRef:
-          name: firefly-iii-secrets
