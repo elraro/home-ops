@@ -9,19 +9,27 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.6.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   values:
-    image:
-      repository: ghcr.io/onedr0p/qbittorrent
-      tag: 4.6.3@sha256:a4ad890e8c4a287c17d12ca22eb1d84a046aba2efbd882bf7d6eb12459f6a70c
-    env:
-      TZ: "${TZ}"
-    settings:
-      automaticPortSetup: false
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/qbittorrent
+              tag: 4.6.3@sha256:a4ad890e8c4a287c17d12ca22eb1d84a046aba2efbd882bf7d6eb12459f6a70c
+            env:
+              TZ: "${TZ}"
+            resources:
+              requests:
+                memory: 250Mi
+                cpu: 500m
+              limits:
+                memory: 3000Mi
     service:
       main:
         ports:
@@ -46,22 +54,24 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "internal"
+        className: "internal"
         hosts:
           - host: &host "qbittorrent.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
-    metrics:
-      enabled: false
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: "OnRootMismatch"
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
     persistence:
       config:
         enabled: true
