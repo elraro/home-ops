@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.6.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -23,9 +23,25 @@ spec:
     remediation:
       retries: 5
   values:
-    image:
-      repository: postgres
-      tag: 15.4-alpine
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: postgres
+              tag: 15.4-alpine
+            resources:
+              requests:
+                cpu: 200m
+                memory: 200Mi
+              limits:
+                cpu: 300m
+                memory: 300Mi
+            env:
+              POSTGRES_DB: "${POSTGRESQLFIREFLY_DATABASE}"
+              POSTGRES_USER: "${POSTGRESQLFIREFLY_USER}"
+              POSTGRES_PASSWORD: "${POSTGRESQLFIREFLY_PASSWORD}"
+              PGDATA: /var/lib/postgresql/data/pgdata
     service:
       main:
         ports:
@@ -41,15 +57,3 @@ spec:
             type: DirectoryOrCreate
             path: /mnt/sdc1/postgresql_firefly-iii
         mountPath: /var/lib/postgresql/data
-    resources:
-      requests:
-        cpu: 200m
-        memory: 200Mi
-      limits:
-        cpu: 300m
-        memory: 300Mi
-    env:
-      POSTGRES_DB: "${POSTGRESQLFIREFLY_DATABASE}"
-      POSTGRES_USER: "${POSTGRESQLFIREFLY_USER}"
-      POSTGRES_PASSWORD: "${POSTGRESQLFIREFLY_PASSWORD}"
-      PGDATA: /var/lib/postgresql/data/pgdata
