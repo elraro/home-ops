@@ -23,6 +23,9 @@ spec:
   upgrade:
     remediation:
       retries: 5
+  dependsOn:
+    - name: firefly-iii
+      namespace: home
 
   values:
     global:
@@ -46,9 +49,6 @@ spec:
             envFrom:
               - secretRef:
                   name: firefly-iii-secrets
-            dependsOn:
-              - name: firefly-iii
-                namespace: home
     service:
       main:
         ports:
