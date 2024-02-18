@@ -45,7 +45,7 @@ spec:
                     key: IMPORTER
             envFrom:
               - secretRef:
-                name: firefly-iii-secrets
+                  name: firefly-iii-secrets
             dependsOn:
               - name: firefly-iii
                 namespace: home
