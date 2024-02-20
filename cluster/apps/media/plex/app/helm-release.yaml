@@ -97,7 +97,7 @@ spec:
             type: DirectoryOrCreate
             path: /mnt/sdb1/peliculas
         mountPath: /peliculas
-      seriesi:
+      seriesing:
         enabled: true
         type: custom
         volumeSpec:
@@ -105,7 +105,7 @@ spec:
             type: DirectoryOrCreate
             path: /mnt/sdb1/series_ingles
         mountPath: /seriesingles
-      seriese:
+      seriesesp:
         enabled: true
         type: custom
         volumeSpec:
