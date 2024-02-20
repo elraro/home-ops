@@ -104,7 +104,7 @@ spec:
           hostPath:
             type: DirectoryOrCreate
             path: /mnt/sdb1/series_ingles
-        mountPath: /series_ingles
+        mountPath: /seriesingles
       seriese:
         enabled: true
         type: custom
@@ -112,7 +112,7 @@ spec:
           hostPath:
             type: DirectoryOrCreate
             path: /mnt/sdb1/series_espanol
-        mountPath: /series_espanol
+        mountPath: /seriesespanol
       backup:
         enabled: false
       transcode:
