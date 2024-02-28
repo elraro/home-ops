@@ -9,3 +9,4 @@ resources:
   - ./radarr/ks.yaml
   - ./sonarr/ks.yaml
   - ./xteve/ks.yaml
+  - ./xteve2/ks.yaml
