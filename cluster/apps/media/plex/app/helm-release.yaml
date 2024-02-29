@@ -121,5 +121,5 @@ spec:
         volumeSpec:
           hostPath:
             type: DirectoryOrCreate
-            path: /mnt/sdb1/plex_transcode
+            path: /mnt/sdc1/plex_transcode
         mountPath: /transcode
