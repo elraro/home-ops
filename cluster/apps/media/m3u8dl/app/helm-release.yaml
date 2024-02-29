@@ -1,0 +1,52 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: m3u8dl
+  namespace: media
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.6.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 30m
+  install:
+    createNamespace: true
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/elraro/m3u8dl
+              tag: latest@sha256:c13fdcd4ce1b1bf2e15235a84e95763a4468b9c1ed44976580c9ea403711f126
+            env:
+              TZ: "${TZ}"
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+    service:
+      main:
+        enabled: true
+        type: LoadBalancer
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${METALLB_M3U8DL_ADDR}"
+          externalTrafficPolicy: Local
+        ports:
+          http:
+            port: 8080
+    persistence:
+      tmpfs:
+        enabled: true
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 500Mi
+        mountPath: /tmp/ramdisk

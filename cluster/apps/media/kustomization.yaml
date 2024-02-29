@@ -10,3 +10,4 @@ resources:
   - ./sonarr/ks.yaml
   - ./xteve/ks.yaml
   - ./xteve2/ks.yaml
+  - ./m3u8dl/ks.yaml
