@@ -21,10 +21,6 @@ spec:
     controllers:
       main:
         type: daemonset
-        pod:
-          securityContext:
-            capabilities:
-              add: ["SYS_RAWIO"]
         containers:
           main:
             image:
@@ -32,6 +28,8 @@ spec:
               tag: master-omnibus@sha256:d3d348a685dc5aecf59372ddcafab1c33966cc49b002e272b9e065db9e7d29ec
             env:
               TZ: "${TZ}"
+            securityContext:
+              privileged: true
     service:
       main:
         ports:
