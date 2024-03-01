@@ -1,0 +1,75 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: scrutiny
+  namespace: monitoring
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.6.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 30m
+  install:
+    createNamespace: true
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/analogj/scrutiny
+              tag: master-omnibus@sha256:d3d348a685dc5aecf59372ddcafab1c33966cc49b002e272b9e065db9e7d29ec
+            env:
+              TZ: "${TZ}"
+    defaultPodOptions:
+      securityContext:
+        privileged: true
+    service:
+      main:
+        ports:
+          http:
+            port: &port 8080
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "internal"
+        hosts:
+          - host: &host "scrutiny.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        type: custom
+        volumeSpec:
+          hostPath:
+            type: DirectoryOrCreate
+            path: /home/elraro/home-ops/volumes/scrutiny/config
+        mountPath: /opt/scrutiny/config
+      udev:
+        enabled: true
+        type: hostPath
+        hostPath: /run/udev
+        readOnly: true
+        globalMounts:
+          - path: /run/udev
+      sdd:
+        enabled: true
+        type: hostPath
+        hostPath: /dev/sdd
+        readOnly: true
+        globalMounts:
+          - path: /dev/sdd
