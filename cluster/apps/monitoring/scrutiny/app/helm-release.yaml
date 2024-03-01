@@ -74,6 +74,27 @@ spec:
         readOnly: true
         globalMounts:
           - path: /run/udev
+      sda:
+        enabled: true
+        type: hostPath
+        hostPath: /dev/sda
+        readOnly: true
+        globalMounts:
+          - path: /dev/sda
+      sdb:
+        enabled: true
+        type: hostPath
+        hostPath: /dev/sdb
+        readOnly: true
+        globalMounts:
+          - path: /dev/sdb
+      sdc:
+        enabled: true
+        type: hostPath
+        hostPath: /dev/sdc
+        readOnly: true
+        globalMounts:
+          - path: /dev/sdc
       sdd:
         enabled: true
         type: hostPath
@@ -81,3 +102,10 @@ spec:
         readOnly: true
         globalMounts:
           - path: /dev/sdd
+      sde:
+        enabled: true
+        type: hostPath
+        hostPath: /dev/sde
+        readOnly: true
+        globalMounts:
+          - path: /dev/sde
