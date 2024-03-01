@@ -20,6 +20,11 @@ spec:
   values:
     controllers:
       main:
+        type: daemonset
+        pod:
+          securityContext:
+            capabilities:
+              add: ["SYS_RAWIO"]
         containers:
           main:
             image:
@@ -27,9 +32,6 @@ spec:
               tag: master-omnibus@sha256:d3d348a685dc5aecf59372ddcafab1c33966cc49b002e272b9e065db9e7d29ec
             env:
               TZ: "${TZ}"
-    defaultPodOptions:
-      securityContext:
-        privileged: true
     service:
       main:
         ports:
@@ -59,6 +61,14 @@ spec:
             type: DirectoryOrCreate
             path: /home/elraro/home-ops/volumes/scrutiny/config
         mountPath: /opt/scrutiny/config
+      database:
+        enabled: true
+        type: custom
+        volumeSpec:
+          hostPath:
+            type: DirectoryOrCreate
+            path: /home/elraro/home-ops/volumes/scrutiny/influxdb
+        mountPath: /opt/scrutiny/influxdb
       udev:
         enabled: true
         type: hostPath
