@@ -7,3 +7,9 @@
 _... managed with Flux, Renovate and GitHub Actions_ 🤖
 
 </div>
+
+# Requirements
+
+```
+pip install pre-commit --break-system-packages
+```
