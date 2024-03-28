@@ -26,3 +26,4 @@ resources:
   - stakater-charts.yaml
   - kured-charts.yaml
   - bjw-s.yaml
+  - trivy.yaml

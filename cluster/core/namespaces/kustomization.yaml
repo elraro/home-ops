@@ -11,3 +11,4 @@ resources:
   - media.yaml
   - home.yaml
   - monitoring.yaml
+  - trivy-system.yaml
