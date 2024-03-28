@@ -8,10 +8,10 @@
       "matchPackagePatterns": ["changedetection", "qbittorrent"]
     },
     {
-      "description": "Custom versioning for frigate",
+      "description": "Ignore m3u8dl",
       "matchDatasources": ["docker"],
-      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(-(?<compatibility>beta)(?<build>\\d+))?$",
-      "matchPackagePatterns": ["frigate"]
+      "matchPackagePatterns": ["m3u8dl"],
+      "enabled": false
     }
   ]
 }
