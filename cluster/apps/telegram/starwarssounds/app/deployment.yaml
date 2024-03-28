@@ -84,7 +84,7 @@ spec:
             - name: WEBHOOK_LISTEN
               value: "0.0.0.0"
             - name: WEBHOOK_LISTEN_PORT
-              value: "8080"
+              value: 8080
           resources:
             requests:
               cpu: 100m
