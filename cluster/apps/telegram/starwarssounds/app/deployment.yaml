@@ -57,8 +57,8 @@ spec:
                   key: mysqlpassword
                   name: starwarssounds
         - name: *app
-          image: ghcr.io/elraro/starwarssounds_bot:latest
-          imagePullPolicy: Always
+          image: ghcr.io/elraro/starwarssounds_bot:1.0.0
+          imagePullPolicy: IfNotPresent
           env:
             - name: MYSQL_HOST
               value: "localhost"
