@@ -46,15 +46,14 @@ spec:
       mode: ClientServer
       storageClassName: local-path
 
+      slow: true
       resources:
         requests:
-          cpu: null
-          memory: null
-          # ephemeral-storage: "2Gi"
+          cpu: 100m
+          memory: 100M
         limits:
-          cpu: null
-          memory: null
+          cpu: 500m
+          memory: 500M
 
     serviceMonitor:
       enabled: false
-      namespace: "flux-monitoring"
