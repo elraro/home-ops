@@ -40,7 +40,7 @@ spec:
       builtInTrivyServer: true
       vulnerabilityScannerScanOnlyCurrentRevisions: true
       configAuditScannerScanOnlyCurrentRevisions: true
-      webhookBroadcastURL: "http://192.168.230.247:8081"
+      webhookBroadcastURL: "http://192.168.230.247:8081/webhook"
 
     trivy:
       ignoreUnfixed: true
