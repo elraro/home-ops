@@ -24,6 +24,7 @@
   "requireConfig": "optional",
   "configMigration": true,
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
   "rebaseWhen": "auto",
   "recreateWhen": "auto",
   "assigneesFromCodeOwners": true,
