@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: nextcloud
-          image: linuxserver/nextcloud:29.0.4
+          image: linuxserver/nextcloud:29.0.5
           imagePullPolicy: Always
           volumeMounts:
             - name: nextcloud-config-volume
