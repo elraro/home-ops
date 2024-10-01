@@ -18,7 +18,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: cloudflare-ddns
-              image: ghcr.io/onedr0p/kubanetics:2024.10.0@sha256:119a23a1c119dee6245a61dbdc0e2f71abe294024d599e42e1439893d0aef643
+              image: ghcr.io/onedr0p/kubanetics:2024.10.2@sha256:62abb7a13d56798cc58433f01afd41a821abe8fd072a64dd4b0329f42d5d74c8
               envFrom:
                 - secretRef:
                     name: cloudflare-ddns
