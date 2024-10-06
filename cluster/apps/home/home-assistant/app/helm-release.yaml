@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: home-assistant
@@ -20,7 +20,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-assistant/home-assistant
-      tag: 2024.9.2
+      tag: 2024.10.0
     env:
       TZ: "${TZ}"
     hostNetwork: true
