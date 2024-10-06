@@ -6,3 +6,4 @@ resources:
   - ./home-assistant/ks.yaml
   - ./firefly-iii/ks.yaml
   - ./congatudo/ks.yaml
+  - ./adguard/ks.yaml
