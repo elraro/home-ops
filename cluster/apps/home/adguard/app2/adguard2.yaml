@@ -21,7 +21,7 @@ metadata:
   namespace: home
 subsets:
   - addresses:
-      - ip: 192.168.100.100
+      - ip: 192.168.230.239
     ports:
       - port: 80
 ---
