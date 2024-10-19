@@ -24,7 +24,7 @@ spec:
           main:
             image:
               repository: ghcr.io/elraro/m3u8dl
-              tag: latest@sha256:10abc1e2e8d92893afe2269f837291e6c31a978b6e98b45753c1a245554157a0
+              tag: latest@sha256:5098f3438fde419fe9aa6c8dcc2c85aced86eb774029d58a233953bdc789c121
             env:
               TZ: "${TZ}"
     defaultPodOptions:
