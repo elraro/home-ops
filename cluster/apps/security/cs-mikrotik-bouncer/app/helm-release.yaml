@@ -18,6 +18,9 @@ spec:
   install:
     createNamespace: true
   values:
+    service:
+      main:
+        enabled: false
     controllers:
       main:
         containers:
