@@ -29,12 +29,12 @@ spec:
               repository: ghcr.io/funkolab/cs-mikrotik-bouncer
               tag: v0.5.0@sha256:25212d927a73d4af85375f641d4dc59fec317cad247726cbdf89cbabe08ec2d2
             env:
-              CROWDSEC_BOUNCER_API_KEY: "${SECRET_CROWDSEC_API}"
-              CROWDSEC_URL: "${SECRET_CROWDSEC_URL}"
+              CROWDSEC_BOUNCER_API_KEY: "${CROWDSEC_BOUNCER_API_KEY}"
+              CROWDSEC_URL: "${CROWDSEC_URL}"
               CROWDSEC_ORIGINS: "none"
               LOG_LEVEL: "1"
-              MIKROTIK_HOST: "${SECRET_MIKROTIK_HOST}"
-              MIKROTIK_USER: "${SECRET_MIKROTIK_USER}"
-              MIKROTIK_PASS: "${SECRET_MIKROTIK_PASS}"
+              MIKROTIK_HOST: "${MIKROTIK_HOST}"
+              MIKROTIK_USER: "${MIKROTIK_USER}"
+              MIKROTIK_PASS: "${MIKROTIK_PASS}"
               MIKROTIK_TLS: "false"
               MIKROTIK_IPV6: "false"
