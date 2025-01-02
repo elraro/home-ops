@@ -31,8 +31,6 @@ spec:
             env:
               CROWDSEC_BOUNCER_API_KEY: "${SECRET_CROWDSEC_BOUNCER_API_KEY}"
               CROWDSEC_URL: "${SECRET_CROWDSEC_URL}"
-              CROWDSEC_ORIGINS: "none"
-              LOG_LEVEL: "1"
               MIKROTIK_HOST: "${SECRET_MIKROTIK_HOST}"
               MIKROTIK_USER: "${SECRET_MIKROTIK_USER}"
               MIKROTIK_PASS: "${SECRET_MIKROTIK_PASS}"
