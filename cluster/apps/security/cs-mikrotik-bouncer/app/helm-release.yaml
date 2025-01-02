@@ -36,3 +36,4 @@ spec:
               MIKROTIK_PASS: "${SECRET_MIKROTIK_PASS}"
               MIKROTIK_TLS: "false"
               MIKROTIK_IPV6: "false"
+              LOG_LEVEL: "5"
