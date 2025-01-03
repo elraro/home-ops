@@ -27,7 +27,7 @@ spec:
           main:
             image:
               repository: ghcr.io/elraro/cs-mikrotik-bouncer
-              tag: v0.5.1@sha256:3b4b9544b4a091805521282d503570cdca154693dab4b5848713218105ed200e
+              tag: v0.5.2@sha256:8622cbbd894cd5b0e5575dcd8e0d38a2f11f497a210b28225882509b22c7dcbd
             env:
               CROWDSEC_BOUNCER_API_KEY: "${SECRET_CROWDSEC_BOUNCER_API_KEY}"
               CROWDSEC_URL: "${SECRET_CROWDSEC_URL}"
