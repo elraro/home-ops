@@ -26,8 +26,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/elraro/cs-mikrotik-bouncer
-              tag: v0.5.2@sha256:8622cbbd894cd5b0e5575dcd8e0d38a2f11f497a210b28225882509b22c7dcbd
+              repository: ghcr.io/funkolab/cs-mikrotik-bouncer:v0.5.0
+              tag: v0.5.0@sha256:25212d927a73d4af85375f641d4dc59fec317cad247726cbdf89cbabe08ec2d2
             env:
               CROWDSEC_BOUNCER_API_KEY: "${SECRET_CROWDSEC_BOUNCER_API_KEY}"
               CROWDSEC_URL: "${SECRET_CROWDSEC_URL}"
@@ -36,4 +36,4 @@ spec:
               MIKROTIK_PASS: "${SECRET_MIKROTIK_PASS}"
               MIKROTIK_TLS: "false"
               MIKROTIK_IPV6: "false"
-              LOG_LEVEL: "-1"
+              LOG_LEVEL: "1"
