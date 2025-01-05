@@ -65,5 +65,5 @@ spec:
         volumeSpec:
           hostPath:
             type: DirectoryOrCreate
-            path: /home/elraro/home-ops/volumes/xteve/data
-        mountPath: /data
+            path: /home/elraro/home-ops/volumes/threadfin
+        mountPath: /home/threadfin/conf
