@@ -27,12 +27,6 @@ spec:
               tag: 1.2.24-nvidia@sha256:549e7476b1a0d6a36e368b69b6e8cd46d6b5658ffb78d2c950e9f68382fd8f41
             env:
               TZ: "${TZ}"
-    defaultPodOptions:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: "OnRootMismatch"
     service:
       main:
         enabled: true
