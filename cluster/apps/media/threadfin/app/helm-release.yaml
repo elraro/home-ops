@@ -24,7 +24,7 @@ spec:
           main:
             image:
               repository: fyb3roptik/threadfin
-              tag: 1.2.24-nvidia@sha256:549e7476b1a0d6a36e368b69b6e8cd46d6b5658ffb78d2c950e9f68382fd8f41
+              tag: 1.2.26-nvidia@sha256:574e4e3614272011c1a6448f279e036f91a1d0a76ddcf129a190cb9f943131c7
             env:
               TZ: "${TZ}"
     service:
