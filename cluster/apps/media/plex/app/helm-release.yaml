@@ -97,6 +97,14 @@ spec:
             type: DirectoryOrCreate
             path: /mnt/sdb1/peliculas
         mountPath: /peliculas
+      otros:
+        enabled: true
+        type: custom
+        volumeSpec:
+          hostPath:
+            type: DirectoryOrCreate
+            path: /mnt/sdb1/otros
+        mountPath: /peliculas
       seriesing:
         enabled: true
         type: custom
