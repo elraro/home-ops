@@ -97,7 +97,7 @@ spec:
             type: DirectoryOrCreate
             path: /mnt/sdb1/peliculas
         mountPath: /peliculas
-      otros:
+      otroos:
         enabled: true
         type: custom
         volumeSpec:
