@@ -97,14 +97,6 @@ spec:
             type: DirectoryOrCreate
             path: /mnt/sdb1/peliculas
         mountPath: /peliculas
-      otroos:
-        enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: DirectoryOrCreate
-            path: /mnt/sdb1/otros
-        mountPath: /otros
       seriesing:
         enabled: true
         type: custom
@@ -123,6 +115,14 @@ spec:
         mountPath: /seriesespanol
       backup:
         enabled: false
+      otrosvideos:
+        enabled: true
+        type: custom
+        volumeSpec:
+          hostPath:
+            type: DirectoryOrCreate
+            path: /mnt/sdb1/otros
+        mountPath: /otrosvideos
       transcode:
         enabled: true
         type: custom
