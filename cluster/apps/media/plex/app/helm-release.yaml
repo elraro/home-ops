@@ -104,7 +104,7 @@ spec:
           hostPath:
             type: DirectoryOrCreate
             path: /mnt/sdb1/otros
-        mountPath: /peliculas
+        mountPath: /otros
       seriesing:
         enabled: true
         type: custom
