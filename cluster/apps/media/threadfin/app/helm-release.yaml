@@ -38,6 +38,7 @@ spec:
       app:
         enabled: true
         type: LoadBalancer
+        controller: threadfin
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${METALLB_THREADFIN_ADDR}"
           externalTrafficPolicy: Local
@@ -46,7 +47,6 @@ spec:
             port: 34400
     ingress:
       app:
-        enabled: true
         ingressClassName: "internal"
         hosts:
           - host: &host "threadfin.${SECRET_DOMAIN}"
