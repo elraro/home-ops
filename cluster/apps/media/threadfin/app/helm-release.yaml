@@ -29,9 +29,10 @@ spec:
               TZ: "${TZ}"
     defaultPodOptions:
       securityContext:
-        runAsUser: 31337
-        runAsGroup: 31337
-        fsGroup: 31337
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 140
+        runAsNonRoot: true
         fsGroupChangePolicy: "OnRootMismatch"
     service:
       main:
