@@ -62,6 +62,7 @@ spec:
       data:
         enabled: true
         type: hostPath
+        hostPathType: "DirectoryOrCreate"
         hostPath: /home/elraro/home-ops/volumes/threadfin
         globalMounts:
           - path: /home/threadfin/conf
