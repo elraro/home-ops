@@ -62,7 +62,6 @@ spec:
       data:
         enabled: true
         type: hostPath
-        hostPath:
-          path: /home/elraro/home-ops/volumes/threadfin
+        hostPath: /home/elraro/home-ops/volumes/threadfin
         globalMounts:
           - path: /home/threadfin/conf
