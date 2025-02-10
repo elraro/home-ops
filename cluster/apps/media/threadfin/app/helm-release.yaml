@@ -47,7 +47,7 @@ spec:
             port: 34400
     ingress:
       app:
-        ingressClassName: "internal"
+        className: "internal"
         hosts:
           - host: &host "threadfin.${SECRET_DOMAIN}"
             paths:
@@ -61,9 +61,9 @@ spec:
     persistence:
       data:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: DirectoryOrCreate
-            path: /home/elraro/home-ops/volumes/threadfin
-        mountPath: /home/threadfin/conf
+        type: hostPath
+        hostPath:
+          type: DirectoryOrCreate
+          path: /home/elraro/home-ops/volumes/threadfin
+        globalMounts:
+          - path: /home/threadfin/conf
