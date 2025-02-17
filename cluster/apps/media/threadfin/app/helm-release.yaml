@@ -24,7 +24,7 @@ spec:
           app:
             image:
               repository: fyb3roptik/threadfin
-              tag: 1.2.27-nvidia@sha256:67ca1c1c42cfbcc6c490d8b6b06c1f18d7e528632177f365345b24baf187abcd
+              tag: 1.2.28-nvidia@sha256:082c50203fd65a1659b0dd424a9c825a6c0542efc82743d0b580a75c389282cf
             env:
               TZ: "${TZ}"
     defaultPodOptions:
