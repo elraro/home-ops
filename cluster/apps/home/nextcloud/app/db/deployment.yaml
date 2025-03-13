@@ -39,6 +39,10 @@ spec:
               cpu: 300m
               memory: 300Mi
           env:
+            - name: MARDIADB_EXTRA_FLAGS
+              value: "--skip-grant-tables"
+            - name: ALLOW_EMPTY_PASSWORD
+              value: "yes"
             - name: MYSQL_ROOT_PASSWORD
               value: "${MARIADBNEXTCLOUD_ROOT_PASS}"
             - name: MYSQL_DATABASE
