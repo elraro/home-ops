@@ -39,9 +39,7 @@ spec:
               cpu: 300m
               memory: 300Mi
           env:
-            - name: MARIADB_EXTRA_FLAGS
-              value: "--skip-grant-tables"
-            - name: ALLOW_EMPTY_PASSWORD
+            - name: MARIADB_AUTO_UPGRADE
               value: "yes"
             - name: MYSQL_ROOT_PASSWORD
               value: "${MARIADBNEXTCLOUD_ROOT_PASS}"
