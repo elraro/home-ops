@@ -39,7 +39,7 @@ spec:
               cpu: 300m
               memory: 300Mi
           env:
-            - name: MARDIADB_EXTRA_FLAGS
+            - name: MARIADB_EXTRA_FLAGS
               value: "--skip-grant-tables"
             - name: ALLOW_EMPTY_PASSWORD
               value: "yes"
