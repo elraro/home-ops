@@ -2,10 +2,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-xteve2
+  name: cluster-apps-threadfin2
   namespace: flux-system
 spec:
-  path: ./cluster/apps/media/xteve2/app
+  path: ./cluster/apps/media/threadfin2/app
   prune: true
   sourceRef:
     kind: GitRepository
