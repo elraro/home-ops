@@ -17,6 +17,9 @@ spec:
       interval: 30m
   install:
     createNamespace: true
+  dependsOn:
+    - name: nvidia-gpu-plugin
+      namespace: kube-system
   values:
     controllers:
       threadfin:
@@ -24,10 +27,16 @@ spec:
           app:
             image:
               repository: fyb3roptik/threadfin
-              tag: 1.2.30-nvidia@sha256:316ba5047b9c6e9ad3644f6155665d8e36c704a092a1f62fe37f420e364e7394
+              tag: 1.2.28-nvidia@sha256:082c50203fd65a1659b0dd424a9c825a6c0542efc82743d0b580a75c389282cf
             env:
               TZ: "${TZ}"
+            resources:
+              requests:
+                nvidia.com/gpu: 1
+              limits:
+                nvidia.com/gpu: 1
     defaultPodOptions:
+      runtimeClassName: nvidia
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
