@@ -22,7 +22,7 @@ spec:
       namespace: kube-system
   values:
     controllers:
-      threadfin2:
+      threadfin:
         containers:
           app:
             image:
@@ -47,7 +47,7 @@ spec:
       app:
         enabled: true
         type: LoadBalancer
-        controller: threadfin2
+        controller: threadfin
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${METALLB_THREADFIN2_ADDR}"
           externalTrafficPolicy: Local
