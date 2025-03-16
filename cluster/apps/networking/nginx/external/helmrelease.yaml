@@ -77,6 +77,16 @@ spec:
         block-user-agents: "GPTBot,~*GPTBot*,ChatGPT-User,~*ChatGPT-User*,Google-Extended,~*Google-Extended*,CCBot,~*CCBot*,Omgilibot,~*Omgilibot*,FacebookBot,~*FacebookBot*" # taken from https://github.com/superseriousbusiness/gotosocial/blob/main/internal/web/robots.go
       addHeaders:
         X-Robots-Tag: "noindex, nofollow, nosnippet, noarchive"
+        Cache-Control: "no-store" # don't store caches
+        X-Frame-Options: "DENY"
+        X-Content-Type-Options: "nosniff"
+        X-XSS-Protection: "1; mode=block"
+        Referrer-Policy: "no-referrer"
+        X-DNS-Prefetch-Control: "off"
+        Permissions-Policy: "interest-cohort=()" # anti Google FLoC
+        Cross-Origin-Opener-Policy: "same-origin"
+        Cross-Origin-Resource-Policy: "same-site"
+        Cross-Origin-Embedder-Policy: "require-corp"
       metrics:
         enabled: true
         serviceMonitor:
