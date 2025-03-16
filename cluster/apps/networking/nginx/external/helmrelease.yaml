@@ -105,4 +105,24 @@ spec:
           memory: 512Mi
 
     defaultBackend:
-      enabled: false
+      enabled: true
+      name: default-backend
+      image:
+        repository: ghcr.io/tarampampam/error-pages
+        tag: 3.3.2
+      replicaCount: 1
+      extraEnvs:
+        - name: DISABLE_L10N
+          value: "true"
+        - name: SEND_SAME_HTTP_CODE
+          value: "true"
+        - name: SHOW_DETAILS
+          value: "false"
+        - name: TEMPLATE_NAME
+          value: hacker-terminal
+      resources:
+        requests:
+          cpu: 5m
+          memory: 10Mi
+        limits:
+          memory: 30Mi
