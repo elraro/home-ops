@@ -120,10 +120,4 @@ spec:
         - name: SHOW_DETAILS
           value: "false"
         - name: TEMPLATE_NAME
-          value: hacker-terminal
-      resources:
-        requests:
-          cpu: 5m
-          memory: 10Mi
-        limits:
-          memory: 30Mi
+          value: l7
