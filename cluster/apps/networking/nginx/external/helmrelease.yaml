@@ -73,7 +73,8 @@ spec:
         proxy-body-size: 0
         proxy-buffer-size: 16k
         ssl-protocols: TLSv1.3 TLSv1.2
-
+      addHeaders:
+        X-Robots-Tag: "noindex, nofollow, nosnippet, noarchive"
       metrics:
         enabled: true
         serviceMonitor:
