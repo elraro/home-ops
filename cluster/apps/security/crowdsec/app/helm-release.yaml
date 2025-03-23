@@ -60,15 +60,8 @@ spec:
         enabled: false
       ingress:
         enabled: true
-        className: "internal"
-        hosts:
-          - host: &host "crowdsec.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: main
-                  port: http
+        ingressClassName: "internal"
+        host: &host "crowdsec.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - *host
