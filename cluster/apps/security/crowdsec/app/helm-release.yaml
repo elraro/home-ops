@@ -1,0 +1,72 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: crowdsec
+  namespace: security
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: crowdsec
+      version: 0.19.0
+      sourceRef:
+        kind: HelmRepository
+        name: crowdsec
+        namespace: flux-system
+      interval: 30m
+  timeout: 20m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    container_runtime: containerd
+    image:
+      repository: ghcr.io/crowdsecurity/crowdsec
+      pullPolicy: IfNotPresent
+      tag: 'v1.6.6'
+    tls:
+      enabled: false
+    agent:
+      # Specify each pod whose logs you want to process
+      acquisition:
+        # The namespace where the pod is located
+        - namespace: home
+          # The pod name
+          podName: nextcloud-*
+          # as in crowdsec configuration, we need to specify the program name to find a matching parser
+          program: nextcloud
+      env:
+        - name: PARSERS
+          value: "crowdsecurity/cri-logs"
+        - name: COLLECTIONS
+          value: "crowdsecurity/nextcloud"
+      metrics:
+        enabled: false
+        serviceMonitor:
+          enabled: false
+    lapi:
+      dashboard:
+        enabled: false
+      env:
+        # For an internal test, disable the Online API
+        - name: DISABLE_ONLINE_API
+          value: "false"
+        - name: ENROLL_KEY
+          value: "${CS_KEY}"
+        - name: ENROLL_INSTANCE_NAME
+          value: "${CS_INSTANCE}"
+      metrics:
+        enabled: false
+        serviceMonitor:
+          enabled: false

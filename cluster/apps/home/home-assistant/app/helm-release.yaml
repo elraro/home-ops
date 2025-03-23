@@ -5,33 +5,36 @@ metadata:
   name: home-assistant
   namespace: home
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
-      chart: home-assistant
-      version: 13.4.2
+      chart: app-template
+      version: 2.6.0
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s
         namespace: flux-system
-      interval: 5m
+      interval: 30m
   install:
     createNamespace: true
   values:
-    image:
-      repository: ghcr.io/home-assistant/home-assistant
-      tag: 2025.3.4
-    env:
-      TZ: "${TZ}"
-    hostNetwork: true
-    # Bluethooth
-    securityContext:
-      capabilities:
-        add:
-          - NET_ADMIN
-          - NET_RAW
-          - SYS_ADMIN
-      privileged: true
+    controllers:
+      main:
+        image:
+          repository: ghcr.io/home-assistant/home-assistant
+          tag: 2025.3.4
+        env:
+          TZ: "${TZ}"
+        hostNetwork: true
+    defaultPodOptions:
+      # Bluethooth
+      securityContext:
+        capabilities:
+          add:
+            - NET_ADMIN
+            - NET_RAW
+            - SYS_ADMIN
+        privileged: true
     service:
       main:
         type: LoadBalancer
@@ -49,13 +52,6 @@ spec:
         tls:
           - hosts:
               - *host
-    probes:
-      liveness:
-        enabled: false
-      readiness:
-        enabled: false
-      startup:
-        enabled: false
     persistence:
       config:
         enabled: true

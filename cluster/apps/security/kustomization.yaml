@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./trivy-operator/ks.yaml
   - ./cs-mikrotik-bouncer/ks.yaml
+  - ./crowdsec/ks.yaml
