@@ -26,8 +26,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/onedr0p/plex
-              tag: 1.40.0.7998-c29d4c0c8@sha256:e49a8028acf71c62b988826e79061996f1c89ef9a4e8b52daba4826d677958d6
+              repository: ghcr.io/home-operations/plex
+              tag: 1.41.5.9522@sha256:cb0310eb53e8ff6e51be2869b6de0425f649e631aa329e6ccf0c72ba580a8aa3
             env:
               TZ: "${TZ}"
               ADVERTISE_IP: "http://${METALLB_PLEX_ADDR}:32400/"
