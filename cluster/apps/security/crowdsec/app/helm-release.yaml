@@ -59,13 +59,12 @@ spec:
       dashboard:
         enabled: false
       env:
-        # For an internal test, disable the Online API
-        - name: DISABLE_ONLINE_API
-          value: "false"
         - name: ENROLL_KEY
           value: "${CS_KEY}"
         - name: ENROLL_INSTANCE_NAME
           value: "${CS_INSTANCE}"
+        - name: ENROLL_TAGS
+          value: 'linux k8s'
       metrics:
         enabled: false
         serviceMonitor:
