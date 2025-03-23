@@ -26,8 +26,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/elraro/cs-mikrotik-bouncer
-              tag: v0.5.3@sha256:026adf7a9649b2ad5749f2c2f7b9f32c48b698304f155d0d5eac5119543b8969
+              repository: ghcr.io/funkolab/cs-mikrotik-bouncer
+              tag: v0.7.2@sha256:55ef20dd2563467665ecabad3b1803b18e3af804835b8ff1f560959daff792f4
             env:
               CROWDSEC_BOUNCER_API_KEY: "${SECRET_CROWDSEC_BOUNCER_API_KEY}"
               CROWDSEC_URL: "${SECRET_CROWDSEC_URL}"
