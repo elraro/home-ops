@@ -61,7 +61,17 @@ spec:
       ingress:
         enabled: true
         className: "internal"
-        host: &host "crowdsec.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "crowdsec.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
       env:
         - name: ENROLL_KEY
           value: "${CS_KEY}"
