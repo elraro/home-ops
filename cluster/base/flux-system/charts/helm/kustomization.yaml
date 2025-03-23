@@ -12,7 +12,7 @@ resources:
   - infracloudio-charts.yaml
   - ingress-nginx-charts.yaml
   - jetstack-charts.yaml
-  - k8s-at-home-charts.yaml
+  - crowdsec-charts.yaml
   - k8s-gateway-charts.yaml
   - metallb-charts.yaml
   - metrics-server-charts.yaml
