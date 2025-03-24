@@ -55,6 +55,15 @@ spec:
         enabled: false
         serviceMonitor:
           enabled: false
+      persistentVolume:
+        config:
+          enabled: true
+          type: custom
+          volumeSpec:
+            hostPath:
+              type: DirectoryOrCreate
+              path: /home/elraro/home-ops/volumes/crowdsec/crowdsec-agent-config-volume
+          mountPath: /etc/crowdsec/
     lapi:
       dashboard:
         enabled: false
@@ -76,3 +85,20 @@ spec:
         enabled: false
         serviceMonitor:
           enabled: false
+      persistentVolume:
+        config:
+          enabled: true
+          type: custom
+          volumeSpec:
+            hostPath:
+              type: DirectoryOrCreate
+              path: /home/elraro/home-ops/volumes/crowdsec/crowdsec-lapi-config-volume
+          mountPath: /etc/crowdsec/
+        data:
+          enabled: true
+          type: custom
+          volumeSpec:
+            hostPath:
+              type: DirectoryOrCreate
+              path: /home/elraro/home-ops/volumes/crowdsec/crowdsec-lapi-data-volume
+          mountPath: /etc/crowdsec/
