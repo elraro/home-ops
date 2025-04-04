@@ -37,6 +37,8 @@ spec:
       tag: 'v1.6.6'
     tls:
       enabled: false
+    notifications:
+      http.yaml: "${CS_HTTP_NOTIFICATION}"
     agent:
       # Specify each pod whose logs you want to process
       acquisition:
