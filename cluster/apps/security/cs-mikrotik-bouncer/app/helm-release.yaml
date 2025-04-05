@@ -27,7 +27,7 @@ spec:
           main:
             image:
               repository: ghcr.io/funkolab/cs-mikrotik-bouncer
-              tag: v0.7.2@sha256:55ef20dd2563467665ecabad3b1803b18e3af804835b8ff1f560959daff792f4
+              tag: v0.7.3@sha256:cba66ac5eb32c98fee2d139311024419adf064bc6eb16886c004cdea747a0b0b
             env:
               CROWDSEC_BOUNCER_API_KEY: "${SECRET_CROWDSEC_BOUNCER_API_KEY}"
               CROWDSEC_URL: "${SECRET_CROWDSEC_URL}"
