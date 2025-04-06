@@ -78,6 +78,7 @@ spec:
         - name: nextcloud-log
           mountPath: /nextcloud.log
           readOnly: true
+      limits: {}
     lapi:
       dashboard:
         enabled: false
