@@ -63,6 +63,11 @@ spec:
       persistentVolume:
         config:
           enabled: true
+          type: custom
+          volumeSpec:
+            hostPath:
+              path: /home/elraro/home-ops/volumes/crowdsec/config_agent
+          mountPath: /etc/crowdsec
     lapi:
       dashboard:
         enabled: false
@@ -87,13 +92,15 @@ spec:
       persistentVolume:
         config:
           enabled: true
+          type: custom
+          volumeSpec:
+            hostPath:
+              path: /home/elraro/home-ops/volumes/crowdsec/config_lapi
+          mountPath: /etc/crowdsec
         data:
           enabled: true
-      extraVolumes:
-        - name: http-config
-          hostPath:
-            path: /home/elraro/home-ops/volumes/crowdsec/http.yaml
-      extraVolumeMounts:
-        - name: http-config
-          mountPath: /etc/crowdsec_data/notifications/http.yaml
-          readOnly: true
+          type: custom
+          volumeSpec:
+            hostPath:
+              path: /home/elraro/home-ops/volumes/crowdsec/data_lapi
+          mountPath: /etc/crowdsec_data
