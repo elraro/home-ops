@@ -38,8 +38,10 @@ spec:
     tls:
       enabled: false
     config:
-      notifications:
-        http.yaml: "${CS_HTTP_NOTIFICATION}"
+      # https://docs.crowdsec.net/docs/notification_plugins/http#enabling-the-plugin
+      profiles.yaml: |
+        notifications:
+          - http_default
     agent:
       # Specify each pod whose logs you want to process
       acquisition:
@@ -87,3 +89,8 @@ spec:
           enabled: true
         data:
           enabled: true
+      extraVolumeMounts:
+        - name: http-config
+          mountPath: /etc/crowdsec_data/notifications/http.yaml
+          hostPath: /home/elraro/home-ops/volumes/crowdsec/http.yaml
+          readOnly: true
