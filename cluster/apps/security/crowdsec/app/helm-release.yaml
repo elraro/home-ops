@@ -89,8 +89,11 @@ spec:
           enabled: true
         data:
           enabled: true
+      extraVolumes:
+        - name: http-config
+          hostPath:
+            path: /home/elraro/home-ops/volumes/crowdsec/http.yaml
       extraVolumeMounts:
         - name: http-config
           mountPath: /etc/crowdsec_data/notifications/http.yaml
-          hostPath: /home/elraro/home-ops/volumes/crowdsec/http.yaml
           readOnly: true
