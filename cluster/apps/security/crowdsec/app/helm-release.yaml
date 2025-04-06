@@ -65,7 +65,14 @@ spec:
           enabled: true
     lapi:
       dashboard:
-        enabled: false
+        enabled: true
+        ingress:
+          enabled: true
+          ingressClassName: "internal"
+          host: &hostdashboard "crowdsec-dashboard.${SECRET_DOMAIN}"
+          tls:
+            - hosts:
+                - *hostdashboard
       ingress:
         enabled: true
         ingressClassName: "internal"
