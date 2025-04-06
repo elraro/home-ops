@@ -68,6 +68,14 @@ spec:
       persistentVolume:
         config:
           enabled: true
+      extraVolumes:
+        - name: nextcloud-log
+          hostPath:
+            path: /mnt/sdc1/nextcloud/data/nextcloud.log
+      extraVolumeMounts:
+        - name: nextcloud-log
+          mountPath: /nextcloud.log
+          readOnly: true
     lapi:
       dashboard:
         enabled: false
@@ -105,13 +113,7 @@ spec:
         - name: http-config
           hostPath:
             path: /home/elraro/home-ops/volumes/crowdsec/http.yaml
-        - name: nextcloud-log
-          hostPath:
-            path: /mnt/sdc1/nextcloud/data/nextcloud.log
       extraVolumeMounts:
         - name: http-config
           mountPath: /etc/crowdsec_data/notifications/http.yaml
-          readOnly: true
-        - name: nextcloud-log
-          mountPath: /nextcloud.log
           readOnly: true
