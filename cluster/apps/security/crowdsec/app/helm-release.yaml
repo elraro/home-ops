@@ -69,7 +69,7 @@ spec:
       persistentVolume:
         config:
           enabled: true
-          existingClaim: security/crowdsec-agent-config-pvc
+          #existingClaim: security/crowdsec-agent-config-pvc
       extraVolumes:
         - name: nextcloud-log
           hostPath:
@@ -109,10 +109,10 @@ spec:
       persistentVolume:
         config:
           enabled: true
-          existingClaim: security/crowdsec-config-pvc
+          #existingClaim: security/crowdsec-config-pvc
         data:
           enabled: true
-          existingClaim: security/crowdsec-db-pvc
+          #existingClaim: security/crowdsec-db-pvc
       extraVolumes:
         - name: http-config
           hostPath:
