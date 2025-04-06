@@ -44,10 +44,11 @@ spec:
           - http_default
     agent:
       additionalAcquisition:
-        filenames:
-          - /nextcloud.log
-        labels:
-          type: Nextcloud
+        - source: file
+          filenames:
+            - /nextcloud.log
+          labels:
+            type: Nextcloud
       # Specify each pod whose logs you want to process
       #acquisition:
       # The namespace where the pod is located
