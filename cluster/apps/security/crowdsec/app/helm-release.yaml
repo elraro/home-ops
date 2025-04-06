@@ -43,14 +43,19 @@ spec:
         notifications:
           - http_default
     agent:
+      additionalAcquisition:
+        filenames:
+          - /nextcloud.log
+        labels:
+          type: Nextcloud
       # Specify each pod whose logs you want to process
-      acquisition:
-        # The namespace where the pod is located
-        - namespace: home
-          # The pod name
-          podName: nextcloud-*
-          # as in crowdsec configuration, we need to specify the program name to find a matching parser
-          program: nextcloud
+      #acquisition:
+      # The namespace where the pod is located
+      #  - namespace: home
+      # The pod name
+      #    podName: nextcloud-*
+      #    as in crowdsec configuration, we need to specify the program name to find a matching parser
+      #    program: nextcloud
       env:
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
@@ -65,9 +70,9 @@ spec:
           enabled: true
     lapi:
       dashboard:
-        enabled: true
+        enabled: false
         ingress:
-          enabled: true
+          enabled: false
           ingressClassName: "internal"
           host: &hostdashboard "crowdsec-dashboard.${SECRET_DOMAIN}"
           tls:
@@ -100,7 +105,13 @@ spec:
         - name: http-config
           hostPath:
             path: /home/elraro/home-ops/volumes/crowdsec/http.yaml
+        - name: nextcloud-log
+          hostPath:
+            path: /mnt/sdc1/nextcloud/data/nextcloud.log
       extraVolumeMounts:
         - name: http-config
           mountPath: /etc/crowdsec_data/notifications/http.yaml
+          readOnly: true
+        - name: nextcloud-log
+          mountPath: /nextcloud.log
           readOnly: true
