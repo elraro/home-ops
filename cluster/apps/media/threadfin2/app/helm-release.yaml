@@ -27,16 +27,10 @@ spec:
           app:
             image:
               repository: fyb3roptik/threadfin
-              tag: 1.2.32-nvidia@sha256:23b853c0778f7c0440602c9a5e0b8736ddacec87ab37f05ce4935e05666d066e
+              tag: 1.2.32@sha256:11e02ff07d7a874133d9c79200d7c6f2ae44d98e2e8736a6f63056387a651b86
             env:
               TZ: "${TZ}"
-            resources:
-              requests:
-                nvidia.com/gpu: 1
-              limits:
-                nvidia.com/gpu: 1
     defaultPodOptions:
-      runtimeClassName: nvidia
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
