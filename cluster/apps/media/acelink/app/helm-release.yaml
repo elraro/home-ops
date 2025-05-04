@@ -23,8 +23,8 @@ spec:
         containers:
           main:
             image:
-              repository: blaiseio/acelink
-              tag: 2.1.0
+              repository: ghcr.io/elraro/docker-acelink
+              tag: latest@sha256:72409b392c93e5a17c04dd2b9f83de1e8eb908e7305f8119d395dd3c47bd575b
               pullPolicy: Always
             env:
               TZ: "${TZ}"
