@@ -26,8 +26,8 @@ spec:
         containers:
           app:
             image:
-              repository: fyb3roptik/threadfin
-              tag: 1.2.32@sha256:11e02ff07d7a874133d9c79200d7c6f2ae44d98e2e8736a6f63056387a651b86
+              repository: senexcrenshaw/xteve
+              tag: 2.5.3@sha256:bd9cdce73b0e9398c3d8036e2d3fbe5b30a85cbc33b478f220063128b55f8319
             env:
               TZ: "${TZ}"
     defaultPodOptions:
@@ -68,4 +68,4 @@ spec:
         hostPathType: "DirectoryOrCreate"
         hostPath: /home/elraro/home-ops/volumes/threadfin2
         globalMounts:
-          - path: /home/threadfin/conf
+          - path: /data
