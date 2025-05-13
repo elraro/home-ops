@@ -22,21 +22,32 @@
   ],
   "configMigration": true,
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
-  "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
+  "suppressNotifications": [
+    "prEditedNotification",
+    "prIgnoreNotification"
+  ],
   "rebaseWhen": "auto",
   "recreateWhen": "auto",
   "assigneesFromCodeOwners": true,
   "reviewersFromCodeOwners": true,
-  "ignorePaths": ["**/*.sops.*", "**/.archive/**", "**/resources/**"],
+  "ignorePaths": [
+    "**/*.sops.*",
+    "**/.archive/**",
+    "**/resources/**"
+  ],
   "flux": {
-    "fileMatch": ["(^|/)cluster/.+\\.ya?ml(\\.j2)?$"]
+    "managerFilePatterns": [
+      "/(^|/)cluster/.+\\.ya?ml(\\.j2)?$/"
+    ]
   },
   "helm-values": {
-    "fileMatch": ["(^|/)cluster/.+\\.ya?ml(\\.j2)?$"]
+    "managerFilePatterns": [
+      "/(^|/)cluster/.+\\.ya?ml(\\.j2)?$/"
+    ]
   },
   "kubernetes": {
-    "fileMatch": [
-      "(^|/)cluster/.+\\.ya?ml(\\.j2)?$"
+    "managerFilePatterns": [
+      "/(^|/)cluster/.+\\.ya?ml(\\.j2)?$/"
     ]
   }
 }
