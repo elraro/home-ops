@@ -53,6 +53,11 @@ spec:
             port: 6881
             protocol: UDP
             targetPort: 6881
+          listenport:
+            enabled: true
+            port: 50413
+            protocol: TCP
+            targetPort: 50413
         externalTrafficPolicy: Local
     ingress:
       main:
