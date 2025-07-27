@@ -33,6 +33,6 @@ jobs:
           cat myResults/results.sarif
           cat myResults/results.json
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@fca7ace96b7d713c7035871441bd52efbe39e27e # v3
+        uses: github/codeql-action/upload-sarif@4e828ff8d448a8a6e532957b1811f387a63867e8 # v3
         with:
           sarif_file: myResults/results.sarif
