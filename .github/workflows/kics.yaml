@@ -20,7 +20,7 @@ jobs:
       - name: Mkdir myResults
         run: mkdir -p myResults
       - name: run kics Scan
-        uses: Checkmarx/kics-github-action@3545b741daf8fc816b081261995184aa12a247c0 # v2.1.11
+        uses: Checkmarx/kics-github-action@cd1f3774406f7818e3f79b77b093fe2ebaaf5c1d # v2.1.12
         with:
           path: cluster
           output_path: myResults/
