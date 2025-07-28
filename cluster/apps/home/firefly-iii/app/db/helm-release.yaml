@@ -29,7 +29,7 @@ spec:
           main:
             image:
               repository: postgres
-              tag: 15.10-alpine
+              tag: 17.5-alpine
             resources:
               requests:
                 cpu: 200m
