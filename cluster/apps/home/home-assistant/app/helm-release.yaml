@@ -22,7 +22,7 @@ spec:
       main:
         image:
           repository: ghcr.io/home-assistant/home-assistant
-          tag: 2025.4.4
+          tag: 2025.7.3
         env:
           TZ: "${TZ}"
         hostNetwork: true
