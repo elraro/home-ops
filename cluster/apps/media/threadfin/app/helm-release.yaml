@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: fyb3roptik/threadfin
-              tag: 1.2.32@sha256:11e02ff07d7a874133d9c79200d7c6f2ae44d98e2e8736a6f63056387a651b86
+              tag: 1.2.35@sha256:31ee09478929b561070b5c22840552f556495e59b0474b6f9231fbe19e07f162
             env:
               TZ: "${TZ}"
     defaultPodOptions:
