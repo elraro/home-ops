@@ -82,14 +82,16 @@ spec:
       config:
         enabled: true
         type: custom
-        mountPath: /config
-        volumeSpec:
-          hostPath:
-            path: /home/elraro/home-ops/volumes/qbittorrent/config
+        name: config
+        advancedMounts:
+        main:
+          main:
+            - path: /home/elraro/home-ops/volumes/qbittorrent/config
       downloads:
         enabled: true
         type: custom
-        mountPath: /downloads
-        volumeSpec:
-          hostPath:
-            path: /mnt/sdd1/downloads_qbittorrent
+        name: downloads
+        advancedMounts:
+        main:
+          main:
+            - path: /mnt/sdd1/downloads_qbittorrent
