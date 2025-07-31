@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 4.2.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -18,11 +18,13 @@ spec:
   values:
     controllers:
       main:
+        strategy: Recreate
         containers:
           main:
             image:
               repository: ghcr.io/home-operations/sonarr
               tag: 4.0.15.2940@sha256:ca6c735014bdfb04ce043bf1323a068ab1d1228eea5bab8305ca0722df7baf78
+              pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
             resources:
@@ -31,15 +33,16 @@ spec:
                 cpu: 100m
               limits:
                 memory: 1000Mi
+
     service:
       main:
-        enabled: true
+        controller: main
         ports:
           http:
             port: 8989
+
     ingress:
       main:
-        enabled: true
         className: "internal"
         hosts:
           - host: &host "sonarr.${SECRET_DOMAIN}"
@@ -47,40 +50,42 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: main
                   port: http
         tls:
           - hosts:
               - *host
+
     defaultPodOptions:
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: "OnRootMismatch"
+
     persistence:
       config:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            path: /home/elraro/home-ops/volumes/sonarr/config
-        mountPath: /config
+        type: hostPath
+        hostPath:
+          path: /home/elraro/home-ops/volumes/sonarr/config
+        globalMounts:
+          - path: /config
       media:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: DirectoryOrCreate
-            path: /mnt/sdb1
-        mountPath: /media
+        type: hostPath
+        hostPath:
+          path: /mnt/sdb1
+          type: DirectoryOrCreate
+        globalMounts:
+          - path: /media
       downloads:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: DirectoryOrCreate
-            path: /mnt/sdd1/downloads_qbittorrent
-        mountPath: /downloads
+        type: hostPath
+        hostPath:
+          path: /mnt/sdd1/downloads_qbittorrent
+          type: DirectoryOrCreate
+        globalMounts:
+          - path: /downloads
       backup:
         enabled: false
