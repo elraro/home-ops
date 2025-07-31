@@ -18,42 +18,50 @@ spec:
   values:
     controllers:
       main:
-        image:
-          repository: ghcr.io/home-operations/prowlarr
-          tag: 1.37.0.5076@sha256:aab0bfd4e96bdca19cca280a2bbf8ac60b9251dcae13459856b724a2dd3ae020
-        env:
-          TZ: "${TZ}"
-        resources:
-          requests:
-            memory: 100Mi
-            cpu: 100m
-          limits:
-            memory: 1000Mi
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: "OnRootMismatch"
+        strategy: Recreate
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/home-operations/prowlarr
+              tag: 1.37.0.5076@sha256:aab0bfd4e96bdca19cca280a2bbf8ac60b9251dcae13459856b724a2dd3ae020
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "${TZ}"
+            resources:
+              requests:
+                memory: 100Mi
+                cpu: 100m
+              limits:
+                memory: 1000Mi
+            securityContext:
+              runAsUser: 1000
+              runAsGroup: 1000
+              fsGroup: 1000
+              fsGroupChangePolicy: "OnRootMismatch"
+
     service:
-      enabled: true
-      ports:
-        http:
-          port: 9696
+      main:
+        controller: main
+        ports:
+          http:
+            port: 9696
+
     ingress:
-      enabled: true
-      className: "internal"
-      hosts:
-        - host: &host "prowlarr.${SECRET_DOMAIN}"
-          paths:
-            - path: /
-              pathType: Prefix
-              service:
-                name: main
-                port: http
-      tls:
-        - hosts:
-            - *host
+      main:
+        className: "internal"
+        hosts:
+          - host: &host "prowlarr.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
     persistence:
       config:
         enabled: true
