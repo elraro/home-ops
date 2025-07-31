@@ -69,5 +69,3 @@ spec:
         volumeSpec:
           hostPath:
             path: /home/elraro/home-ops/volumes/prowlarr/config
-      backup:
-        enabled: false
