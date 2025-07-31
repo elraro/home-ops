@@ -84,14 +84,14 @@ spec:
         type: custom
         name: config
         advancedMounts:
-        main:
           main:
-            - path: /home/elraro/home-ops/volumes/qbittorrent/config
+            main:
+              - path: /home/elraro/home-ops/volumes/qbittorrent/config
       downloads:
         enabled: true
         type: custom
         name: downloads
         advancedMounts:
-        main:
           main:
-            - path: /mnt/sdd1/downloads_qbittorrent
+            main:
+              - path: /mnt/sdd1/downloads_qbittorrent
