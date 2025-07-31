@@ -41,7 +41,7 @@ spec:
             port: &port 8080
     ingress:
       main:
-        ingressClassName: "internal"
+        className: "internal"
         hosts:
           - host: &host "scrutiny.${SECRET_DOMAIN}"
             paths:
@@ -70,41 +70,41 @@ spec:
         enabled: true
         type: hostPath
         hostPath: /run/udev
-        readOnly: true
         globalMounts:
           - path: /run/udev
+            readOnly: true
       sda:
         enabled: true
         type: hostPath
         hostPath: /dev/sda
-        readOnly: true
         globalMounts:
           - path: /dev/sda
+            readOnly: true
       sdb:
         enabled: true
         type: hostPath
         hostPath: /dev/sdb
-        readOnly: true
         globalMounts:
           - path: /dev/sdb
+            readOnly: true
       sdc:
         enabled: true
         type: hostPath
         hostPath: /dev/sdc
-        readOnly: true
         globalMounts:
           - path: /dev/sdc
+            readOnly: true
       sdd:
         enabled: true
         type: hostPath
         hostPath: /dev/sdd
-        readOnly: true
         globalMounts:
           - path: /dev/sdd
+            readOnly: true
       sde:
         enabled: true
         type: hostPath
         hostPath: /dev/sde
-        readOnly: true
         globalMounts:
           - path: /dev/sde
+            readOnly: true
