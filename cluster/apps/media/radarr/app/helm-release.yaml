@@ -33,6 +33,7 @@ spec:
                 memory: 1000Mi
     service:
       main:
+        controller: main
         ports:
           http:
             port: 7878
