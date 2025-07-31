@@ -18,11 +18,13 @@ spec:
   values:
     controllers:
       main:
+        strategy: Recreate
         containers:
           main:
             image:
               repository: ghcr.io/home-operations/radarr
               tag: 5.27.2.10142@sha256:aa84b8341e2b53281bcea4696427861e4ab02ab004cd76a1b3a76d77ea065ac5
+              pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
             resources:
@@ -39,7 +41,6 @@ spec:
             port: 7878
     ingress:
       main:
-        enabled: true
         className: "internal"
         hosts:
           - host: &host "radarr.${SECRET_DOMAIN}"
@@ -47,7 +48,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: main
                   port: http
         tls:
           - hosts:
