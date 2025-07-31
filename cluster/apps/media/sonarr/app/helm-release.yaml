@@ -67,24 +67,19 @@ spec:
       config:
         enabled: true
         type: hostPath
-        hostPath:
-          path: /home/elraro/home-ops/volumes/sonarr/config
+        hostPath: /home/elraro/home-ops/volumes/sonarr/config
         globalMounts:
           - path: /config
       media:
         enabled: true
         type: hostPath
-        hostPath:
-          path: /mnt/sdb1
-          type: DirectoryOrCreate
+        hostPath: /mnt/sdb1
         globalMounts:
           - path: /media
       downloads:
         enabled: true
         type: hostPath
-        hostPath:
-          path: /mnt/sdd1/downloads_qbittorrent
-          type: DirectoryOrCreate
+        hostPath: /mnt/sdd1/downloads_qbittorrent
         globalMounts:
           - path: /downloads
       backup:
