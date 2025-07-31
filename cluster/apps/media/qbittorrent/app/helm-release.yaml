@@ -81,17 +81,13 @@ spec:
     persistence:
       config:
         enabled: true
-        type: custom
-        name: config
-        advancedMounts:
-          main:
-            main:
-              - path: /home/elraro/home-ops/volumes/qbittorrent/config
+        type: hostPath
+        hostPath: /home/elraro/home-ops/volumes/qbittorrent/config
+        globalMounts:
+          - path: /config
       downloads:
         enabled: true
-        type: custom
-        name: downloads
-        advancedMounts:
-          main:
-            main:
-              - path: /mnt/sdd1/downloads_qbittorrent
+        type: hostPath
+        hostPath: /mnt/sdd1/downloads_qbittorrent
+        globalMounts:
+          - path: /downloads
