@@ -82,5 +82,3 @@ spec:
         hostPath: /mnt/sdd1/downloads_qbittorrent
         globalMounts:
           - path: /downloads
-      backup:
-        enabled: false
