@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 4.2.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -28,6 +28,7 @@ spec:
             image:
               repository: ghcr.io/home-operations/plex
               tag: 1.41.9.9961@sha256:6c86319bb3275135f5da5aec71b45e48305669ecbceee0f88d335bebf0d0f218
+              pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
               ADVERTISE_IP: "http://${METALLB_PLEX_ADDR}:32400/"
@@ -51,7 +52,7 @@ spec:
           - 109 # render
     service:
       main:
-        enabled: true
+        controller: main
         type: LoadBalancer
         externalTrafficPolicy: Local
         annotations:
@@ -81,53 +82,36 @@ spec:
     persistence:
       config:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: DirectoryOrCreate
-            path: /home/elraro/home-ops/volumes/plex/config
-        mountPath: /config
-      media:
-        enabled: false
+        type: hostPath
+        hostPath: /home/elraro/home-ops/volumes/plex/config
+        globalMounts:
+          - path: /config
       peliculas:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: DirectoryOrCreate
-            path: /mnt/sdb1/peliculas
-        mountPath: /peliculas
+        type: hostPath
+        hostPath: /mnt/sdb1/peliculas
+        globalMounts:
+          - path: /peliculas
       seriesing:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: DirectoryOrCreate
-            path: /mnt/sdb1/series_ingles
-        mountPath: /seriesingles
+        type: hostPath
+        hostPath: /mnt/sdb1/series_ingles
+        globalMounts:
+          - path: /seriesingles
       seriesesp:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: DirectoryOrCreate
-            path: /mnt/sdb1/series_espanol
-        mountPath: /seriesespanol
-      backup:
-        enabled: false
+        type: hostPath
+        hostPath: /mnt/sdb1/series_espanol
+        globalMounts:
+          - path: /seriesespanol
       otrosvideos:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: DirectoryOrCreate
-            path: /mnt/sdb1/otros
-        mountPath: /otrosvideos
+        type: hostPath
+        hostPath: /mnt/sdb1/otros
+        globalMounts:
+          - path: /otrosvideos
       transcode:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: DirectoryOrCreate
-            path: /mnt/sdc1/plex_transcode
-        mountPath: /transcode
+        type: emptyDir
+        globalMounts:
+          - path: /transcode
