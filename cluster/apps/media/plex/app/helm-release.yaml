@@ -52,6 +52,7 @@ spec:
           - 109 # render
     service:
       main:
+        enabled: true
         controller: main
         type: LoadBalancer
         externalTrafficPolicy: Local
