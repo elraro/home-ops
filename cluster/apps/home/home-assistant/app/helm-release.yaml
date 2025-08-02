@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 4.2.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -20,12 +20,16 @@ spec:
   values:
     controllers:
       main:
-        image:
-          repository: ghcr.io/home-assistant/home-assistant
-          tag: 2025.7.4
-        env:
-          TZ: "${TZ}"
-        hostNetwork: true
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: ghcr.io/home-assistant/home-assistant
+              tag: 2025.7.4
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "${TZ}"
+            hostNetwork: true
     defaultPodOptions:
       # Bluethooth
       securityContext:

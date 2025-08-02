@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-kindlebot
   namespace: flux-system
 spec:
-  path: ./cluster/apps/telegram/kindle/app
+  path: ./cluster/apps/telegram/kindlebot/app
   prune: true
   sourceRef:
     kind: GitRepository
