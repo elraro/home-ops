@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: *app
-          image: ghcr.io/elraro/send-to-kindle-telegram-bot:latest@sha256:9214121be9aedb450e27b85a1b27db4bb5feb4fd654dff36ea07248d3e14b956
+          image: ghcr.io/elraro/send-to-kindle-telegram-bot:latest@sha256:0c5f5c2be64553666ddfc65614a40f6eda0fbe7ea6ba6da9e352dff094838655
           imagePullPolicy: IfNotPresent
           env:
             - name: TELEGRAM_BOT_TOKEN
@@ -67,7 +67,7 @@ spec:
                 secretKeyRef:
                   key: smtppassword
                   name: kindlebot
-            - name: EMAIL_DESTINO
+            - name: EMAIL
               valueFrom:
                 secretKeyRef:
                   key: email
