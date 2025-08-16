@@ -23,4 +23,12 @@ chmod +x /usr/local/bin/sops
 # install direnv
 apt install direnv
 echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
+
+# install fluxcd
+curl -s https://fluxcd.io/install.sh | sudo bash
+echo '. <(flux completion bash)' >> ~/.bashrc
+
+# configure GITHUB_TOKEN and GITHUB_USER
+echo 'export GITHUB_TOKEN=<your-token>' >> ~/.bashrc
+echo 'export GITHUB_USER=<your-username>' >> ~/.bashrc
 ```
