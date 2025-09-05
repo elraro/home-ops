@@ -19,10 +19,9 @@ spec:
     createNamespace: true
   values:
     controllers:
-      main:
-        strategy: Recreate
+      home-assistant:
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/home-assistant/home-assistant
               tag: 2025.8.3
@@ -30,6 +29,12 @@ spec:
             env:
               TZ: "${TZ}"
             hostNetwork: true
+            resources:
+              requests:
+                cpu: 100m
+                memory: 100Mi
+              limits:
+                memory: 1000Mi
     defaultPodOptions:
       # Bluethooth
       securityContext:
@@ -40,30 +45,38 @@ spec:
             - SYS_ADMIN
         privileged: true
     service:
-      main:
-        type: LoadBalancer
-        loadBalancerIP: "${METALLB_HOME_ASSISTANT_ADDR}"
-        externalTrafficPolicy: Local
-    ingress:
-      main:
+      app:
         enabled: true
-        ingressClassName: "internal"
+        type: LoadBalancer
+        controller: home-assistant
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${METALLB_HOME_ASSISTANT_ADDR}"
+          externalTrafficPolicy: Local
+        ports:
+          http:
+            port: 8123
+    ingress:
+      app:
+        className: "internal"
         hosts:
           - host: &host "home-assistant.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
         tls:
           - hosts:
               - *host
     persistence:
       config:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            path: /home/elraro/home-ops/volumes/home-assistant/config
-        mountPath: /config
+        type: hostPath
+        hostPathType: "DirectoryOrCreate"
+        hostPath: /home/elraro/home-ops/volumes/home-assistant/config
+        globalMounts:
+          - path: /config
     resources:
       requests:
         cpu: 100m

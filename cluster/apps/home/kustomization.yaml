@@ -7,3 +7,4 @@ resources:
   - ./congatudo/ks.yaml
   - ./adguard/ks.yaml
   - ./stirling-pdf/ks.yaml
+  - ./home-assistant/ks.yaml
