@@ -18,6 +18,8 @@ spec:
   install:
     createNamespace: true
   values:
+    defaultPodOptions:
+      hostNetwork: true
     controllers:
       home-assistant:
         containers:
@@ -28,7 +30,6 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
-            hostNetwork: true
             resources:
               requests:
                 cpu: 100m
@@ -42,7 +43,7 @@ spec:
                   - NET_ADMIN
                   - NET_RAW
                   - SYS_ADMIN
-        privileged: true
+              privileged: true
     service:
       app:
         enabled: true
