@@ -35,14 +35,13 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 1000Mi
-    defaultPodOptions:
-      # Bluethooth
-      securityContext:
-        capabilities:
-          add:
-            - NET_ADMIN
-            - NET_RAW
-            - SYS_ADMIN
+            # Bluethooth
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
+                  - NET_RAW
+                  - SYS_ADMIN
         privileged: true
     service:
       app:
