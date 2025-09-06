@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-bunkerweb
   namespace: flux-system
 spec:
-  path: ./cluster/apps/home/bunkerweb/app
+  path: ./cluster/apps/security/bunkerweb/app
   prune: true
   sourceRef:
     kind: GitRepository
