@@ -3,7 +3,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: &app home-assistant-bunkerweb
-  namespace: home
+  namespace: security
   labels:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
