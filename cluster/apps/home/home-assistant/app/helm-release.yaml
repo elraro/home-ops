@@ -59,7 +59,7 @@ spec:
       app:
         className: "internal"
         hosts:
-          - host: &host "home-assistant.${SECRET_DOMAIN}"
+          - host: &host "home-assistant-local.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
