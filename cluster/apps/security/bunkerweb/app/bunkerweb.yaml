@@ -9,9 +9,7 @@ metadata:
     app.kubernetes.io/instance: bunkerweb
 spec:
   ports:
-    - name: http
-      port: &port 443
-      protocol: TCP
+    - port: &port 443
       targetPort: *port
 ---
 apiVersion: v1
@@ -24,28 +22,3 @@ subsets:
       - ip: 192.168.101.11
     ports:
       - port: 443
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: bunkerweb
-  namespace: security
-  labels:
-    app.kubernetes.io/name: bunkerweb
-    app.kubernetes.io/instance: bunkerweb
-spec:
-  ingressClassName: internal
-  rules:
-    - host: &host bunkerweb.${SECRET_DOMAIN}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: bunkerweb
-                port:
-                  number: 443
-  tls:
-    - hosts:
-        - *host
