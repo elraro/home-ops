@@ -1,3 +1,4 @@
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -5,12 +6,17 @@ metadata:
   namespace: security
 spec:
   schedule: "*/5 * * * *" # cada 5 minutos
+  concurrencyPolicy: "Forbid"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 5
   jobTemplate:
     spec:
+      backoffLimit: 3
+      ttlSecondsAfterFinished: 300
       template:
         spec:
           serviceAccountName: default
-          restartPolicy: OnFailure
+          restartPolicy: Never
           containers:
             - name: recycle
               image: registry.suse.com/suse/kubectl:1.33@sha256:73782a857611810b4222f3971663041e8c22b87ab44f12b0b2c5ba244fc5e452
