@@ -9,7 +9,7 @@ metadata:
     type: lapi
     version: v1
 spec:
-  storageClassName: local-path
+  storageClassName: local-path-retain
   accessModes:
     - ReadWriteOnce
   resources:
@@ -27,7 +27,7 @@ metadata:
     type: lapi
     version: v1
 spec:
-  storageClassName: local-path
+  storageClassName: local-path-retain
   accessModes:
     - ReadWriteOnce
   resources:
@@ -45,7 +45,7 @@ metadata:
     type: agent
     version: v1
 spec:
-  storageClassName: local-path
+  storageClassName: local-path-retain
   accessModes:
     - ReadWriteOnce
   resources:
