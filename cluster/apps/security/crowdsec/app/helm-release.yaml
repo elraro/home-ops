@@ -52,7 +52,6 @@ spec:
       acquisition:
         - namespace: home
           podName: home-assistant-*
-          containerName: app
           program: home-assistant
       env:
         - name: PARSERS
