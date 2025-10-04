@@ -52,7 +52,7 @@ spec:
       acquisition:
         - namespace: home-assistant
           podName: home-assistant-*
-          program: home-assistant
+          program: home_app
       env:
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
