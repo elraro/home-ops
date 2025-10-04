@@ -43,6 +43,9 @@ spec:
         notifications:
           - http_default
     agent:
+      config:
+        common:
+          poll_without_inotify: true
       additionalAcquisition:
         - source: file
           filenames:
