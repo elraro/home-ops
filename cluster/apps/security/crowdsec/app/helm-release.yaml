@@ -50,9 +50,10 @@ spec:
           labels:
             type: Nextcloud
       acquisition:
-        - namespace: home-assistant
+        - namespace: home
           podName: home-assistant-*
-          program: home_app
+          containerName: app
+          program: home-assistant
       env:
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
