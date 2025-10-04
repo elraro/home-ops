@@ -49,14 +49,10 @@ spec:
             - /nextcloud.log
           labels:
             type: Nextcloud
-      # Specify each pod whose logs you want to process
-      #acquisition:
-      # The namespace where the pod is located
-      #  - namespace: home
-      # The pod name
-      #    podName: nextcloud-*
-      #    as in crowdsec configuration, we need to specify the program name to find a matching parser
-      #    program: nextcloud
+      acquisition:
+        - namespace: home-assistant
+          podName: home-assistant-*
+          program: home-assistant
       env:
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
