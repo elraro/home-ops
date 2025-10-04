@@ -70,9 +70,21 @@ spec:
         - name: nextcloud-log
           hostPath:
             path: /mnt/sdc1/nextcloud/data/nextcloud.log
+        - name: var-log-containers
+          hostPath:
+            path: /var/log/containers
+        - name: var-log-pods
+          hostPath:
+            path: /var/log/pods
       extraVolumeMounts:
         - name: nextcloud-log
           mountPath: /nextcloud.log
+          readOnly: true
+        - name: var-log-containers
+          mountPath: /var/log/containers
+          readOnly: true
+        - name: var-log-pods
+          mountPath: /var/log/pods
           readOnly: true
     lapi:
       dashboard:
