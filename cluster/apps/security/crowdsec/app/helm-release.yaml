@@ -57,7 +57,7 @@ spec:
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
         - name: COLLECTIONS
-          value: "crowdsecurity/nextcloud"
+          value: "crowdsecurity/nextcloud crowdsecurity/home-assistant"
       metrics:
         enabled: false
         serviceMonitor:
