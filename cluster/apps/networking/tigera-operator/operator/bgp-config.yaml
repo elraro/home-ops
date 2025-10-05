@@ -1,6 +1,4 @@
-# ----------------------------------------------------------------
-# 1️⃣ IPPool para pods
-# ----------------------------------------------------------------
+---
 apiVersion: projectcalico.org/v3
 kind: IPPool
 metadata:
@@ -12,9 +10,6 @@ spec:
   vxlanMode: "Never"
 
 ---
-# ----------------------------------------------------------------
-# 2️⃣ IPPool para LoadBalancer / VIPs
-# ----------------------------------------------------------------
 apiVersion: projectcalico.org/v3
 kind: IPPool
 metadata:
@@ -26,9 +21,6 @@ spec:
   vxlanMode: "Never"
 
 ---
-# ----------------------------------------------------------------
-# 3️⃣ BGPConfiguration global
-# ----------------------------------------------------------------
 apiVersion: projectcalico.org/v3
 kind: BGPConfiguration
 metadata:
@@ -38,12 +30,9 @@ spec:
   logSeverityScreen: Info
   nodeToNodeMeshEnabled: true       # habilita mesh entre nodos
   serviceExternalIPs:
-    - 192.168.203.50-192.168.203.100
+    - cidr: 192.168.203.50-192.168.203.100
 
 ---
-# ----------------------------------------------------------------
-# 4️⃣ BGPPeer hacia tu router/gateway
-# ----------------------------------------------------------------
 apiVersion: projectcalico.org/v3
 kind: BGPPeer
 metadata:
