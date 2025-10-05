@@ -6,3 +6,4 @@ resources:
   - ./external-dns/ks.yaml
   - ./k8s-gateway/ks.yaml
   - ./nginx/ks.yaml
+  - ./calico-system/kustomization.yaml
