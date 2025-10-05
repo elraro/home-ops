@@ -1,0 +1,30 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: calico
+  namespace: calico-system
+spec:
+  releaseName: calico
+  chart:
+    spec:
+      chart: tigera-operator
+      sourceRef:
+        kind: HelmRepository
+        name: projectcalico
+        namespace: flux-system
+      version: v3.30.3
+  interval: 10m
+  values:
+    installation:
+      calicoNetwork:
+        bgp: Enabled
+        ipPools:
+          - cidr: 10.42.0.0/16
+            encapsulation: None
+            natOutgoing: true
+          - cidr: 192.168.203.50/27
+            natOutgoing: false
+            vxlanMode: Never
+            ipipMode: Never
+      cni:
+        type: Calico

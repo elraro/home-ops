@@ -6,4 +6,4 @@ resources:
   - cert-manager
   - kube-system
   - runtimeclass
-  - metallb-system
+  - calico-system
