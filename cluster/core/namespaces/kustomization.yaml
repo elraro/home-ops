@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - cert-manager.yaml
   - tigera-operator.yaml
+  - calico-system.yaml
   - networking.yaml
   - system-upgrade.yaml
   - telegram.yaml

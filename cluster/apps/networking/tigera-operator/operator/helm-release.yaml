@@ -1,10 +1,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: tigera
-  namespace: tigera-operator
+  name: calico
+  namespace: calico-system
 spec:
-  releaseName: tigera
+  releaseName: calico
   chart:
     spec:
       chart: tigera-operator
