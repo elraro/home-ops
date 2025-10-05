@@ -1,0 +1,56 @@
+# ----------------------------------------------------------------
+# 1️⃣ IPPool para pods
+# ----------------------------------------------------------------
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: pod-network
+spec:
+  cidr: 10.42.0.0/16
+  natOutgoing: "Enabled"
+  ipipMode: "Never"
+  vxlanMode: "Never"
+
+---
+# ----------------------------------------------------------------
+# 2️⃣ IPPool para LoadBalancer / VIPs
+# ----------------------------------------------------------------
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: lb-ips
+spec:
+  cidr: 192.168.203.50/27
+  natOutgoing: "Disabled"
+  ipipMode: "Never"
+  vxlanMode: "Never"
+
+---
+# ----------------------------------------------------------------
+# 3️⃣ BGPConfiguration global
+# ----------------------------------------------------------------
+apiVersion: projectcalico.org/v3
+kind: BGPConfiguration
+metadata:
+  name: default
+spec:
+  asNumber: 65533                   # ASN local
+  logSeverityScreen: Info
+  nodeToNodeMeshEnabled: true       # habilita mesh entre nodos
+  serviceExternalIPs:
+    cidr:
+      - 192.168.203.50-192.168.203.100
+
+---
+# ----------------------------------------------------------------
+# 4️⃣ BGPPeer hacia tu router/gateway
+# ----------------------------------------------------------------
+apiVersion: projectcalico.org/v3
+kind: BGPPeer
+metadata:
+  name: home-router
+  namespace: calico-system
+spec:
+  peerIP: 192.168.202.1            # tu gateway/router BGP
+  asNumber: 65534                   # ASN del vecino
+  nodeSelector: all()               # todos los nodos anuncian
