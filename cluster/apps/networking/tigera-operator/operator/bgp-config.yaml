@@ -38,8 +38,7 @@ spec:
   logSeverityScreen: Info
   nodeToNodeMeshEnabled: true       # habilita mesh entre nodos
   serviceExternalIPs:
-    cidr:
-      - 192.168.203.50-192.168.203.100
+    - 192.168.203.50-192.168.203.100
 
 ---
 # ----------------------------------------------------------------
