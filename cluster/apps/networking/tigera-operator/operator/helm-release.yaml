@@ -21,9 +21,9 @@ spec:
         ipPools:
           - cidr: 10.42.0.0/16
             encapsulation: None
-            natOutgoing: true
+            natOutgoing: Enabled
           - cidr: 192.168.203.50/27
-            natOutgoing: false
+            natOutgoing: Disabled
             vxlanMode: Never
             ipipMode: Never
       cni:
