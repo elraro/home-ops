@@ -10,7 +10,7 @@ spec:
       chart: tigera-operator
       sourceRef:
         kind: HelmRepository
-        name: projectcalico
+        name: calico
         namespace: flux-system
       version: v3.30.3
   interval: 10m
