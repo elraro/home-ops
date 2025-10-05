@@ -14,7 +14,7 @@ resources:
   - jetstack-charts.yaml
   - crowdsec-charts.yaml
   - k8s-gateway-charts.yaml
-  - metallb-charts.yaml
+  - calico.yaml
   - metrics-server-charts.yaml
   - minio-charts.yaml
   - nfs-subdir-external-provisioner-charts.yaml
