@@ -5,6 +5,6 @@ metadata:
   name: kured-charts
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 6h
   url: https://kubereboot.github.io/charts
   timeout: 3m
