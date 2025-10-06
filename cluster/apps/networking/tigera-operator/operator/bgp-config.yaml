@@ -5,7 +5,7 @@ metadata:
   name: pod-network
 spec:
   cidr: 10.42.0.0/16
-  natOutgoing: true
+  natOutgoing: false
   ipipMode: "Never"
   vxlanMode: "Never"
 
