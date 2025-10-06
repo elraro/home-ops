@@ -35,7 +35,7 @@ spec:
       service:
         type: LoadBalancer
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${NGINX_EXT_ADDR}"
+          projectcalico.org/loadBalancerIPs: "${NGINX_EXT_ADDR}"
           externalTrafficPolicy: Local
 
       publishService:
