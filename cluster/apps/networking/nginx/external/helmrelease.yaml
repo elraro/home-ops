@@ -33,10 +33,10 @@ spec:
         type: RollingUpdate
 
       service:
-        type: LoadBalancer
-        annotations:
-          projectcalico.org/loadBalancerIPs: "${NGINX_EXT_ADDR}"
-          externalTrafficPolicy: Local
+        type: ClusterIP
+        externalIPs:
+          - "${NGINX_EXT_ADDR}"
+        externalTrafficPolicy: Local
 
       publishService:
         enabled: true
