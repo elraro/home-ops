@@ -22,9 +22,5 @@ spec:
           - cidr: 10.42.0.0/16
             encapsulation: None
             natOutgoing: Enabled
-          - cidr: 192.168.203.50/27
-            natOutgoing: Disabled
-            vxlanMode: Never
-            ipipMode: Never
       cni:
         type: Calico
