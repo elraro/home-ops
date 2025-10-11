@@ -23,7 +23,7 @@ spec:
             encapsulation: None
             natOutgoing: Enabled
           - cidr: 192.168.203.0/24
-            disabled: true
+            disabled: false
             allowedUses:
               - ServiceClusterIPs
       cni:
