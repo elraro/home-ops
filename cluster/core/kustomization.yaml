@@ -7,3 +7,4 @@ resources:
   - metallb-system
   - kube-system
   - runtimeclass
+  - tigera-operator
