@@ -24,5 +24,3 @@ spec:
   values:
     crds:
       enabled: true
-    speaker:
-      enabled: false
