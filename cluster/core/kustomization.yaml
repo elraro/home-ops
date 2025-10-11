@@ -8,3 +8,4 @@ resources:
   - kube-system
   - runtimeclass
   - tigera-operator
+  - cluster-configs
