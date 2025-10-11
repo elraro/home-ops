@@ -33,10 +33,10 @@ spec:
         type: RollingUpdate
 
       service:
-        type: ClusterIP
-        externalIPs:
-          - "${NGINX_EXT_ADDR}"
-        externalTrafficPolicy: Local
+        type: LoadBalancer
+        loadBalancerIP: "${NGINX_INT_ADDR}"
+        annotations:
+          externalTrafficPolicy: Local
 
       publishService:
         enabled: true

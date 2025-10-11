@@ -22,5 +22,9 @@ spec:
           - cidr: 10.42.0.0/16
             encapsulation: None
             natOutgoing: Enabled
+          - cidr: 192.168.203.0/24
+            disabled: true
+            allowedUses:
+              - ServiceClusterIPs
       cni:
         type: Calico
