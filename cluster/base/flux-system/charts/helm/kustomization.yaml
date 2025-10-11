@@ -15,6 +15,7 @@ resources:
   - crowdsec-charts.yaml
   - k8s-gateway-charts.yaml
   - calico.yaml
+  - metallb-charts.yaml
   - metrics-server-charts.yaml
   - minio-charts.yaml
   - nfs-subdir-external-provisioner-charts.yaml

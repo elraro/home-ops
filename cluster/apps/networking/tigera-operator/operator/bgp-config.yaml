@@ -1,44 +1,19 @@
 ---
 apiVersion: projectcalico.org/v3
-kind: IPPool
-metadata:
-  name: pod-network
-spec:
-  cidr: 10.42.0.0/16
-  natOutgoing: true
-  ipipMode: "Never"
-  vxlanMode: "Never"
-
----
-apiVersion: projectcalico.org/v3
-kind: IPPool
-metadata:
-  name: lb-ips
-spec:
-  cidr: 192.168.203.0/24
-  natOutgoing: false
-  ipipMode: "Never"
-  vxlanMode: "Never"
-
----
-apiVersion: projectcalico.org/v3
 kind: BGPConfiguration
 metadata:
   name: default
 spec:
-  asNumber: 65533                   # ASN local
+  asNumber: 65533                # ASN local del cluster
   logSeverityScreen: Info
-  nodeToNodeMeshEnabled: true       # habilita mesh entre nodos
-  serviceExternalIPs:
-    - cidr: 192.168.203.0/24
+  nodeToNodeMeshEnabled: false   # sin full-mesh, peering solo con router
 
 ---
 apiVersion: projectcalico.org/v3
 kind: BGPPeer
 metadata:
   name: home-router
-  namespace: calico-system
 spec:
-  peerIP: 192.168.202.1            # tu gateway/router BGP
-  asNumber: 65534                   # ASN del vecino
-  nodeSelector: all()               # todos los nodos anuncian
+  peerIP: 192.168.202.1          # IP del router
+  asNumber: 65534                # ASN remoto
+  nodeSelector: all()            # todos los nodos hacen peering con el router
