@@ -34,8 +34,8 @@ spec:
 
       service:
         type: LoadBalancer
-        loadBalancerIP: "${NGINX_INT_ADDR}"
         annotations:
+          metallb.universe.tf/loadBalancerIPs: "${NGINX_EXT_ADDR}"
           externalTrafficPolicy: Local
 
       publishService:
