@@ -14,13 +14,18 @@ spec:
         kind: HelmRepository
         name: metallb-charts
         namespace: flux-system
+  dependsOn:
+    - name: tigera-operator
+      namespace: tigera-operator
   install:
     createNamespace: true
     remediation:
       retries: 3
+    crds: CreateReplace
   upgrade:
     remediation:
       retries: 3
+    crds: CreateReplace
   values:
     crds:
       enabled: true
