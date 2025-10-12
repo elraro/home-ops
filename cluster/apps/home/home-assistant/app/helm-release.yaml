@@ -57,7 +57,7 @@ spec:
             port: 8123
     ingress:
       app:
-        className: "internal"
+        className: "external"
         hosts:
           - host: &host "home-assistant.${SECRET_DOMAIN}"
             paths:
