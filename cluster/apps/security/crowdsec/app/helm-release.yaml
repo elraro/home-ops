@@ -52,7 +52,9 @@ spec:
             - /nextcloud.log
           labels:
             type: Nextcloud
-        - source: /var/log/containers/home-assistant-*.log
+        - source: file
+          filenames:
+            - /var/log/containers/home-assistant-*.log
           labels:
             type: container
       env:
