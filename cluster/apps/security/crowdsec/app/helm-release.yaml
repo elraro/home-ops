@@ -52,10 +52,9 @@ spec:
             - /nextcloud.log
           labels:
             type: Nextcloud
-      acquisition:
-        - namespace: home
-          podName: home-assistant-*
-          program: home-assistant
+        - source: /var/log/containers/home-assistant-*.log
+          labels:
+            type: container
       env:
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
