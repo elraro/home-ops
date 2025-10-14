@@ -56,7 +56,8 @@ spec:
           filenames:
             - /var/log/containers/home-assistant-*.log
           labels:
-            type: container
+            type: containerd
+            program: home-assistant
       env:
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
