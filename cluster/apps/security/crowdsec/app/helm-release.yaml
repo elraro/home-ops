@@ -81,6 +81,9 @@ spec:
         - name: var-log-pods
           hostPath:
             path: /var/log/pods
+        - name: home-assistant-parser
+          hostPath:
+            path: /home/elraro/home-ops/volumes/crowdsec/home-assistant-logs.yaml
       extraVolumeMounts:
         - name: nextcloud-log
           mountPath: /nextcloud.log
@@ -90,6 +93,9 @@ spec:
           readOnly: true
         - name: var-log-pods
           mountPath: /var/log/pods
+          readOnly: true
+        - name: home-assistant-parser
+          mountPath: /etc/crowdsec/parsers/s01-parse/home-assistant-logs.yaml
           readOnly: true
     lapi:
       dashboard:
