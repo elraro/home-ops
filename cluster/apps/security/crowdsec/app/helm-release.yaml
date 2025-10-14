@@ -95,7 +95,7 @@ spec:
           mountPath: /var/log/pods
           readOnly: true
         - name: home-assistant-parser
-          mountPath: /home-assistant-logs.yaml
+          mountPath: /etc/crowdsec_data/parsers/s01-parse/home-assistant-logs.yaml
           readOnly: true
     lapi:
       dashboard:
