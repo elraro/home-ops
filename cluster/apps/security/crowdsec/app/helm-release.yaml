@@ -54,7 +54,7 @@ spec:
               description: "Parse Home Assistant logs"
               filter: "'homeassistant.components.http.ban' in evt.Parsed.message"
               pattern_syntax:
-                TIMESTAMP: '%{YEAR}-%{MONTHNUM}-%{MONTHDAY} %{HOUR}:%{MINUTE}:%{SECOND}'
+                TIMESTAMP: '%{YEAR}-%{MONTHNUM}-%{MONTHDAY} %{HOUR}:%{MINUTE}:%{SECOND}(?:\.%{INT})?'
               nodes:
                 - grok:
                     pattern: "%{TIMESTAMP:time} WARNING \\(%{DATA:threadName}\\) \\[homeassistant.components.http.ban\\] Login attempt or request with invalid authentication from %{DATA:source_rdns} \\(%{IPORHOST:source_ip}\\). \\(%{GREEDYDATA:http_user_agent}\\)"
