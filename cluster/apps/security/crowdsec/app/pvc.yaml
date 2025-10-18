@@ -15,7 +15,6 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  volumeName: pvc-crowdsec-db-retain
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -33,7 +32,6 @@ spec:
   resources:
     requests:
       storage: 100Mi
-  volumeName: pvc-crowdsec-config-retain
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -51,4 +49,3 @@ spec:
   resources:
     requests:
       storage: 100Mi
-  volumeName: pvc-crowdsec-agent-config-retain
