@@ -46,6 +46,37 @@ spec:
       config:
         common:
           poll_without_inotify: true
+        parsers:
+          s01-parse:
+            home-assistant-logs.yaml: |
+              onsuccess: next_stage
+              name: crowdsecurity/home-assistant-logs
+              description: "Parse Home Assistant logs"
+              filter: "'homeassistant.components.http.ban' in evt.Parsed.message"
+              pattern_syntax:
+                TIMESTAMP: '%{YEAR}-%{MONTHNUM}-%{MONTHDAY} %{HOUR}:%{MINUTE}:%{SECOND}'
+              nodes:
+                - grok:
+                    pattern: "%{TIMESTAMP:time} WARNING \\(%{DATA:threadName}\\) \\[homeassistant.components.http.ban\\] Login attempt or request with invalid authentication from %{DATA:source_rdns} \\(%{IPORHOST:source_ip}\\). \\(%{GREEDYDATA:http_user_agent}\\)"
+                    apply_on: message
+                    statics:
+                      - meta: log_type
+                        value: home-assistant_failed_auth
+                  - grok:
+                    pattern: "%{TIMESTAMP:time} WARNING \\(%{DATA:threadName}\\) \\[homeassistant.components.http.ban\\] Login attempt or request with invalid authentication from %{DATA:source_rdns} \\(%{IPORHOST:source_ip}\\). Requested URL: '%{GREEDYDATA:url}'. \\(%{GREEDYDATA:http_user_agent}\\)"
+                    apply_on: message
+                    statics:
+                      - meta: log_type
+                        value: home-assistant_failed_auth
+              statics:
+                - target: StrTime
+                  expression: "evt.Parsed.time"
+                - meta: service
+                  value: http
+                - meta: source_ip
+                  expression: "evt.Parsed.source_ip"
+                - meta: source_rdns
+                  expression: "evt.Parsed.source_rdns"
       additionalAcquisition:
         - source: file
           filenames:
@@ -81,9 +112,6 @@ spec:
         - name: var-log-pods
           hostPath:
             path: /var/log/pods
-        - name: home-assistant-parser
-          configMap:
-            name: crowdsec-home-assistant-parser
       extraVolumeMounts:
         - name: nextcloud-log
           mountPath: /nextcloud.log
@@ -93,10 +121,6 @@ spec:
           readOnly: true
         - name: var-log-pods
           mountPath: /var/log/pods
-          readOnly: true
-        - name: home-assistant-parser
-          mountPath: /etc/crowdsec_data/parsers/s01-parse/home-assistant-logs.yaml
-          subPath: home-assistant-logs.yaml
           readOnly: true
     lapi:
       dashboard:
