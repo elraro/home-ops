@@ -82,8 +82,8 @@ spec:
           hostPath:
             path: /var/log/pods
         - name: home-assistant-parser
-          hostPath:
-            path: /home/elraro/home-ops/volumes/crowdsec/home-assistant-logs.yaml
+          configMap:
+            name: crowdsec-home-assistant-parser
       extraVolumeMounts:
         - name: nextcloud-log
           mountPath: /nextcloud.log
