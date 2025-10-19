@@ -46,18 +46,16 @@ spec:
       config:
         common:
           poll_without_inotify: true
+      acquisition:
+        - namespace: home
+          podName: home-assistant-*
+          program: home-assistant
       additionalAcquisition:
         - source: file
           filenames:
             - /nextcloud.log
           labels:
             type: Nextcloud
-        - source: file
-          filenames:
-            - /var/log/containers/home-assistant-*.log
-          labels:
-            type: containerd
-            program: home-assistant
       env:
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
