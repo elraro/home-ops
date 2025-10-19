@@ -47,7 +47,7 @@ spec:
           server:
             auto_registration: # Activate if not using TLS for authentication
               enabled: true
-              token: "${REGISTRATION_TOKEN}" # /!\ Do not modify this variable (auto-generated and handled by the chart)
+              token: "$${REGISTRATION_TOKEN}" # /!\ Do not modify this variable (auto-generated and handled by the chart)
               allowed_ranges: # /!\ Make sure to adapt to the pod IP ranges used by your cluster
                 - "127.0.0.1/32"
                 - "10.42.0.0/16"
