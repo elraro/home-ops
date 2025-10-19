@@ -38,10 +38,16 @@ spec:
     tls:
       enabled: false
     config:
-      # https://docs.crowdsec.net/docs/notification_plugins/http#enabling-the-plugin
       profiles.yaml: |
-        notifications:
-          - http_default
+        name: default_ip_remediation
+          filters:
+            - Alert.Remediation == true && Alert.GetScope() == "Ip"
+          decisions:
+            - type: ban
+              duration: 4h
+          notifications:
+            - http_default
+          on_success: break
       config.yaml.local: |
         api:
           server:
