@@ -47,7 +47,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: recycle
-              image: registry.suse.com/suse/kubectl:1.33@sha256:edc9220c2606339140db448bf6471bedd4ed42664b85afe99bf44c79125ba5ac
+              image: registry.suse.com/suse/kubectl:1.33@sha256:ef5f3e6883694842d085bab417f7b142ca8a46453ad6511b451f032f3f7068b8
               command:
                 - /bin/sh
                 - -c
