@@ -26,7 +26,7 @@ spec:
               TZ: "${TZ}"
             image:
               repository: louislam/uptime-kuma
-              tag: 1.23.16@sha256:431fee3be822b04861cf0e35daf4beef6b7cb37391c5f26c3ad6e12ce280fe18
+              tag: 2.0.0@sha256:e63226107e874e5a2e168268e0ab9a5e6438a0ca82c61c834c5e03816b07b8d8
             ports:
               - name: http
                 containerPort: 3001
