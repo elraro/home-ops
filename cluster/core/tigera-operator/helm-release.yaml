@@ -12,7 +12,7 @@ spec:
         kind: HelmRepository
         name: calico
         namespace: flux-system
-      version: v3.31.1
+      version: v3.31.2
   interval: 10m
   values:
     installation:
