@@ -1,0 +1,83 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &app kindlebot
+  namespace: telegram
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: *app
+      app.kubernetes.io/instance: *app
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: *app
+        app.kubernetes.io/instance: *app
+    spec:
+      containers:
+        - name: *app
+          image: ghcr.io/elraro/send-to-kindle-telegram-bot:latest@sha256:a87e1398f534609317a101814b5754e2492e10a725c44bbc1b00a3e271765aed
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TELEGRAM_BOT_TOKEN
+              value: "${SECRET_KINDLEBOT_TOKEN}"
+            - name: TELEGRAM_USER_ALIAS
+              valueFrom:
+                secretKeyRef:
+                  key: telegramuseralias
+                  name: kindlebot
+            - name: WEBHOOK_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: webhookhost
+                  name: kindlebot
+            - name: WEBHOOK_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: webhookport
+                  name: kindlebot
+            - name: WEBHOOK_LISTEN
+              value: "0.0.0.0"
+            - name: WEBHOOK_LISTEN_PORT
+              value: "8080"
+            - name: SMTP_SERVER
+              valueFrom:
+                secretKeyRef:
+                  key: smtpserver
+                  name: kindlebot
+            - name: SMTP_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: smtpport
+                  name: kindlebot
+            - name: SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  key: smtpuser
+                  name: kindlebot
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: smtppassword
+                  name: kindlebot
+            - name: EMAIL
+              valueFrom:
+                secretKeyRef:
+                  key: email
+                  name: kindlebot
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 150Mi
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60

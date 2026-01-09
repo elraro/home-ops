@@ -8,5 +8,3 @@ resources:
   - ./radarr/ks.yaml
   - ./sonarr/ks.yaml
   - ./threadfin/ks.yaml
-  - ./threadfin2/ks.yaml
-  - ./acelink/ks.yaml

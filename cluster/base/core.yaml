@@ -12,7 +12,6 @@ spec:
     kind: GitRepository
     name: flux-system
   dependsOn:
-    - name: config
     - name: crds
   decryption:
     provider: sops

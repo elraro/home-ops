@@ -14,6 +14,7 @@ resources:
   - jetstack-charts.yaml
   - crowdsec-charts.yaml
   - k8s-gateway-charts.yaml
+  - calico.yaml
   - metallb-charts.yaml
   - metrics-server-charts.yaml
   - minio-charts.yaml
@@ -21,7 +22,7 @@ resources:
   - node-feature-discovery-charts.yaml
   - nvidia-charts.yaml
   - nvdp-charts.yaml
-  - prometheus-community-charts.yaml
+  - prometheus-community.yaml
   - rook-ceph-charts.yaml
   - stakater-charts.yaml
   - kured-charts.yaml

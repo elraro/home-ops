@@ -9,13 +9,13 @@ spec:
   chart:
     spec:
       chart: crowdsec
-      version: 0.19.5
+      version: 0.21.1
       sourceRef:
         kind: HelmRepository
         name: crowdsec
         namespace: flux-system
       interval: 30m
-  timeout: 20m
+  timeout: 3m
   maxHistory: 3
   install:
     createNamespace: true
@@ -34,34 +34,48 @@ spec:
     image:
       repository: ghcr.io/crowdsecurity/crowdsec
       pullPolicy: IfNotPresent
-      tag: 'v1.6.11'
+      tag: 'v1.7.4'
     tls:
       enabled: false
     config:
-      # https://docs.crowdsec.net/docs/notification_plugins/http#enabling-the-plugin
       profiles.yaml: |
+        name: default_ip_remediation
+        filters:
+          - Alert.Remediation == true && Alert.GetScope() == "Ip"
+        decisions:
+          - type: ban
+            duration: 4h
         notifications:
           - http_default
+        on_success: break
+      config.yaml.local: |
+        api:
+          server:
+            auto_registration: # Activate if not using TLS for authentication
+              enabled: true
+              token: "$${REGISTRATION_TOKEN}" # /!\ Do not modify this variable (auto-generated and handled by the chart)
+              allowed_ranges: # /!\ Make sure to adapt to the pod IP ranges used by your cluster
+                - "127.0.0.1/32"
+                - "10.42.0.0/16"
     agent:
+      config:
+        common:
+          poll_without_inotify: true
+      acquisition:
+        - namespace: home
+          podName: home-assistant-*
+          program: home-assistant
       additionalAcquisition:
         - source: file
           filenames:
             - /nextcloud.log
           labels:
             type: Nextcloud
-      # Specify each pod whose logs you want to process
-      #acquisition:
-      # The namespace where the pod is located
-      #  - namespace: home
-      # The pod name
-      #    podName: nextcloud-*
-      #    as in crowdsec configuration, we need to specify the program name to find a matching parser
-      #    program: nextcloud
       env:
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
         - name: COLLECTIONS
-          value: "crowdsecurity/nextcloud"
+          value: "crowdsecurity/nextcloud crowdsecurity/home-assistant"
       metrics:
         enabled: false
         serviceMonitor:
@@ -74,9 +88,21 @@ spec:
         - name: nextcloud-log
           hostPath:
             path: /mnt/sdc1/nextcloud/data/nextcloud.log
+        - name: var-log-containers
+          hostPath:
+            path: /var/log/containers
+        - name: var-log-pods
+          hostPath:
+            path: /var/log/pods
       extraVolumeMounts:
         - name: nextcloud-log
           mountPath: /nextcloud.log
+          readOnly: true
+        - name: var-log-containers
+          mountPath: /var/log/containers
+          readOnly: true
+        - name: var-log-pods
+          mountPath: /var/log/pods
           readOnly: true
     lapi:
       dashboard:

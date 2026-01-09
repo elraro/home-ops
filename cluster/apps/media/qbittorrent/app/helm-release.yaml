@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 4.2.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -17,11 +17,13 @@ spec:
   values:
     controllers:
       main:
+        strategy: Recreate
         containers:
           main:
             image:
               repository: ghcr.io/home-operations/qbittorrent
-              tag: 5.1.2@sha256:9dd0164cc23e9c937e0af27fd7c3f627d1df30c182cf62ed34d3f129c55dc0e8
+              tag: 5.1.4@sha256:e9c2c24ad2b39fa0ee44de682bf26b14bf23cffea1de9e1f082f26caed4277f9
+              pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
             resources:
@@ -30,38 +32,39 @@ spec:
                 cpu: 500m
               limits:
                 memory: 3000Mi
+            securityContext:
+              runAsUser: 1000
+              runAsGroup: 1000
+              fsGroup: 1000
+              fsGroupChangePolicy: "OnRootMismatch"
+
     service:
       main:
-        enabled: true
         controller: main
         ports:
           http:
             port: 8080
       bittorrent:
-        enabled: true
         controller: main
         type: LoadBalancer
         loadBalancerIP: "${METALLB_QBITTORRENT_ADDR}"
         ports:
           bittorrent:
-            enabled: true
             port: 6881
             protocol: TCP
             targetPort: 6881
           microtp:
-            enabled: true
             port: 6881
             protocol: UDP
             targetPort: 6881
           listenport:
-            enabled: true
             port: 50413
             protocol: TCP
             targetPort: 50413
         externalTrafficPolicy: Local
+
     ingress:
       main:
-        enabled: true
         className: "internal"
         hosts:
           - host: &host "qbittorrent.${SECRET_DOMAIN}"
@@ -69,35 +72,22 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: main
                   port: http
         tls:
           - hosts:
               - *host
-    defaultPodOptions:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: "OnRootMismatch"
+
     persistence:
       config:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            path: /home/elraro/home-ops/volumes/qbittorrent/config
-        mountPath: /config
+        type: hostPath
+        hostPath: /home/elraro/home-ops/volumes/qbittorrent/config
+        globalMounts:
+          - path: /config
       downloads:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            path: /mnt/sdd1/downloads_qbittorrent
-        mountPath: /downloads
-    resources:
-      requests:
-        memory: 250Mi
-        cpu: 500m
-      limits:
-        memory: 3000Mi
+        type: hostPath
+        hostPath: /mnt/sdd1/downloads_qbittorrent
+        globalMounts:
+          - path: /downloads

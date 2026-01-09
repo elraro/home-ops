@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 4.2.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -25,7 +25,7 @@ spec:
           main:
             image:
               repository: ghcr.io/analogj/scrutiny
-              tag: master-omnibus@sha256:275314f4acf92ca83b3cec04c3f27b2528a336f24fe5737bbda6c3cb87ee856b
+              tag: master-omnibus@sha256:e5638d8580adba40f7c03464cde8420866188b9e48cddb9fc3866ec3243163d5
             env:
               TZ: "${TZ}"
             envFrom:
@@ -35,20 +35,20 @@ spec:
               privileged: true
     service:
       main:
+        controller: main
         ports:
           http:
             port: &port 8080
     ingress:
       main:
-        enabled: true
-        ingressClassName: "internal"
+        className: "internal"
         hosts:
           - host: &host "scrutiny.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: main
                   port: http
         tls:
           - hosts:
@@ -56,59 +56,55 @@ spec:
     persistence:
       config:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: DirectoryOrCreate
-            path: /home/elraro/home-ops/volumes/scrutiny/config
-        mountPath: /opt/scrutiny/config
+        type: hostPath
+        hostPath: /home/elraro/home-ops/volumes/scrutiny/config
+        globalMounts:
+          - path: /opt/scrutiny/config
       database:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            type: DirectoryOrCreate
-            path: /home/elraro/home-ops/volumes/scrutiny/influxdb
-        mountPath: /opt/scrutiny/influxdb
+        type: hostPath
+        hostPath: /home/elraro/home-ops/volumes/scrutiny/influxdb
+        globalMounts:
+          - path: /opt/scrutiny/influxdb
       udev:
         enabled: true
         type: hostPath
         hostPath: /run/udev
-        readOnly: true
         globalMounts:
           - path: /run/udev
+            readOnly: true
       sda:
         enabled: true
         type: hostPath
         hostPath: /dev/sda
-        readOnly: true
         globalMounts:
           - path: /dev/sda
+            readOnly: true
       sdb:
         enabled: true
         type: hostPath
         hostPath: /dev/sdb
-        readOnly: true
         globalMounts:
           - path: /dev/sdb
+            readOnly: true
       sdc:
         enabled: true
         type: hostPath
         hostPath: /dev/sdc
-        readOnly: true
         globalMounts:
           - path: /dev/sdc
+            readOnly: true
       sdd:
         enabled: true
         type: hostPath
         hostPath: /dev/sdd
-        readOnly: true
         globalMounts:
           - path: /dev/sdd
+            readOnly: true
       sde:
         enabled: true
         type: hostPath
         hostPath: /dev/sde
-        readOnly: true
         globalMounts:
           - path: /dev/sde
+            readOnly: true

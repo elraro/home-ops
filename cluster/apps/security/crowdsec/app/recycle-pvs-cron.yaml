@@ -1,0 +1,57 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: pv-recycler
+  namespace: security
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: pv-recycler
+rules:
+  - apiGroups: [""]
+    resources: ["persistentvolumes"]
+    verbs: ["get", "list", "watch", "patch", "update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: pv-recycler-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: pv-recycler
+subjects:
+  - kind: ServiceAccount
+    name: pv-recycler
+    namespace: security
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: recycle-pvs
+  namespace: security
+spec:
+  schedule: "*/5 * * * *" # cada 5 minutos
+  concurrencyPolicy: "Forbid"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      backoffLimit: 3
+      ttlSecondsAfterFinished: 300
+      template:
+        spec:
+          serviceAccountName: pv-recycler
+          restartPolicy: Never
+          containers:
+            - name: recycle
+              image: registry.suse.com/suse/kubectl:1.35@sha256:1311e88b0af3b2284cce1115dea118e330de1be1937e7c3d5a073bb2b3b227a4
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  for pv in $(kubectl get pv -o jsonpath='{.items[?(@.status.phase=="Released")].metadata.name}'); do
+                    kubectl patch pv $pv -p '{"spec":{"claimRef": null}}'
+                  done

@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: tigera
+  namespace: tigera-operator
+spec:
+  releaseName: tigera
+  chart:
+    spec:
+      chart: tigera-operator
+      sourceRef:
+        kind: HelmRepository
+        name: calico
+        namespace: flux-system
+      version: v3.31.3
+  interval: 10m
+  values:
+    installation:
+      calicoNetwork:
+        ipPools:
+          - cidr: 10.42.0.0/16
+            encapsulation: None
+            natOutgoing: Enabled
+      cni:
+        type: Calico

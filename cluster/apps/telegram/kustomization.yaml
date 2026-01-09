@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./rajoybot/ks.yaml
   - ./starwarssounds/ks.yaml
+  - ./kindlebot/ks.yaml

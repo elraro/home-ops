@@ -13,10 +13,22 @@ _... managed with Flux, Renovate and GitHub Actions_ 🤖
 ```
 # install pre-commit
 pip install pre-commit --break-system-packages
-echo 'export PATH=/home/$USER/.local/bin:$PATH' >> ~/.bashrc 
+echo 'export PATH=/home/$USER/.local/bin:$PATH' >> ~/.bashrc
 
 # install sops
 curl -LO https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64
 mv sops-v3.8.1.linux.amd64 /usr/local/bin/sops
 chmod +x /usr/local/bin/sops
+
+# install direnv
+apt install direnv
+echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
+
+# install fluxcd
+curl -s https://fluxcd.io/install.sh | sudo bash
+echo '. <(flux completion bash)' >> ~/.bashrc
+
+# configure GITHUB_TOKEN and GITHUB_USER
+echo 'export GITHUB_TOKEN=<your-token>' >> ~/.bashrc
+echo 'export GITHUB_USER=<your-username>' >> ~/.bashrc
 ```

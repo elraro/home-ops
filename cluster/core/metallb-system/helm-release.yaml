@@ -2,14 +2,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: metallb
+  name: metallb-crds
   namespace: metallb-system
 spec:
   interval: 5m
   chart:
     spec:
       chart: metallb
-      version: 0.14.5
+      version: 0.15.2
       sourceRef:
         kind: HelmRepository
         name: metallb-charts
@@ -18,9 +18,48 @@ spec:
     createNamespace: true
     remediation:
       retries: 3
+    crds: CreateReplace
   upgrade:
     remediation:
       retries: 3
+    crds: CreateReplace
+  values:
+    # Solo instala los CRDs, sin los componentes principales
+    controller:
+      enabled: false
+    speaker:
+      enabled: false
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: metallb
+  namespace: metallb-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: metallb
+      version: 0.15.2
+      sourceRef:
+        kind: HelmRepository
+        name: metallb-charts
+        namespace: flux-system
+  dependsOn:
+    - name: metallb-crds
+      namespace: metallb-system
+    - name: tigera
+      namespace: tigera-operator
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+    crds: Skip  # evita que vuelva a tocar los CRDs
+  upgrade:
+    remediation:
+      retries: 3
+    crds: Skip
   values:
     crds:
-      enabled: true
+      enabled: false  # desactiva CRDs dentro del chart

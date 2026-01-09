@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: fyb3roptik/threadfin
-              tag: 1.2.32@sha256:11e02ff07d7a874133d9c79200d7c6f2ae44d98e2e8736a6f63056387a651b86
+              tag: 1.2.39@sha256:c5accc5922a9fb30a90d47564abf1f7f2e9c1e83665988e2854061dcc4d98a50
             env:
               TZ: "${TZ}"
     defaultPodOptions:
@@ -42,9 +42,9 @@ spec:
         enabled: true
         type: LoadBalancer
         controller: threadfin
+        externalTrafficPolicy: Local
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${METALLB_THREADFIN_ADDR}"
-          externalTrafficPolicy: Local
         ports:
           http:
             port: 34400
