@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: trivy-operator-dashboard
+  name: trivy-dashboard
   namespace: trivy-system
 spec:
   interval: 15m
