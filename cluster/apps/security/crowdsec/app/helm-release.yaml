@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: crowdsec
-      version: 0.20.1
+      version: 0.21.1
       sourceRef:
         kind: HelmRepository
         name: crowdsec
@@ -34,20 +34,20 @@ spec:
     image:
       repository: ghcr.io/crowdsecurity/crowdsec
       pullPolicy: IfNotPresent
-      tag: 'v1.7.0'
+      tag: 'v1.7.4'
     tls:
       enabled: false
     config:
       profiles.yaml: |
-        - name: default_ip_remediation
-          filters:
-            - Alert.Remediation == true && Alert.GetScope() == "Ip"
-          decisions:
-            - type: ban
-              duration: 4h
-          notifications:
-            - http_default
-          on_success: break
+        name: default_ip_remediation
+        filters:
+          - Alert.Remediation == true && Alert.GetScope() == "Ip"
+        decisions:
+          - type: ban
+            duration: 4h
+        notifications:
+          - http_default
+        on_success: break
       config.yaml.local: |
         api:
           server:
