@@ -7,7 +7,6 @@ resources:
   - calico-system.yaml
   - metallb-system.yaml
   - networking.yaml
-  - system-upgrade.yaml
   - telegram.yaml
   - security.yaml
   - media.yaml
