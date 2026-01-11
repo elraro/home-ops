@@ -6,3 +6,4 @@ resources:
   - ./uptime-kuma/ks.yaml
   - ./prometheus/ks.yaml
   - ./prometheus-operator-crds/ks.yaml
+  - ./goldilocks/ks.yaml

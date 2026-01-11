@@ -28,3 +28,4 @@ resources:
   - kured-charts.yaml
   - bjw-s.yaml
   - trivy.yaml
+  - fairwinds-charts.yaml
