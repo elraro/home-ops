@@ -30,10 +30,10 @@ spec:
               mountPath: /var/lib/mysql
           resources:
             requests:
-              cpu: 100m
-              memory: 100Mi
+              cpu: 15m
+              memory: 105Mi
             limits:
-              cpu: 100m
+              cpu: 30m
               memory: 150Mi
           env:
             - name: MYSQL_ROOT_PASSWORD
@@ -87,10 +87,10 @@ spec:
               value: "8080"
           resources:
             requests:
-              cpu: 100m
+              cpu: 15m
               memory: 100Mi
             limits:
-              cpu: 100m
+              cpu: 30m
               memory: 150Mi
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
