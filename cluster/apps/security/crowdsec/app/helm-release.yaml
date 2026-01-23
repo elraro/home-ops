@@ -34,7 +34,7 @@ spec:
     image:
       repository: ghcr.io/crowdsecurity/crowdsec
       pullPolicy: IfNotPresent
-      tag: 'v1.7.4'
+      tag: 'v1.7.6'
     tls:
       enabled: false
     config:
