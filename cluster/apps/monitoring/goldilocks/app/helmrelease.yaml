@@ -6,6 +6,14 @@ metadata:
   namespace: monitoring
 spec:
   interval: 30m
+  install:
+    timeout: 10m
+    remediation:
+      retries: 3
+  upgrade:
+    timeout: 10m
+    remediation:
+      retries: 3
   chart:
     spec:
       chart: goldilocks
