@@ -67,11 +67,6 @@ spec:
                 secretKeyRef:
                   key: smtppassword
                   name: kindlebot
-            - name: EMAIL
-              valueFrom:
-                secretKeyRef:
-                  key: email
-                  name: kindlebot
           resources:
             requests:
               cpu: 15m
