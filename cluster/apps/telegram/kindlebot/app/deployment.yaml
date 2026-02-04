@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: *app
-          image: ghcr.io/elraro/send-to-kindle-telegram-bot:latest@sha256:e5a7a9cacba1b3c908efb6f2b01664bfea7835fed18cfc7e57690c9fa32c9305
+          image: ghcr.io/elraro/send-to-kindle-telegram-bot:latest@sha256:e77ac28776c3e3f1aaa0e9d723a8175dfe76fde98ed1a6c08fb4766b6f3f4e84
           imagePullPolicy: IfNotPresent
           env:
             - name: TELEGRAM_BOT_TOKEN
