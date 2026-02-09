@@ -25,7 +25,7 @@ spec:
           main:
             image:
               repository: ghcr.io/analogj/scrutiny
-              tag: master-omnibus@sha256:8922d5aac20c5cbf7869e3fd47ab9900ad48acc18ffd72879ccb4c58dfe6bf41
+              tag: latest-omnibus@sha256:e26dac3ad9055e1f7d2618f8b2a2c7db0ebd598e764d7981918ade6deaf51c21
             env:
               TZ: "${TZ}"
             envFrom:
