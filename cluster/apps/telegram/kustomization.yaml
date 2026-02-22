@@ -5,3 +5,4 @@ resources:
   - ./rajoybot/ks.yaml
   - ./starwarssounds/ks.yaml
   - ./kindlebot/ks.yaml
+  - ./gmvitabot/ks.yaml
