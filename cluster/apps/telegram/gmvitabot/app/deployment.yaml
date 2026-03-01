@@ -42,6 +42,11 @@ spec:
               value: "0.0.0.0"
             - name: WEBHOOK_LISTEN_PORT
               value: "8080"
+            - name: ADMIN_USERS
+              valueFrom:
+                secretKeyRef:
+                  key: admin
+                  name: gmvitabot
           resources:
             requests:
               cpu: 15m
