@@ -27,10 +27,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: TELEGRAM_BOT_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  key: token
-                  name: gmvitabot
+              value: "${SECRET_GMVITABOT_TOKEN}"
             - name: WEBHOOK_HOST
               valueFrom:
                 secretKeyRef:

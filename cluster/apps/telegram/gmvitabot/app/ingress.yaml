@@ -16,7 +16,7 @@ spec:
     - host: "botstelegram.${SECRET_DOMAIN}"
       http:
         paths:
-          - path: "/${SECRET_KINDLEBOT_TOKEN}/"
+          - path: "/${SECRET_GMVITABOT_TOKEN}/"
             pathType: Prefix
             backend:
               service:
