@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: *app
-          image: ghcr.io/elraro/gmvitabot:latest@sha256:a704da2f83f5760e743609ebcd5ab4f0876ae311b0500a727cd021085ed468b1
+          image: ghcr.io/elraro/gmvitabot:latest@sha256:6d6327422d9e9d3d16581988d9e993003863bf7955f8e7d69f12dfac96312227
           imagePullPolicy: IfNotPresent
           env:
             - name: TELEGRAM_BOT_TOKEN
