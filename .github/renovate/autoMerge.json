@@ -15,7 +15,7 @@
       "automerge": true,
       "automergeType": "branch",
       "matchUpdateTypes": ["minor", "patch"],
-      "matchPackagePatterns": ["ghcr.io/bjw-s", "ghcr.io/onedr0p", "ghcr.io/home-operations"]
+      "matchPackagePatterns": ["ghcr.io/bjw-s", "ghcr.io/onedr0p", "ghcr.io/home-operations", "ghcr.io/home-assistant"]
     },
     {
       "description": "Auto-merge GitHub Actions for minor and patch",
