@@ -1,0 +1,69 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: musicgrabber
+  namespace: media
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 4.2.0
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 30m
+  install:
+    createNamespace: true
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: g33kphr33k/musicgrabber
+              tag: 2.3.5@sha256:9b44854b3f1de3a371151d55a87bbdebb729b2c3bd2c5b846c17076cd205c58d
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "${TZ}"
+              MUSIC_DIR: "/music"
+              DB_PATH: "/data/music_grabber.db"
+              ENABLE_MUSICBRAINZ: true
+              DEFAULT_CONVERT_TO_FLAC: true
+    service:
+      main:
+        enabled: true
+        controller: main
+        ports:
+          http:
+            port: 38274
+    ingress:
+      main:
+        enabled: true
+        className: "internal"
+        hosts:
+          - host: &host "musicgrabber.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        type: hostPath
+        hostPath: /home/elraro/home-ops/volumes/musicgrabber/music
+        globalMounts:
+          - path: /music
+      data:
+        enabled: true
+        type: hostPath
+        hostPath: /home/elraro/home-ops/volumes/musicgrabber/data
+        globalMounts:
+          - path: /data

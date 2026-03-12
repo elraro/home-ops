@@ -8,3 +8,4 @@ resources:
   - ./radarr/ks.yaml
   - ./sonarr/ks.yaml
   - ./threadfin/ks.yaml
+  - ./musicgrabber/ks.yaml
