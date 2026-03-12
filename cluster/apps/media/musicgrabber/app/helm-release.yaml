@@ -38,7 +38,7 @@ spec:
         controller: main
         ports:
           http:
-            port: 38274
+            port: 8080
     ingress:
       main:
         enabled: true
