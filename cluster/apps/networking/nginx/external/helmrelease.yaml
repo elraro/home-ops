@@ -92,7 +92,6 @@ spec:
         Permissions-Policy: "interest-cohort=()" # anti Google FLoC
         Cross-Origin-Opener-Policy: "same-origin"
         Cross-Origin-Resource-Policy: "same-site"
-        Cross-Origin-Embedder-Policy: "require-corp"
       metrics:
         enabled: true
         serviceMonitor:
