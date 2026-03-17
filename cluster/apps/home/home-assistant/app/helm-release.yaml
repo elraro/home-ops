@@ -70,9 +70,9 @@ spec:
                 service:
                   identifier: app
                   port: http
-        tls:
-          - hosts:
-              - *host
+#        tls:
+#          - hosts:
+#              - *host
     persistence:
       config:
         enabled: true
