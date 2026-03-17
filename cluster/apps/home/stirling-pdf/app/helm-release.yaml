@@ -59,7 +59,7 @@ spec:
           gethomepage.dev/name: Stirling PDF
           gethomepage.dev/group: selfhosted
         hosts:
-          - host: &host "stirling-pdf.${SECRET_DOMAIN}"
+          - host: &host "stirling-pdf.internal.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
