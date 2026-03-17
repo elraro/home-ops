@@ -7,15 +7,15 @@ metadata:
   labels:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
-  annotations:
-    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-    external-dns/is-public: "true"
-    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      #  annotations:
+      #    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+      #    external-dns/is-public: "true"
+      #    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+      #    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: external
   rules:
-    - host: "nextcloud.${SECRET_DOMAIN}"
+    - host: "nextcloud.internal.${SECRET_DOMAIN}"
       http:
         paths:
           - path: "/"
