@@ -15,7 +15,7 @@ metadata:
 spec:
   ingressClassName: external
   rules:
-    - host: "nextcloud.internal.${SECRET_DOMAIN}"
+    - host: &host "nextcloud.internal.${SECRET_DOMAIN}"
       http:
         paths:
           - path: "/"
@@ -27,4 +27,4 @@ spec:
                   number: 443
   tls:
     - hosts:
-        - "nextcloud.internal.${SECRET_DOMAIN}"
+        - *host
