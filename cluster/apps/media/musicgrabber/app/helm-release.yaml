@@ -44,7 +44,7 @@ spec:
         enabled: true
         className: "internal"
         hosts:
-          - host: &host "musicgrabber.${SECRET_DOMAIN}"
+          - host: &host "musicgrabber.internal.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix

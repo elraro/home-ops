@@ -52,7 +52,7 @@ spec:
       app:
         className: "internal"
         hosts:
-          - host: &host "threadfin.${SECRET_DOMAIN}"
+          - host: &host "threadfin.internal.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
