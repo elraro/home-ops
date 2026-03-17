@@ -45,7 +45,7 @@ spec:
       main:
         className: "internal"
         hosts:
-          - host: &host "sonarr.${SECRET_DOMAIN}"
+          - host: &host "sonarr.internal.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
