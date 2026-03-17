@@ -27,4 +27,4 @@ spec:
                   number: 443
   tls:
     - hosts:
-        - "nextcloud.${SECRET_DOMAIN}"
+        - "nextcloud.internal.${SECRET_DOMAIN}"
