@@ -22,4 +22,4 @@ spec:
                   number: 8080
   tls:
     - hosts:
-        - "botstelegram..internal.${SECRET_DOMAIN}"
+        - "botstelegram.internal.${SECRET_DOMAIN}"
