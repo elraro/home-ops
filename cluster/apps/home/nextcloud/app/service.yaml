@@ -2,17 +2,21 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: &app nextcloud
+  name: nextcloud
   namespace: home
   labels:
-    app.kubernetes.io/name: *app
-    app.kubernetes.io/instance: *app
+    app.kubernetes.io/name: nextcloud
+    app.kubernetes.io/instance: nextcloud
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: "${METALLB_NEXTCLOUD_ADDR}"
 spec:
+  type: LoadBalancer
   selector:
-    app.kubernetes.io/name: *app
-    app.kubernetes.io/instance: *app
+    app.kubernetes.io/name: nextcloud
+    app.kubernetes.io/instance: nextcloud
   ports:
-    - protocol: TCP
-      name: nextcloud
-      port: 443
-      targetPort: 443
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  externalTrafficPolicy: Local
