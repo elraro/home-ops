@@ -20,6 +20,3 @@ spec:
                 name: gmvitabot
                 port:
                   number: 8080
-  tls:
-    - hosts:
-        - "botstelegram..internal.${SECRET_DOMAIN}"
