@@ -7,13 +7,10 @@ metadata:
   labels:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
-  annotations:
-    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-    external-dns/is-public: "true"
 spec:
   ingressClassName: external
   rules:
-    - host: "botstelegram.${SECRET_DOMAIN}"
+    - host: "botstelegram.internal.${SECRET_DOMAIN}"
       http:
         paths:
           - path: "/${SECRET_GMVITABOT_TOKEN}/"
@@ -25,4 +22,4 @@ spec:
                   number: 8080
   tls:
     - hosts:
-        - "botstelegram.${SECRET_DOMAIN}"
+        - "botstelegram..internal.${SECRET_DOMAIN}"
