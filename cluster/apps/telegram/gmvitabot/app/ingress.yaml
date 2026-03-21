@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: external
   rules:
-    - host: "botstelegram.internal.${SECRET_DOMAIN}"
+    - host: "botstelegram.${SECRET_DOMAIN}"
       http:
         paths:
           - path: "/${SECRET_GMVITABOT_TOKEN}/"
@@ -22,4 +22,4 @@ spec:
                   number: 8080
   tls:
     - hosts:
-        - "botstelegram.internal.${SECRET_DOMAIN}"
+        - "botstelegram.${SECRET_DOMAIN}"
