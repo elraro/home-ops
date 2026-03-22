@@ -110,14 +110,14 @@ spec:
         ingress:
           enabled: false
           ingressClassName: "internal"
-          host: &hostdashboard "crowdsec-dashboard.${SECRET_DOMAIN}"
+          host: &hostdashboard "crowdsec-dashboard.internal..${SECRET_DOMAIN}"
           tls:
             - hosts:
                 - *hostdashboard
       ingress:
         enabled: true
         ingressClassName: "internal"
-        host: &host "crowdsec.${SECRET_DOMAIN}"
+        host: &host "crowdsec.internal.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - *host
