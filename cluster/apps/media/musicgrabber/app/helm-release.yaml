@@ -24,7 +24,7 @@ spec:
           main:
             image:
               repository: g33kphr33k/musicgrabber
-              tag: 2.5.5@sha256:756ce91653b2f5f17f8f47e5c91f07df5af82162608acdf507e6209a16725373
+              tag: 2.6.2@sha256:620441179d3ba9e82eb3ccedef45ee470e30da685891e0defa40ad16cf758d63
               pullPolicy: IfNotPresent
             env:
               TZ: "${TZ}"
