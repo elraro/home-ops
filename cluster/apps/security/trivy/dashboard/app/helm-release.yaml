@@ -25,7 +25,7 @@ spec:
       enabled: true
       className: internal
       hosts:
-        - host: &host trivy.${SECRET_DOMAIN}
+        - host: &host trivy.internal.${SECRET_DOMAIN}
           paths:
             - path: /
               pathType: Prefix
