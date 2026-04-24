@@ -80,9 +80,6 @@ spec:
               limits:
                 cpu: 30m
                 memory: 150Mi
-            volumeMounts:
-              mariadb-rajoybot-volume:
-                mountPath: /var/lib/mysql
 
     service:
       main:
@@ -110,7 +107,7 @@ spec:
               - "botstelegram.${SECRET_DOMAIN}"
 
     persistence:
-      mariadb-rajoybot-volume:
+      mariadb-volume:
         enabled: true
         type: hostPath
         hostPath: /home/elraro/home-ops/volumes/rajoybot/mariadb-rajoybot-volume
