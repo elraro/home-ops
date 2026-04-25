@@ -40,6 +40,7 @@ spec:
               TELEGRAM_BOT_TOKEN: "${SECRET_RAJOYBOT_TOKEN}"
               WEBHOOK_LISTEN: "0.0.0.0"
               WEBHOOK_LISTEN_PORT: "8080"
+              TELEGRAM_USER_ALIAS: "elraro"
             envFrom:
               - secretRef:
                   name: rajoybot
