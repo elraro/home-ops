@@ -35,45 +35,14 @@ spec:
               tag: latest
               pullPolicy: Always
             env:
-              MYSQL_HOST: "localhost"
-              MYSQL_PORT: "3306"
               TELEGRAM_BOT_TOKEN: "${SECRET_RAJOYBOT_TOKEN}"
               WEBHOOK_LISTEN: "0.0.0.0"
               WEBHOOK_LISTEN_PORT: "8080"
               TELEGRAM_USER_ALIAS: "elraro"
+              SQLITE_FILE: /data/db.sqlite
             envFrom:
               - secretRef:
                   name: rajoybot
-            resources:
-              requests:
-                cpu: 15m
-                memory: 105Mi
-              limits:
-                cpu: 30m
-                memory: 150Mi
-
-          mariadb-rajoybot:
-            image:
-              repository: mariadb
-              tag: latest
-              pullPolicy: IfNotPresent
-            env:
-              MYSQL_ROOT_PASSWORD:
-                secretKeyRef:
-                  name: rajoybot
-                  key: mysqlrootpassword
-              MYSQL_DATABASE:
-                secretKeyRef:
-                  name: rajoybot
-                  key: mysqldatabase
-              MYSQL_USER:
-                secretKeyRef:
-                  name: rajoybot
-                  key: mysqluser
-              MYSQL_PASSWORD:
-                secretKeyRef:
-                  name: rajoybot
-                  key: mysqlpassword
             resources:
               requests:
                 cpu: 15m
@@ -108,12 +77,12 @@ spec:
               - "botstelegram.${SECRET_DOMAIN}"
 
     persistence:
-      mariadb-volume:
+      rajoybot-volume:
         enabled: true
         type: hostPath
-        hostPath: /home/elraro/home-ops/volumes/rajoybot/mariadb-rajoybot-volume
+        hostPath: /home/elraro/home-ops/volumes/rajoybot/
         globalMounts:
-          - path: /var/lib/mysql
+          - path: /data/
 
     defaultPodOptions:
       securityContext:
