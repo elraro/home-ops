@@ -32,8 +32,8 @@ spec:
           main:
             image:
               repository: ghcr.io/elraro/rajoybot
-              tag: latest
-              pullPolicy: Always
+              tag: latest@sha256:711803277245eca21846a53d34c8d6547ee745d972a138a232249bd5c2ebb49b
+              pullPolicy: IfNotPresent
             env:
               TELEGRAM_BOT_TOKEN: "${SECRET_RAJOYBOT_TOKEN}"
               WEBHOOK_LISTEN: "0.0.0.0"
