@@ -66,14 +66,13 @@ spec:
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
           external-dns/is-public: "true"
         hosts:
-          - host: "botstelegram.external.${SECRET_DOMAIN}"
+          - host: &host "botstelegram.external.${SECRET_DOMAIN}"
             paths:
               - path: "/${SECRET_RAJOYBOT_TOKEN}/"
                 pathType: Prefix
         tls:
-          - secretName: rajoybot-tls
-            hosts:
-              - "botstelegram.external.${SECRET_DOMAIN}"
+          - hosts:
+              - *host
 
     persistence:
       rajoybot-volume:
