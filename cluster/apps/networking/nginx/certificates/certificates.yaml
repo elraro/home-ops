@@ -13,3 +13,4 @@ spec:
   dnsNames:
     - "${SECRET_DOMAIN}"
     - "*.internal.${SECRET_DOMAIN}"
+    - "*.external.${SECRET_DOMAIN}"
