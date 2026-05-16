@@ -1,0 +1,105 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app kindlebot
+  namespace: telegram
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+
+  values:
+    controllers:
+      main:
+        replicas: 1
+        strategy: RollingUpdate
+        containers:
+          main:
+            image:
+              repository: ghcr.io/elraro/send-to-kindle-telegram-bot
+              tag: latest@sha256:e77ac28776c3e3f1aaa0e9d723a8175dfe76fde98ed1a6c08fb4766b6f3f4e84
+              pullPolicy: IfNotPresent
+            env:
+              TELEGRAM_BOT_TOKEN: "${SECRET_KINDLEBOT_TOKEN}"
+              WEBHOOK_LISTEN: "0.0.0.0"
+              WEBHOOK_LISTEN_PORT: "8080"
+              WEBHOOK_HOST: "botstelegram.${SECRET_DOMAIN}"
+              WEBHOOK_PORT: 443
+              SMTP_SERVER:
+                valueFrom:
+                  secretKeyRef:
+                    name: kindlebot
+                    key: smtpserver
+              SMTP_PORT:
+                valueFrom:
+                  secretKeyRef:
+                    name: kindlebot
+                    key: smtpport
+              SMTP_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: kindlebot
+                    key: smtpuser
+              SMTP_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: kindlebot
+                    key: smtppassword
+              TELEGRAM_USER_ALIAS:
+                valueFrom:
+                  secretKeyRef:
+                    name: kindlebot
+                    key: telegramuseralias
+            resources:
+              requests:
+                cpu: 15m
+                memory: 105Mi
+              limits:
+                cpu: 30m
+                memory: 150Mi
+
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 8080
+            protocol: TCP
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          nginx.ingress.kubernetes.io/rewrite-target: /
+        hosts:
+          - host: &host "botstelegram.external.${SECRET_DOMAIN}"
+            paths:
+              - path: "/${SECRET_KINDLEBOT_TOKEN}/"
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+
+    podAnnotations:
+      kustomize.toolkit.fluxcd.io/substitute: "enabled"
