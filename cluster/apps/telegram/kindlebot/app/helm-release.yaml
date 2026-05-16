@@ -85,8 +85,6 @@ spec:
       main:
         enabled: true
         className: external
-        annotations:
-          nginx.ingress.kubernetes.io/rewrite-target: /
         hosts:
           - host: &host "botstelegram.external.${SECRET_DOMAIN}"
             paths:
