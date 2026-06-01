@@ -47,7 +47,7 @@ spec:
     ingress:
       app:
         enabled: true
-        className: "internal"
+        className: "external"
         hosts:
           - host: &host "uptime-kuma.external.${SECRET_DOMAIN}"
             paths:
