@@ -72,15 +72,9 @@ spec:
                   key: telegramuseralias
                   name: starwarssounds
             - name: WEBHOOK_HOST
-              valueFrom:
-                secretKeyRef:
-                  key: webhookhost
-                  name: starwarssounds
+              value: "botstelegram.${SECRET_DOMAIN}"
             - name: WEBHOOK_PORT
-              valueFrom:
-                secretKeyRef:
-                  key: webhookport
-                  name: starwarssounds
+              value: 443
             - name: WEBHOOK_LISTEN
               value: "0.0.0.0"
             - name: WEBHOOK_LISTEN_PORT
