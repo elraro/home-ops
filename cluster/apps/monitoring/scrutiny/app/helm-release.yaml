@@ -25,7 +25,7 @@ spec:
           main:
             image:
               repository: ghcr.io/starosdev/scrutiny
-              tag: latest-omnibus@sha256:d79e6f1bc299ab28fbd95c9e05fa5a8c565332d2cb9091a91e42d84d4d939989
+              tag: latest-omnibus@sha256:bf55bae54eb329d96261183ce4174a4000b6350a7a71dca704d3fef215d98199
             env:
               TZ: "${TZ}"
             envFrom:
