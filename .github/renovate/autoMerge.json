@@ -23,7 +23,7 @@
       "matchDatasources": ["github-tags"],
       "automerge": true,
       "automergeType": "branch",
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["digest", "minor", "patch"]
     }
   ]
 }
