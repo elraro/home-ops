@@ -21,11 +21,12 @@ spec:
       readOnlyRootFilesystem: true
       runAsNonRoot: true
       runAsUser: 1000
-    persistence:
-      enabled: true
-      storageClassName: local-path-retain
-      accessMode: ReadWriteOnce
-      size: 10Gi
+    distributedCache:
+      persistence:
+        enabled: true
+        storageClassName: local-path-retain
+        accessMode: ReadWriteOnce
+        size: 10Gi
     ingress:
       enabled: true
       className: internal
