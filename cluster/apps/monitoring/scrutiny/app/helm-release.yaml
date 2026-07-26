@@ -101,10 +101,10 @@ spec:
         globalMounts:
           - path: /dev/sdd
             readOnly: true
-      sde:
+      nvme0n1:
         enabled: true
         type: hostPath
-        hostPath: /dev/sde
+        hostPath: /dev/nvme0n1
         globalMounts:
-          - path: /dev/sde
+          - path: /dev/nvme0n1
             readOnly: true
