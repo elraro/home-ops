@@ -7,13 +7,12 @@ metadata:
   labels:
     app.kubernetes.io/name: nextcloud
     app.kubernetes.io/instance: nextcloud
-  annotations:
-    metallb.universe.tf/loadBalancerIPs: "${METALLB_NEXTCLOUD_ADDR}"
 spec:
   type: LoadBalancer
   selector:
     app.kubernetes.io/name: nextcloud
     app.kubernetes.io/instance: nextcloud
+  loadBalancerIP: "${METALLB_NEXTCLOUD_ADDR}"
   ports:
     - name: http
       protocol: TCP
