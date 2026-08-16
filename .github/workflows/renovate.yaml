@@ -18,8 +18,7 @@ on: # yamllint disable-line rule:truthy
     branches:
       - main
     paths:
-      - ".github/renovate.json"
-      - ".github/renovate/**.json"
+      - ".github/renovate/renovaterc.json5"
 
 env:
   WORKFLOW_DRY_RUN: false
