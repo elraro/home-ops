@@ -32,6 +32,8 @@ spec:
               mountPath: /config
             - name: nextcloud-data-volume
               mountPath: /data
+            - name: nextcloud-patches-volume
+              mountPath: /custom-cont-init.d
           env:
             - name: PGID
               value: "1000"
@@ -48,3 +50,6 @@ spec:
         - name: nextcloud-data-volume
           hostPath:
             path: /mnt/sdc1/nextcloud/data
+        - name: nextcloud-patches-volume
+          hostPath:
+            path: /home/elraro/home-ops/volumes/nextcloud/nextcloud-patches-volume
