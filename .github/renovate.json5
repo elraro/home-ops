@@ -6,6 +6,8 @@
   ],
   // Commits made through the GitHub API (platformCommit) are authored by the app user
   gitIgnoredAuthors: ["135143428+roybatty-bot[bot]@users.noreply.github.com"],
+  // Only rebase on conflicts so every merge to main doesn't push the remaining automerges back a run
+  rebaseWhen: "conflicted",
   packageRules: [
     // Auto-merge rules
     {
