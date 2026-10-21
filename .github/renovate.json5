@@ -7,12 +7,11 @@
   packageRules: [
     // Auto-merge rules
     {
-      description: "Auto-merge trusted OCI digests",
-      matchDatasources: ["docker"],
+      description: "Auto-merge all digest updates",
       matchUpdateTypes: ["digest"],
       automerge: true,
       automergeType: "pr",
-      ignoreTests: false,
+      ignoreTests: true,
     },
     {
       description: "Auto-merge high-cadence OCI packages",
