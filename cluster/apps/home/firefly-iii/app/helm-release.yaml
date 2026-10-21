@@ -37,7 +37,7 @@ spec:
           wait-database:
             image:
               repository: alpine
-              tag: 3.24.1
+              tag: 3.24.2
               pullPolicy: IfNotPresent
             command:
               - sh
