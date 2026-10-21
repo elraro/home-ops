@@ -4,6 +4,8 @@
     "github>home-operations/renovate-presets",
     ":timezone(Europe/Madrid)",
   ],
+  // Commits made through the GitHub API (platformCommit) are authored by the app user
+  gitIgnoredAuthors: ["135143428+roybatty-bot[bot]@users.noreply.github.com"],
   packageRules: [
     // Auto-merge rules
     {
