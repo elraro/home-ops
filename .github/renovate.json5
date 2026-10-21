@@ -9,8 +9,8 @@
   packageRules: [
     // Auto-merge rules
     {
-      description: "Auto-merge all digest updates",
-      matchUpdateTypes: ["digest"],
+      description: "Auto-merge all digest and patch updates",
+      matchUpdateTypes: ["digest", "patch"],
       automerge: true,
       automergeType: "pr",
       ignoreTests: true,
@@ -18,7 +18,7 @@
     {
       description: "Auto-merge high-cadence OCI packages",
       matchDatasources: ["docker"],
-      matchUpdateTypes: ["minor", "patch"],
+      matchUpdateTypes: ["minor"],
       matchPackageNames: ["ghcr.io/bjw-s", "ghcr.io/onedr0p", "ghcr.io/home-operations", "ghcr.io/starosdev", "ghcr.io/stirling-tools", "registry.suse.com/suse/"],
       automerge: true,
       automergeType: "pr",
