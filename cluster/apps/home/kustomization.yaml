@@ -5,3 +5,4 @@ resources:
   - ./congatudo/ks.yaml
   - ./adguard/ks.yaml
   - ./stirling-pdf/ks.yaml
+  - ./nextcloud/ks.yaml
