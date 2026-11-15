@@ -1,0 +1,50 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cloudflare-ddns
+  namespace: networking
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 30m
+  values:
+    controllers:
+      cloudflare-ddns:
+        containers:
+          app:
+            image:
+              repository: favonia/cloudflare-ddns
+              tag: "1"
+            env:
+              TZ: "${TZ}"
+              DOMAINS: ipv4.elraro.dev
+              PROXIED: "true"
+              IP6_PROVIDER: none
+              UPDATE_CRON: "@every 5m"
+            envFrom:
+              - secretRef:
+                  name: cloudflare-ddns
+            resources:
+              requests:
+                cpu: 10m
+                memory: 16Mi
+              limits:
+                memory: 64Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop: ["ALL"]
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
