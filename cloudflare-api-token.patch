@@ -1,0 +1,57 @@
+diff --git a/cluster/apps/networking/external-dns/app/helm-release.yaml b/cluster/apps/networking/external-dns/app/helm-release.yaml
+index 1a1d596..1418d9d 100644
+--- a/cluster/apps/networking/external-dns/app/helm-release.yaml
++++ b/cluster/apps/networking/external-dns/app/helm-release.yaml
+@@ -22,16 +22,11 @@ spec:
+     logLevel: debug
+     provider: cloudflare
+     env:
+-      - name: CF_API_EMAIL
++      - name: CF_API_TOKEN
+         valueFrom:
+           secretKeyRef:
+             name: external-dns-cloud-credentials
+-            key: email
+-      - name: CF_API_KEY
+-        valueFrom:
+-          secretKeyRef:
+-            name: external-dns-cloud-credentials
+-            key: api-key
++            key: api-token
+     extraArgs:
+       - --cloudflare-proxied
+       - --annotation-filter=external-dns/is-public in (true)
+diff --git a/cluster/core/cert-manager/letsencrypt-production.yaml b/cluster/core/cert-manager/letsencrypt-production.yaml
+index 1f880a8..be08fb6 100644
+--- a/cluster/core/cert-manager/letsencrypt-production.yaml
++++ b/cluster/core/cert-manager/letsencrypt-production.yaml
+@@ -12,10 +12,9 @@ spec:
+     solvers:
+       - dns01:
+           cloudflare:
+-            email: "${SECRET_CLOUDFLARE_EMAIL}"
+-            apiKeySecretRef:
++            apiTokenSecretRef:
+               name: cloudflare-api-key
+-              key: api-key
++              key: api-token
+         selector:
+           dnsZones:
+             - ${SECRET_DOMAIN}
+diff --git a/cluster/core/cert-manager/letsencrypt-staging.yaml b/cluster/core/cert-manager/letsencrypt-staging.yaml
+index 0d08a79..351b361 100644
+--- a/cluster/core/cert-manager/letsencrypt-staging.yaml
++++ b/cluster/core/cert-manager/letsencrypt-staging.yaml
+@@ -12,10 +12,9 @@ spec:
+     solvers:
+       - dns01:
+           cloudflare:
+-            email: "${SECRET_CLOUDFLARE_EMAIL}"
+-            apiKeySecretRef:
++            apiTokenSecretRef:
+               name: cloudflare-api-key
+-              key: api-key
++              key: api-token
+         selector:
+           dnsZones:
+             - ${SECRET_DOMAIN}
