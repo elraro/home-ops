@@ -8,3 +8,14 @@ resources:
   - notifications
 patchesStrategicMerge:
   - ./gotk-patches.yaml
+patches:
+  - target:
+      kind: Kustomization
+      name: flux-system
+    patch: |
+      - op: add
+        path: /spec/decryption
+        value:
+          provider: sops
+          secretRef:
+            name: sops-age
