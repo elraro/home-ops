@@ -33,7 +33,7 @@ spec:
               tag: 3.3.0-fat@sha256:c91c53c8cdb68a230e3d710538a2bbcefcd4f6a32d4aa8f93fb1fc726141d5ad
               pullPolicy: IfNotPresent
             env:
-              TZ: ${TIMEZONE}
+              TZ: "${TZ}"
               DOCKER_ENABLE_SECURITY: false
               SECURITY_ENABLE_LOGIN: false
             resources:
