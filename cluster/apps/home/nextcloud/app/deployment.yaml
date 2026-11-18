@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: nextcloud
-          image: linuxserver/nextcloud:35.0.3@sha256:cc5a5cf7385e1a958fd4645aad76d0557ed0f58c8267825329ac7f7980fe0265
+          image: linuxserver/nextcloud:35.0.3@sha256:8c1459b8ccb09f10f28902586ddd322e531b68a3fa5e9a818f20328bc56d872b
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: nextcloud-config-volume
